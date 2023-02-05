@@ -1,9 +1,10 @@
 namespace MauiBank.View;
 
-public partial class NewPage1 : ContentPage
+public partial class AuthPage : ContentPage
 {
-	public NewPage1()
+	public AuthPage(AuthViewModel vm)
 	{
 		InitializeComponent();
+		BindingContext = vm;
 	}
 }

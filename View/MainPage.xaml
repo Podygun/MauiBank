@@ -7,6 +7,7 @@
     xmlns:model="clr-namespace:MauiBank.Model"
     xmlns:view="clr-namespace:MauiBank.View"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    Title="Welcome"
     x:DataType="vm:MainViewModel">
     <ContentPage.Resources>
         <converters:StringToColor x:Key="StringToColor" />
@@ -21,9 +22,9 @@
         <Grid
             Grid.Row="0"
             Margin="0,20,0,20"
-            RowDefinitions="30,*"
+            Padding="0,0,0,0"
             VerticalOptions="Start">
-            <Grid>
+            <!--<Grid>
                 <ImageButton
                     Margin="15,0,0,0"
                     HeightRequest="32"
@@ -34,18 +35,17 @@
                     HorizontalOptions="Center"
                     Style="{StaticResource BaseWhiteLbl}"
                     Text="Welcome" />
-            </Grid>
+            </Grid>-->
             <CarouselView
                 x:Name="cardsCarousel"
                 Grid.Row="1"
                 BackgroundColor="{StaticResource Primary}"
-                ItemsSource="{Binding cards, Mode=TwoWay}"
-                >
+                ItemsSource="{Binding cards, Mode=TwoWay}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="model:Card">
                         <Frame
                             x:Name="cardFrame"
-                            Margin="20,20,20,0"
+                            Margin="20,0,20,0"
                             Background="{Binding Color, Converter={StaticResource StringToColor}}"
                             BindingContext="{x:Reference cardFrame}"
                             BorderColor="Transparent"
@@ -53,13 +53,14 @@
                             <Grid RowDefinitions="*,*,*">
                                 <HorizontalStackLayout Spacing="60">
                                     <Image
-                                        HeightRequest="32"
+                                        HeightRequest="40"
                                         HorizontalOptions="Start"
                                         Source="sim.png"
-                                        WidthRequest="32" />
+                                        WidthRequest="40" />
 
                                     <Label
-                                        FontSize="20"
+                                        FontFamily="SemiBold"
+                                        FontSize="24"
                                         HorizontalTextAlignment="Start"
                                         Style="{StaticResource BaseWhiteLbl}"
                                         Text="{Binding Number, Converter={StaticResource ToShortNumber}}" />
@@ -69,7 +70,8 @@
                                 <Label
                                     Grid.Row="1"
                                     Margin="5,5,0,0"
-                                    FontFamily="Light"
+                                    FontFamily="SemiBold"
+                                    FontSize="24"
                                     HorizontalOptions="Start"
                                     Style="{StaticResource BaseWhiteLbl}"
                                     Text="{Binding Type}" />
@@ -78,6 +80,7 @@
                                     <Label
                                         Margin="5,0,0,0"
                                         FontFamily="Light"
+                                        FontSize="16"
                                         HorizontalTextAlignment="Start"
                                         Style="{StaticResource BaseWhiteLbl}"
                                         Text="{Binding DateEnd}" />
@@ -105,18 +108,17 @@
                 <Grid ColumnDefinitions="3*,*">
                     <VerticalStackLayout Grid.ColumnSpan="3">
                         <Label
-                            
-                            FontFamily="Medium"
-                            FontSize="12"
+                            FontFamily="Regular"
+                            FontSize="14"
                             HorizontalOptions="Start"
                             Style="{StaticResource BaseWhiteLbl}"
                             Text="Текущий баланс" />
                         <Label
-                            FontFamily="Medium"
+                            FontFamily="SemiBold"
                             FontSize="28"
                             HorizontalOptions="Start"
                             Style="{StaticResource BaseWhiteLbl}"
-                            Text="{Binding Source={x:Reference cardsCarousel }, Path=CurrentItem.Balance}" />
+                            Text="{Binding Source={x:Reference cardsCarousel}, Path=CurrentItem.Balance}" />
                     </VerticalStackLayout>
 
                     <Image
@@ -145,7 +147,7 @@
                     Command="{Binding GetCardsCommand}"
                     HorizontalOptions="Fill"
                     Style="{StaticResource MainBtn}"
-                    Text="GetRealCards">
+                    Text="GetReal">
                     <!--<Button.ContentLayout>
 
                     </Button.ContentLayout>-->
@@ -155,12 +157,13 @@
                     Grid.Column="1"
                     Command="{Binding GetFakeCardsCommand}"
                     Style="{StaticResource MainBtn}"
-                    Text="GetFakeCards" />
+                    Text="GetFake" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
+                    Command="{Binding GoToAuthCommand}"
                     Style="{StaticResource MainBtn}"
-                    Text="3" />
+                    Text="Войти" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"

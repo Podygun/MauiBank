@@ -9,7 +9,7 @@ public class CardsService
 		string sqlQuery = $"select " +
 			$"карты.* " +
 			$", ch.Баланс" +
-			$", ch.код_валюты" +
+			$", ch.код_валюты " +
 			$"from карты " +
 			$"left join `банковские счета` as ch on id_Банковского_счета=ch.id " +
 				$"WHERE id_Банковского_счета in (" +

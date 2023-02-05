@@ -1,4 +1,6 @@
 ﻿using MySqlConnector;
+using System.Diagnostics;
+
 
 namespace MauiBank.Service.Database;
 
@@ -17,60 +19,9 @@ internal class Database
 	///// "-1"     if not found
 	///// null     if Database Error
 	///// </returns>
-	//public static string? GetUserId(string login, SecureString password)
-	//{
-	//	string commandText = "select id from аккаунты " +
-	//			"where Логин = @login and Пароль = @password";
-	//	using (MySqlCommand command = new MySqlCommand(commandText, con))
-	//	{
-
-	//		string hashedPassword = Hasher.ComputeSha256(new System.Net.NetworkCredential(string.Empty, password).Password + GetUserSalt(login));
 
 
-	//		command.Parameters.AddWithValue("@password", hashedPassword);
-	//		command.Parameters.AddWithValue("@login", login);
-	//		try
-	//		{
-	//			con.Open();
-	//			string? id = command.ExecuteScalar()?.ToString();
-	//			return id ?? "-1";
-	//		}
-	//		catch (System.Exception e)
-	//		{
-	//			Trace.WriteLine(e.Message);
-	//			return null;
-	//		}
-	//		finally
-	//		{
-	//			con.Close();
-	//		}
-	//	}
-	//}
 
-	//public static string? GetUserSalt(string login)
-	//{
-	//	string commandText = "select Salt from аккаунты " +
-	//			"where Логин = @login";
-	//	using (MySqlCommand command = new MySqlCommand(commandText, con))
-	//	{
-	//		command.Parameters.AddWithValue("@login", login);
-	//		try
-	//		{
-	//			con.Open();
-	//			string? salt = command.ExecuteScalar()?.ToString();
-	//			return salt ?? string.Empty;
-	//		}
-	//		catch (System.Exception e)
-	//		{
-	//			Trace.WriteLine(e.Message);
-	//			return null;
-	//		}
-	//		finally
-	//		{
-	//			con.Close();
-	//		}
-	//	}
-	//}
 
 	//public static bool ModifyDataBase(MySqlCommand command)
 	//{
@@ -149,8 +100,7 @@ internal class Database
 
 	public static async Task<DataSet> GetDataSet(string sqlQuery)
 	{
-		var connString = "Server=localhost;Port=3306;User ID=root;Password=root;Database=bank_db";
-		await using var connection = new MySqlConnection(connString);
+		await using var connection = new MySqlConnection(GetConnectionString());
 		try
 		{
 			await connection.OpenAsync();
@@ -168,4 +118,67 @@ internal class Database
 			await connection.CloseAsync();
 		}
 	}
+
+	public static async Task<string> GetUserId(string login, string password)
+	{
+		const string commandText = "select id from аккаунты where Логин = @login and Пароль = @password";
+		await using var connection = new MySqlConnection(GetConnectionString());
+
+		try
+		{
+			await connection.OpenAsync();
+			string hashedPassword =  Security.Hasher.ComputeSha256(password + GetUserSalt(login));
+			using var command = new MySqlCommand(commandText, connection);
+			command.Parameters.AddWithValue("@password", hashedPassword);
+			command.Parameters.AddWithValue("@login", login);
+
+			await using MySqlDataReader reader = await command.ExecuteReaderAsync();
+			while(reader.Read())
+			{
+				return reader.GetValue(0).ToString();
+			}
+			return "-1";
+
+		}
+		catch (Exception ex)
+		{
+			Trace.WriteLine(ex.Message);
+			return null;
+		}
+
+		finally
+		{
+			await connection.CloseAsync();
+		}
+	}
+
+	public static string GetUserSalt(string login)
+	{
+		const string commandText = "select Salt from аккаунты where Логин = @login";
+		using var connection = new MySqlConnection(GetConnectionString());
+
+		try
+		{
+			connection.Open();
+			using var command = new MySqlCommand(commandText, connection);
+			command.Parameters.AddWithValue("@login", login);
+
+			string salt = command.ExecuteScalar()?.ToString();
+			return salt ?? string.Empty;
+		}
+		catch (Exception ex)
+		{
+			Trace.WriteLine(ex.Message);
+			return "-1";
+		}
+		finally
+		{
+			connection.Close();
+		}
+
+	}
+
+	private static string GetConnectionString() => "Server=localhost;Port=3306;User ID=root;Password=root;Database=bank_db";
+
+
 }

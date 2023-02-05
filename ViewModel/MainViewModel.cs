@@ -59,4 +59,10 @@ public partial class MainViewModel : BaseViewModel
 
 		cards = tempCards;
 	}
+
+	[RelayCommand]
+	void GoToAuth()
+	{
+		Shell.Current.GoToAsync("//MainPage/auth");
+	}
 }

@@ -2,11 +2,32 @@
 <ContentPage
     x:Class="MauiBank.View.AuthPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Auth page"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:AuthViewModel">
+    <Grid BackgroundColor="{StaticResource Secondary}">
+        <VerticalStackLayout VerticalOptions="Center">
+            <Frame
+                Margin="-150,0,20,0"
+                BackgroundColor="{StaticResource Orange100Accent}"
+                BorderColor="Transparent"
+                CornerRadius="150"
+                HasShadow="True"
+                HeightRequest="250">
+                <VerticalStackLayout Margin="150,-30,0,0" VerticalOptions="Center">
+                    <Entry
+                        Placeholder="Login"
+                        Style="{StaticResource AuthEntry}"
+                        Text="{Binding Login, Mode=TwoWay}" />
+                    <Entry
+                        IsPassword="True"
+                        Placeholder="Password"
+                        Style="{StaticResource AuthEntry}"
+                        Text="{Binding Password}" />
+                </VerticalStackLayout>
+
+            </Frame>
+            <Button Command="{Binding TryEntryCommand}" Text="Войти" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
