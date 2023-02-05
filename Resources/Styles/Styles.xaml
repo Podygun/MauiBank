@@ -403,12 +403,12 @@
     <Style x:Key="MainBtn" TargetType="Button">
         <Setter Property="TextColor" Value="Black" />
         <Setter Property="Background" Value="White" />
-        <Setter Property="FontFamily" Value="BaseFontMedium" />
+        <Setter Property="FontFamily" Value="Regular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Padding" Value="14,10" />
         <Setter Property="HeightRequest" Value="100" />
-        
+
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -421,26 +421,26 @@
 
                     </VisualState>
                 </VisualStateGroup>
-                
+
             </VisualStateGroupList>
 
 
         </Setter>
         <Style.Triggers>
             <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="Yellow" />
+                <Setter Property="Background" Value="{StaticResource Gray100}" />
                 <Setter Property="Scale" Value="1.02" />
             </Trigger>
         </Style.Triggers>
 
-        
-        
+
+
     </Style>
 
     <Style x:Key="BaseWhiteLbl" TargetType="Label">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="BaseFontMedium" />
+        <Setter Property="FontFamily" Value="Regular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
