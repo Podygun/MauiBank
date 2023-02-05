@@ -1,11 +1,31 @@
-﻿namespace MauiBank.Model;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class Card
+
+namespace MauiBank.Model;
+
+public partial class Card : ObservableObject
 {
-	public string id { get; set; }
-	public string number { get; set; }
-	public string cvv { get; set; }
-	public string dateEnd { get; set; }
-	public string type { get; set; }
-	public string color { get; set; }
+	[ObservableProperty]
+	string id;
+
+	[ObservableProperty]
+	string number;
+
+	[ObservableProperty]
+	string cvv;
+
+	[ObservableProperty]
+	string dateEnd;
+
+	[ObservableProperty]
+	string type;
+
+	[ObservableProperty]
+	string color;
+
+	[ObservableProperty]
+	string balance;
+
+	[ObservableProperty]
+	string code;
 }
