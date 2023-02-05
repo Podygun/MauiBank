@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:MauiBank.Model"
+    xmlns:view="clr-namespace:MauiBank.View"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:MainViewModel">
+
+    <!--<ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25"
+            VerticalOptions="Center">
+
+            <Image
+                HeightRequest="200"
+                HorizontalOptions="Center"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                Source="dotnet_bot.png" />
+
+            <Label
+                FontSize="32"
+                HorizontalOptions="Center"
+                SemanticProperties.HeadingLevel="Level1"
+                Text="{Binding Title}" />
+
+            <Label
+                FontFamily="BaseFontRegular"
+                HorizontalOptions="Center"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                SemanticProperties.HeadingLevel="Level2"
+                Text="Welcome to .NET Multi-platform App UI" />
+
+
+        </VerticalStackLayout>
+    </ScrollView>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <FlexLayout
+            Grid.Row="0"
+            AlignContent="Start"
+            AlignItems="Center"
+            Background="{StaticResource Primary}"
+            Direction="Row"
+            JustifyContent="SpaceBetween">
+            <Button BackgroundColor="red" Text="Back" />
+            <Label
+                BackgroundColor="red"
+                HorizontalTextAlignment="Center"
+                Text="Welcome"
+                TextColor="White"
+                WidthRequest="70" />
+            <Button BackgroundColor="red" Text="..." />
+        </FlexLayout>
+
+        <CarouselView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Primary}"
+            ItemsSource="{Binding cards}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="model:Card">
+                    <Border
+                        Background="Orange"
+                        HeightRequest="178.13"
+                        WidthRequest="282.48">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Text="{Binding type}" />
+
+                            <Label
+                                Grid.Row="1"
+                                FontSize="20"
+                                Text="{Binding number}" />
+                            <Label Grid.Row="2" Text="VASILIY TERKIN" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <Grid
+            Grid.Row="2"
+            BackgroundColor="{StaticResource Secondary}"
+            RowDefinitions="120,*">
+            <Frame
+                Grid.Row="0"
+                Margin="20,20,20,0"
+                BackgroundColor="{StaticResource Orange100Accent}"
+                BorderColor="Transparent"
+                CornerRadius="20">
+                <Grid ColumnDefinitions="3*,*">
+                    <VerticalStackLayout Grid.ColumnSpan="3">
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource BaseWhiteLbl}"
+                            Text="Текущий баланс" />
+                        <Label
+                            FontSize="32"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource BaseWhiteLbl}"
+                            Text="30903.36 руб" />
+                    </VerticalStackLayout>
+
+                    <Image
+                        Grid.Column="1"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        Source="wallet.png"
+                        VerticalOptions="Start"
+                        WidthRequest="40" />
+                </Grid>
+
+
+
+
+            </Frame>
+
+
+            <Grid
+                Grid.Row="1"
+                Margin="20"
+                BackgroundColor="{StaticResource Secondary}"
+                ColumnDefinitions="*,*,*"
+                ColumnSpacing="20"
+                RowDefinitions="*,*"
+                RowSpacing="20"
+                VerticalOptions="Center">
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Command="{Binding GetCardsCommand}"
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource MainBtn}"
+                    Text="1">
+                    <!--<Button.ContentLayout>
+
+                    </Button.ContentLayout>-->
+                </Button>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MainBtn}"
+                    Text="2" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Style="{StaticResource MainBtn}"
+                    Text="3" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource MainBtn}"
+                    Text="4" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Style="{StaticResource MainBtn}"
+                    Text="5" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Style="{StaticResource MainBtn}"
+                    Text="6" />
+
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</ContentPage>
