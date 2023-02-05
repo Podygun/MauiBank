@@ -12,10 +12,15 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-				fonts.AddFont("Raleway-Regular.ttf", "BaseFontRegular");
-				fonts.AddFont("Raleway-Light.ttf", "BaseFontLight");
+				fonts.AddFont("Inter-Thin.ttf", "Thin");
+				fonts.AddFont("Inter-ExtraLight.ttf", "ExtraLight");
+				fonts.AddFont("Inter-Light.ttf", "Light");
+				fonts.AddFont("Inter-Regular.ttf", "Regular");
+				fonts.AddFont("Inter-Medium.ttf", "Medium");
+				fonts.AddFont("Inter-SemiBold.ttf", "SemiBold");
+				fonts.AddFont("Inter-Bold.ttf", "Bold");
+				fonts.AddFont("Inter-ExtraBold.ttf", "ExtraBold");
+				fonts.AddFont("Inter-Black.ttf", "Black");
 			});
 
 #if DEBUG

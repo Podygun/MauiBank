@@ -49,15 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\Raleway-Black.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-Bold.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-ExtraBold.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-ExtraLight.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-Light.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-Medium.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-Regular.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-SemiBold.ttf" />
-	  <None Remove="Resources\Fonts\Raleway-Thin.ttf" />
+	  <None Remove="Resources\Images\sim.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +62,22 @@
 	  <Reference Include="MySql.Data">
 	    <HintPath>MySql.Data.dll</HintPath>
 	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Fonts\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="View\AuthPage.xaml.cs">
+	    <DependentUpon>AuthPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\AuthPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

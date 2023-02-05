@@ -4,31 +4,55 @@ public class CardsService
 {
 	ObservableCollection<Card> cardsCollection = new();
 
-	public ObservableCollection<Card> GetCardsAsync(string userId)
+	public async Task<ObservableCollection<Card>> GetCardsAsync(string userId)
 	{
-		string sqlQuery = $"select * from карты " +
+		string sqlQuery = $"select " +
+			$"карты.* " +
+			$", ch.Баланс" +
+			$", ch.код_валюты" +
+			$"from карты " +
+			$"left join `банковские счета` as ch on id_Банковского_счета=ch.id " +
 				$"WHERE id_Банковского_счета in (" +
 				$"select id FROM `банковские счета` " +
 				$"WHERE id_клиента = (" +
 				$"select distinct id from клиенты " +
 				$"WHERE id_аккаунта = {userId}))";
 
-		DataSet cardsDS =  Database.Database.GetDataSet(sqlQuery);
+		DataSet cardsDS = await Database.Database.GetDataSet(sqlQuery);
 
 		cardsCollection = new ObservableCollection<Card>();
 
+		string tempColor = String.Empty;
+		int i = 0;
+
 		foreach (DataRow card in cardsDS.Tables[0].Rows)
 		{
+			if (i == Colors.Length) i = 0;
+			tempColor = Colors[i];
+
 			cardsCollection.Add(new Card()
 			{
-				id = card.ItemArray[0].ToString(),
-				type = card.ItemArray[1].ToString(),
-				number = card.ItemArray[2].ToString(),
-				cvv = card.ItemArray[3].ToString(),
-				dateEnd = card.ItemArray[4].ToString()
+				Id = card.ItemArray[0].ToString(),
+				Type = card.ItemArray[1].ToString(),
+				Number = card.ItemArray[2].ToString(),
+				Cvv = card.ItemArray[3].ToString(),
+				DateEnd = card.ItemArray[4].ToString(),
+				Balance = card.ItemArray[5].ToString(),
+				Code = card.ItemArray[6].ToString(),
+				Color = tempColor
 			});
+
+			i++;
 		}
 
 		return cardsCollection;
 	}
+
+
+	readonly static string[] Colors = new string[]
+	{
+		"#8916FF",
+		"#ECC200",
+		"#424874"
+	};
 }

@@ -8,7 +8,7 @@ public class ToShortNumber : IValueConverter
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 	{
 		string _value = (string)value;
-		string tempStr = "....";	
+		string tempStr = ". . . . ";	
 		tempStr += _value.Substring(_value.Length - 4, 4);
 		return tempStr;
 	}

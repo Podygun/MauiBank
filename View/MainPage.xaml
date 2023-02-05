@@ -3,90 +3,95 @@
     x:Class="MauiBank.View.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiBank.Service.Converters"
     xmlns:model="clr-namespace:MauiBank.Model"
     xmlns:view="clr-namespace:MauiBank.View"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     x:DataType="vm:MainViewModel">
+    <ContentPage.Resources>
+        <converters:StringToColor x:Key="StringToColor" />
+        <converters:ToShortNumber x:Key="ToShortNumber" />
+    </ContentPage.Resources>
 
-    <!--<ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25"
-            VerticalOptions="Center">
-
-            <Image
-                HeightRequest="200"
-                HorizontalOptions="Center"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                Source="dotnet_bot.png" />
-
-            <Label
-                FontSize="32"
-                HorizontalOptions="Center"
-                SemanticProperties.HeadingLevel="Level1"
-                Text="{Binding Title}" />
-
-            <Label
-                FontFamily="BaseFontRegular"
-                HorizontalOptions="Center"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                SemanticProperties.HeadingLevel="Level2"
-                Text="Welcome to .NET Multi-platform App UI" />
-
-
-        </VerticalStackLayout>
-    </ScrollView>-->
-    <Grid>
+    <Grid Background="{StaticResource Primary}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="200" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <FlexLayout
+        <Grid
             Grid.Row="0"
-            AlignContent="Start"
-            AlignItems="Center"
-            Background="{StaticResource Primary}"
-            Direction="Row"
-            JustifyContent="SpaceBetween">
-            <Button BackgroundColor="red" Text="Back" />
-            <Label
-                BackgroundColor="red"
-                HorizontalTextAlignment="Center"
-                Text="Welcome"
-                TextColor="White"
-                WidthRequest="70" />
-            <Button BackgroundColor="red" Text="..." />
-        </FlexLayout>
+            Margin="0,20,0,20"
+            RowDefinitions="30,*"
+            VerticalOptions="Start">
+            <Grid>
+                <ImageButton
+                    Margin="15,0,0,0"
+                    HeightRequest="32"
+                    HorizontalOptions="Start"
+                    Source="burger.png"
+                    WidthRequest="32" />
+                <Label
+                    HorizontalOptions="Center"
+                    Style="{StaticResource BaseWhiteLbl}"
+                    Text="Welcome" />
+            </Grid>
+            <CarouselView
+                x:Name="cardsCarousel"
+                Grid.Row="1"
+                BackgroundColor="{StaticResource Primary}"
+                ItemsSource="{Binding cards, Mode=TwoWay}"
+                >
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Card">
+                        <Frame
+                            x:Name="cardFrame"
+                            Margin="20,20,20,0"
+                            Background="{Binding Color, Converter={StaticResource StringToColor}}"
+                            BindingContext="{x:Reference cardFrame}"
+                            BorderColor="Transparent"
+                            CornerRadius="15">
+                            <Grid RowDefinitions="*,*,*">
+                                <HorizontalStackLayout Spacing="60">
+                                    <Image
+                                        HeightRequest="32"
+                                        HorizontalOptions="Start"
+                                        Source="sim.png"
+                                        WidthRequest="32" />
 
-        <CarouselView
-            Grid.Row="1"
-            BackgroundColor="{StaticResource Primary}"
-            ItemsSource="{Binding cards}">
-            <CarouselView.ItemTemplate>
-                <DataTemplate x:DataType="model:Card">
-                    <Border
-                        Background="Orange"
-                        HeightRequest="178.13"
-                        WidthRequest="282.48">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Text="{Binding type}" />
+                                    <Label
+                                        FontSize="20"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{StaticResource BaseWhiteLbl}"
+                                        Text="{Binding Number, Converter={StaticResource ToShortNumber}}" />
 
-                            <Label
-                                Grid.Row="1"
-                                FontSize="20"
-                                Text="{Binding number}" />
-                            <Label Grid.Row="2" Text="VASILIY TERKIN" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
+                                </HorizontalStackLayout>
+
+                                <Label
+                                    Grid.Row="1"
+                                    Margin="5,5,0,0"
+                                    FontFamily="Light"
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource BaseWhiteLbl}"
+                                    Text="{Binding Type}" />
+
+                                <HorizontalStackLayout Grid.Row="2">
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontFamily="Light"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{StaticResource BaseWhiteLbl}"
+                                        Text="{Binding DateEnd}" />
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        </Grid>
+
+
         <Grid
             Grid.Row="2"
             BackgroundColor="{StaticResource Secondary}"
@@ -100,31 +105,30 @@
                 <Grid ColumnDefinitions="3*,*">
                     <VerticalStackLayout Grid.ColumnSpan="3">
                         <Label
-                            FontSize="14"
+                            
+                            FontFamily="Medium"
+                            FontSize="12"
                             HorizontalOptions="Start"
                             Style="{StaticResource BaseWhiteLbl}"
                             Text="Текущий баланс" />
                         <Label
-                            FontSize="32"
+                            FontFamily="Medium"
+                            FontSize="28"
                             HorizontalOptions="Start"
                             Style="{StaticResource BaseWhiteLbl}"
-                            Text="30903.36 руб" />
+                            Text="{Binding Source={x:Reference cardsCarousel }, Path=CurrentItem.Balance}" />
                     </VerticalStackLayout>
 
                     <Image
                         Grid.Column="1"
+                        Margin="0,10,0,0"
                         HeightRequest="40"
                         HorizontalOptions="End"
-                        Source="wallet.png"
-                        VerticalOptions="Start"
+                        Source="bagmoney.png"
+                        VerticalOptions="Center"
                         WidthRequest="40" />
                 </Grid>
-
-
-
-
             </Frame>
-
 
             <Grid
                 Grid.Row="1"
@@ -135,14 +139,13 @@
                 RowDefinitions="*,*"
                 RowSpacing="20"
                 VerticalOptions="Center">
-
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
                     Command="{Binding GetCardsCommand}"
                     HorizontalOptions="Fill"
                     Style="{StaticResource MainBtn}"
-                    Text="1">
+                    Text="GetRealCards">
                     <!--<Button.ContentLayout>
 
                     </Button.ContentLayout>-->
@@ -150,8 +153,9 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
+                    Command="{Binding GetFakeCardsCommand}"
                     Style="{StaticResource MainBtn}"
-                    Text="2" />
+                    Text="GetFakeCards" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"

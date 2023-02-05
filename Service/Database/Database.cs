@@ -1,7 +1,4 @@
-﻿using MauiBank.Service.Security;
-using MySqlConnector;
-using System.Diagnostics;
-using System.Security;
+﻿using MySqlConnector;
 
 namespace MauiBank.Service.Database;
 
@@ -150,62 +147,25 @@ internal class Database
 	//	}
 	//}
 
-	public static DataSet GetDataSet(string sqlQuery)
+	public static async Task<DataSet> GetDataSet(string sqlQuery)
 	{
 		var connString = "Server=localhost;Port=3306;User ID=root;Password=root;Database=bank_db";
-		//var builder = new MySqlConnectionStringBuilder
-		//{
-		//	Server = "localhost",
-		//	UserID = "root",
-		//	Password = "root",
-		//	Database = "bank_db",
-		//	Port = 3306,
-		//	SslMode = MySqlSslMode.None,
-		//};
-
-		using var connection = new MySqlConnection(connString);
-		connection.Open();
-		//connection.CloseAsync();
-		//try
-		//{
-			//await connection.OpenAsync();
-			
+		await using var connection = new MySqlConnection(connString);
+		try
+		{
+			await connection.OpenAsync();
 			MySqlDataAdapter DA = new MySqlDataAdapter(sqlQuery, connection);
 			DataSet ds = new DataSet();
-
-			//MySqlCommand cmd = new MySqlCommand();
-
-			//cmd.CommandType = CommandType.Text;
-			//cmd.CommandText = sqlQuery;
-			//cmd.Connection = connection;
-
-			//DA.SelectCommand = cmd;
 			DA.Fill(ds);
-		
-		return ds;
-		connection.Close();
-		//}
-		//catch
-		//{
-		return null;
-		//}
-		//finally
-		//{
-			
-		//}
-
-	}
-
-	//private static string GetConnectionString() => "host=127.0.0.1;port=3306;user=root;password=root;database=bank_db";
-
-	public static void tryConnect()
-	{
-		var connString = "Server=192.168.1.105;Port=3306;User ID=root;Password=root;Database=bank_db";
-
-		using var connection = new MySqlConnection(connString);
-		connection.OpenAsync();
-		connection.CloseAsync();
-		// open a connection asynchronously
-
+			return ds;
+		}
+		catch
+		{
+			return null;
+		}
+		finally
+		{
+			await connection.CloseAsync();
+		}
 	}
 }
