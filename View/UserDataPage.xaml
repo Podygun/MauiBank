@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.UserDataPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    Title="Персональные данные"
+    x:DataType="vm:UserDataViewModel">
+    <Grid BackgroundColor="{StaticResource Secondary}" RowDefinitions="10*,*">
+        <VerticalStackLayout
+            Margin="20"
+            HorizontalOptions="Fill"
+            Spacing="20"
+            VerticalOptions="Fill">
+
+            <Frame
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Orange100Accent}"
+                CornerRadius="15"
+                HasShadow="False"
+                HeightRequest="70">
+                <Entry
+                    HeightRequest="80"
+                    Placeholder="Имя"
+                    PlaceholderColor="{StaticResource Gray300}"
+                    Style="{StaticResource BaseEntry}"
+                    Text="{Binding FirstName}"
+                    TextColor="White" />
+            </Frame>
+            <Frame
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Orange100Accent}"
+                CornerRadius="15"
+                HasShadow="False"
+                HeightRequest="70">
+                <Entry
+                    HeightRequest="80"
+                    Placeholder="Фамилия"
+                    PlaceholderColor="{StaticResource Gray300}"
+                    Style="{StaticResource BaseEntry}"
+                    Text="{Binding SecondName}"
+                    TextColor="White" />
+            </Frame>
+            <Frame
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Orange100Accent}"
+                CornerRadius="15"
+                HasShadow="False"
+                HeightRequest="70">
+                <Entry
+                    HeightRequest="80"
+                    Placeholder="Отчество"
+                    PlaceholderColor="{StaticResource Gray300}"
+                    Style="{StaticResource BaseEntry}"
+                    Text="{Binding ThirdName}"
+                    TextColor="White" />
+            </Frame>
+            <Frame
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Orange100Accent}"
+                CornerRadius="15"
+                HasShadow="False"
+                HeightRequest="70">
+                <Entry
+                    HeightRequest="80"
+                    Placeholder="Пол"
+                    PlaceholderColor="{StaticResource Gray300}"
+                    Style="{StaticResource BaseEntry}"
+                    Text="{Binding Gender}"
+                    TextColor="White" />
+            </Frame>
+            <Frame
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Orange100Accent}"
+                CornerRadius="15"
+                HasShadow="False"
+                HeightRequest="70">
+                <Entry
+                    HeightRequest="80"
+                    Placeholder="Телефон"
+                    PlaceholderColor="{StaticResource Gray300}"
+                    Style="{StaticResource BaseEntry}"
+                    Text="{Binding Phone}"
+                    TextColor="White" />
+            </Frame>
+            <Frame
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Orange100Accent}"
+                CornerRadius="15"
+                HasShadow="False"
+                HeightRequest="70">
+                <Entry
+                    HeightRequest="80"
+                    Placeholder="Почта"
+                    PlaceholderColor="{StaticResource Gray300}"
+                    ReturnCommand="{Binding AcceptCommand}"
+                    Style="{StaticResource BaseEntry}"
+                    Text="{Binding Email}"
+                    TextColor="White" />
+            </Frame>
+
+
+
+
+
+        </VerticalStackLayout>
+        <Button
+            Grid.Row="1"
+            Margin="0,0,0,0"
+            Background="{StaticResource Primary}"
+            BorderColor="{StaticResource Cyan100Accent}"
+            BorderWidth="2"
+            Command="{Binding AcceptCommand}"
+            FontFamily="Medium"
+            FontSize="22"
+            HeightRequest="50"
+            Style="{StaticResource MainBtn}"
+            Text="Подтвердить"
+            TextColor="White"
+            VerticalOptions="Start"
+            WidthRequest="200" />
+    </Grid>
+
+</ContentPage>

@@ -83,7 +83,7 @@
                                         FontSize="16"
                                         HorizontalTextAlignment="Start"
                                         Style="{StaticResource BaseWhiteLbl}"
-                                        Text="{Binding DateEnd}" />
+                                        Text="{Binding Date_end}" />
                                 </HorizontalStackLayout>
 
                             </Grid>
@@ -155,7 +155,6 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    Command="{Binding GetFakeCardsCommand}"
                     Style="{StaticResource MainBtn}"
                     Text="GetFake" />
                 <Button
