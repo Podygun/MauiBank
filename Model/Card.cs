@@ -1,12 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-
 namespace MauiBank.Model;
 
 public partial class Card : ObservableObject
 {
 	[ObservableProperty]
-	string id;
+	int id;
 
 	[ObservableProperty]
 	string number;
@@ -15,7 +14,7 @@ public partial class Card : ObservableObject
 	string cvv;
 
 	[ObservableProperty]
-	string dateEnd;
+	DateOnly date_end;
 
 	[ObservableProperty]
 	string type;
@@ -24,7 +23,7 @@ public partial class Card : ObservableObject
 	string color;
 
 	[ObservableProperty]
-	string balance;
+	double balance;
 
 	[ObservableProperty]
 	string code;

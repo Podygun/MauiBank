@@ -7,10 +7,19 @@
     Shell.FlyoutBehavior="Flyout">
 
 
-    <ShellContent ContentTemplate="{DataTemplate view:MainPage}" Route="MainPage">
-
-        <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage" />
+    <ShellContent
+        Title="Главная"
+        ContentTemplate="{DataTemplate view:MainPage}"
+        Route="MainPage">
+        <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
+            <ShellContent ContentTemplate="{DataTemplate view:RegPage}" Route="RegPage" />
+        </ShellContent>
     </ShellContent>
+
+    <ShellContent
+        Title="Персональные данные"
+        ContentTemplate="{DataTemplate view:UserDataPage}"
+        Route="UserDataPage" />
 
 
 </Shell>
