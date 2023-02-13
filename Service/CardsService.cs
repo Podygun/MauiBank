@@ -1,58 +1,53 @@
 ﻿namespace MauiBank.Service;
 
+
 public class CardsService
 {
-	ObservableCollection<Card> cardsCollection = new();
-
-	public async Task<ObservableCollection<Card>> GetCardsAsync(string userId)
+	public string GetNewCardNumber(string cardSystem)
 	{
-		string sqlQuery = $"select " +
-			$"карты.* " +
-			$", ch.Баланс" +
-			$", ch.код_валюты " +
-			$"from карты " +
-			$"left join `банковские счета` as ch on id_Банковского_счета=ch.id " +
-				$"WHERE id_Банковского_счета in (" +
-				$"select id FROM `банковские счета` " +
-				$"WHERE id_клиента = (" +
-				$"select distinct id from клиенты " +
-				$"WHERE id_аккаунта = {userId}))";
+		string finalNumber;
 
-		DataSet cardsDS = await Database.Database.GetDataSet(sqlQuery);
-
-		cardsCollection = new ObservableCollection<Card>();
-
-		string tempColor = String.Empty;
-		int i = 0;
-
-		foreach (DataRow card in cardsDS.Tables[0].Rows)
+		do
 		{
-			if (i == Colors.Length) i = 0;
-			tempColor = Colors[i];
-
-			cardsCollection.Add(new Card()
+			finalNumber = string.Empty;
+			switch (cardSystem)
 			{
-				Id = card.ItemArray[0].ToString(),
-				Type = card.ItemArray[1].ToString(),
-				Number = card.ItemArray[2].ToString(),
-				Cvv = card.ItemArray[3].ToString(),
-				DateEnd = card.ItemArray[4].ToString(),
-				Balance = card.ItemArray[5].ToString(),
-				Code = card.ItemArray[6].ToString(),
-				Color = tempColor
-			});
-
-			i++;
+				case "мир":
+					finalNumber += "2";
+					break;
+				case "visa":
+					finalNumber += "4";
+					break;
+				case "maestro":
+					finalNumber += "6";
+					break;
+				case "mastercard":
+					finalNumber += "5";
+					break;
+				default:
+					break;
+			}
+			Random rnd = new();
+			finalNumber += RandomString(rnd, 15);
 		}
+		while (!isUnique(finalNumber));
 
-		return cardsCollection;
+		return finalNumber;
+
 	}
 
-
-	readonly static string[] Colors = new string[]
+	private bool isUnique(string finalNumber)
 	{
-		"#8916FF",
-		"#ECC200",
-		"#424874"
-	};
+		//TODO
+		//Обращение на уникальность номера к БД
+		return true;
+	}
+
+	public static string RandomString(Random random, int length)
+	{
+		const string chars = "0123456789";
+		return new string(Enumerable.Repeat(chars, length)
+			.Select(s => s[random.Next(s.Length)]).ToArray());
+	}
+
 }

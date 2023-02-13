@@ -7,6 +7,7 @@ public class StringToColor : IValueConverter
 {
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 	{
+		if (value == null) value = "#FCBE0B";
 		ColorTypeConverter converter = new ColorTypeConverter();
 		Color color = (Color)(converter.ConvertFromInvariantString((string)value));
 		return color;
