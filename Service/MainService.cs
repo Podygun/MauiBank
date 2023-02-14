@@ -1,7 +1,4 @@
-﻿using MauiBank.HTTP;
-
-
-namespace MauiBank.Service;
+﻿namespace MauiBank.Service;
 
 public class MainService
 {
