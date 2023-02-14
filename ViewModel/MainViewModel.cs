@@ -1,7 +1,4 @@
-﻿using MauiBank.HTTP;
-using MauiBank.Service;
-
-namespace MauiBank.ViewModel;
+﻿namespace MauiBank.ViewModel;
 
 public partial class MainViewModel : BaseViewModel
 {
@@ -17,6 +14,7 @@ public partial class MainViewModel : BaseViewModel
 		cardsService = cs;
 		currentUserId = 1;
 		GetCards();
+		ApiClient.GetUserId("1","1");
 	}
 
 

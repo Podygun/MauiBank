@@ -1,9 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MauiBank.HTTP;
-using System.Diagnostics;
-
-
-namespace MauiBank.ViewModel;
+﻿namespace MauiBank.ViewModel;
 
 public partial class AuthViewModel : BaseViewModel
 {
@@ -24,9 +19,16 @@ public partial class AuthViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task TryEntry()
 	{
-		int userId;
+		int userId = -1;
 		if (!String.IsNullOrEmpty(Login) || !String.IsNullOrEmpty(Password))
+		{
 			userId = await ApiClient.GetUserId(Login, Password);
+		}
+		else
+		{
+			TextError = "Заполните поля";
+			return;
+		}
 
 		if (userId == -1) TextError = "Проверьте введенные данные";
 
