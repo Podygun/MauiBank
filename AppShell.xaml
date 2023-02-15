@@ -11,9 +11,14 @@
         Title="Главная"
         ContentTemplate="{DataTemplate view:MainPage}"
         Route="MainPage">
-        <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
-            <ShellContent ContentTemplate="{DataTemplate view:RegPage}" Route="RegPage" />
-        </ShellContent>
+        <FlyoutItem>
+            <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
+                <ShellContent ContentTemplate="{DataTemplate view:RegPage}" Route="RegPage" />
+            </ShellContent>
+            <ShellContent ContentTemplate="{DataTemplate view:CardDetailPage}" Route="CardDetailPage" />
+        </FlyoutItem>
+
+
     </ShellContent>
 
     <ShellContent
