@@ -49,7 +49,7 @@ class UserAccountController extends Controller
     {
         return User_account::where('login', $request->login)
             ->where('password', $request->password)
-            ->get('id');
+            ->get('id')->first();
     }
 
 }

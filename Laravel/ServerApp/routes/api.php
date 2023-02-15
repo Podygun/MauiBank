@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers;
+use App\Http\Controllers\api;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,8 +32,8 @@ Route::get('/users/delete', [Controllers\UserAccountController::class, 'delete']
 Route::get('/users/get', [Controllers\UserAccountController::class, 'getId']);
 
 
-Route::get('/userdata', [Controllers\UserDataController::class, 'get']);
-
-
+Route::apiResources([
+    'userdata' => api\UserDataController::class,
+]);
 
 #$users = DB::select('select * from users where active = ?', [1]);
