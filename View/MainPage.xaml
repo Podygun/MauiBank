@@ -40,8 +40,12 @@
                 x:Name="cardsCarousel"
                 Grid.Row="1"
                 BackgroundColor="{StaticResource Primary}"
-                ItemsSource="{Binding cards, Mode=TwoWay}">
-                <CarouselView.ItemTemplate>
+                ItemsSource="{Binding cards, Mode=TwoWay}"
+                CurrentItem="{Binding SelectedCard}"
+                >
+                <CarouselView.ItemTemplate
+                    
+                    >
                     <DataTemplate x:DataType="model:Card">
                         <Frame
                             x:Name="cardFrame"
@@ -50,6 +54,9 @@
                             BindingContext="{x:Reference cardFrame}"
                             BorderColor="Transparent"
                             CornerRadius="15">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer x:DataType="vm:MainViewModel" Tapped="TapGestureRecognizer_Tapped" />
+                            </Frame.GestureRecognizers>
                             <Grid RowDefinitions="*,*,*">
                                 <HorizontalStackLayout Spacing="60">
                                     <Image
