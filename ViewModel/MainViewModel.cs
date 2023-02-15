@@ -1,4 +1,6 @@
-﻿namespace MauiBank.ViewModel;
+﻿using MauiBank.Static;
+
+namespace MauiBank.ViewModel;
 
 public partial class MainViewModel : BaseViewModel
 {
@@ -7,6 +9,9 @@ public partial class MainViewModel : BaseViewModel
 	public ObservableCollection<Card> cards { get; set; } = new();
 
 	public int currentUserId { get; set; }
+
+	[ObservableProperty]
+	Card selectedCard;
 
 	public MainViewModel(CardsService cs)
 	{
@@ -39,9 +44,9 @@ public partial class MainViewModel : BaseViewModel
 	//}
 
 	[RelayCommand]
-	void GoToAuth()
+	static async void GoToAuth()
 	{
-		Shell.Current.GoToAsync("//MainPage/auth");
+		await Shell.Current.GoToAsync("//MainPage/auth");
 	}
 
 	[RelayCommand]
@@ -95,5 +100,15 @@ public partial class MainViewModel : BaseViewModel
 		{
 			Busy = false;
 		}
+	}
+
+	[RelayCommand]
+	async void CardDetail()
+	{
+		var navigationParameter = new Dictionary<string, object>
+		{
+			{ "Card", SelectedCard }
+		};
+		await Shell.Current.GoToAsync("//MainPage/carddetail", navigationParameter);
 	}
 }
