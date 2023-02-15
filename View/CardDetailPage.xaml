@@ -16,26 +16,43 @@
         <Frame
             x:Name="cardFrame"
             Margin="20,0,20,0"
-            Background="{Binding CurrentCard.Color, Converter={DynamicResource StringToColor}}"
-            BindingContext="{x:Reference cardFrame}"
+            Background="{StaticResource Cyan100Accent}"
             BorderColor="Transparent"
-            CornerRadius="15">
+            CornerRadius="15"
+            HeightRequest="200">
             <Grid RowDefinitions="*,*,*">
-                <HorizontalStackLayout Spacing="60">
+                <HorizontalStackLayout Spacing="30">
                     <Image
                         HeightRequest="40"
                         HorizontalOptions="Start"
                         Source="sim.png"
                         WidthRequest="40" />
 
-                    <Label
-                        FontFamily="SemiBold"
-                        FontSize="24"
-                        HorizontalTextAlignment="Start"
-                        Style="{StaticResource BaseWhiteLbl}"
-                        Text="{Binding CurrentCard.Number}}" />
+                    <Border
+                        Margin="10,0,0,0"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        Stroke="{StaticResource Primary}"
+                        StrokeShape="RoundRectangle 5"
+                        StrokeThickness="2">
+                        <Label
+                            x:Name="LblNumber"
+                            FontFamily="SemiBold"
+                            FontSize="22"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource BaseEntry}"
+                            Text="{Binding CurrentCard.Number}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="CopyNumber" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+
 
                 </HorizontalStackLayout>
+
 
                 <Label
                     Grid.Row="1"
@@ -45,6 +62,38 @@
                     HorizontalOptions="Start"
                     Style="{StaticResource BaseWhiteLbl}"
                     Text="{Binding CurrentCard.Type}" />
+                <HorizontalStackLayout Grid.Row="1" HorizontalOptions="End">
+
+                    <Label
+                        FontFamily="Regular"
+                        FontSize="18"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="cvv" />
+                    <Border
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        HeightRequest="40"
+                        Stroke="{StaticResource Primary}"
+                        StrokeShape="RoundRectangle 5"
+                        StrokeThickness="2">
+                        <Label
+                            x:Name="LblCvv"
+                            Margin="0,-6,0,0"
+                            FontFamily="SemiBold"
+                            FontSize="20"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource BaseWhiteLbl}"
+                            Text="{Binding CurrentCard.Cvv}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="CopyCvv" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+                </HorizontalStackLayout>
+
+
+
+
 
                 <HorizontalStackLayout Grid.Row="2">
                     <Label

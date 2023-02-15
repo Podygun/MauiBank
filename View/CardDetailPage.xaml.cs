@@ -7,4 +7,13 @@ public partial class CardDetailPage : ContentPage
 		InitializeComponent();
 		BindingContext = vm;
 	}
+
+	private async void CopyNumber(object sender, TappedEventArgs e) =>
+		await Clipboard.Default.SetTextAsync(LblNumber.Text);
+
+
+	private async void CopyCvv(object sender, TappedEventArgs e) =>
+		await Clipboard.Default.SetTextAsync(LblCvv.Text);
+
+
 }
