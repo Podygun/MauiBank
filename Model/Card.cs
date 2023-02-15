@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace MauiBank.Model;
+﻿namespace MauiBank.Model;
 
 public partial class Card : ObservableObject
 {
