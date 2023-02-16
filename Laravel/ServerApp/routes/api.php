@@ -34,6 +34,9 @@ Route::get('/users/get', [Controllers\UserAccountController::class, 'getId']);
 
 Route::apiResources([
     'userdata' => api\UserDataController::class,
+    'userAccounts'=>api\UserAccountController::class
 ]);
+
+
 
 #$users = DB::select('select * from users where active = ?', [1]);

@@ -25,7 +25,22 @@ public partial class RegViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task RegEntry()
 	{
-		
+		if(String.IsNullOrWhiteSpace(Login) ||
+		   String.IsNullOrWhiteSpace(Password) ||
+		   String.IsNullOrWhiteSpace(ConfirmPassword)) 
+		{
+			//bad	
+			return;							   
+		}
+
+		string Salt = "test";
+		UserAccount acc = new()
+		{
+			login = Login,
+			password = Password,
+			salt = Salt
+		};
+		await ApiClient.SaveUserAsync(acc);
 
 	}
 }

@@ -15,5 +15,10 @@ public partial class CardDetailPage : ContentPage
 	private async void CopyCvv(object sender, TappedEventArgs e) =>
 		await Clipboard.Default.SetTextAsync(LblCvv.Text);
 
+	private async void CopyName(object sender, TappedEventArgs e) =>
+		await Clipboard.Default.SetTextAsync(LblName.Text);
+
+	
+
 
 }

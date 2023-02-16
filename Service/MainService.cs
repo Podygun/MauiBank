@@ -22,9 +22,10 @@ public class MainService
 				Balance = data.balance,
 				Cvv = data.cvv,
 				Number = data.number,
-				Type = data.card_type_name
+				Type = data.card_type_name,
+				Date_end = DateOnly.ParseExact(data.date_end, "yyyy-MM-dd")
 
-			});
+			}) ;
 		}
 
 		for (int i = 0, j = 0; j < tempCards.Count; i++, j++)

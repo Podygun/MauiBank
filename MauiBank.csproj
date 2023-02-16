@@ -73,6 +73,9 @@
 	  <MauiXaml Update="View\AuthPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\CardDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\RegPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

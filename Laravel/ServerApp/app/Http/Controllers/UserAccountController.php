@@ -7,16 +7,16 @@ use App\Models\User_account;
 
 class UserAccountController extends Controller
 {
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        $user_account = new User_account();
-
-        $user_account->login = $request->login;
-        $user_account->password = $request->password;
-        $user_account->salt = $request->salt;
-
-        $user_account->save();
-        return 'ok';
+        $user_account = User_account::create($request->all);
+        return new User_account($user_account);
+//        $user_account->login = $request->login;
+//        $user_account->password = $request->password;
+//        $user_account->salt = $request->salt;
+//
+//        $user_account->save();
+//        return 'ok';
     }
 
     public function update(Request $request)
@@ -51,5 +51,7 @@ class UserAccountController extends Controller
             ->where('password', $request->password)
             ->get('id')->first();
     }
+
+
 
 }

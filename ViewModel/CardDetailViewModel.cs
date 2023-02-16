@@ -12,7 +12,7 @@ public partial class CardDetailViewModel : BaseViewModel, IQueryAttributable
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{ 
 		CurrentCard = query["Card"] as Card;
-		OnPropertyChanged(nameof(CurrentCard));
+		OnPropertyChanged();
 
 		
 	}
