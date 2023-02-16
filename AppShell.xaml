@@ -4,27 +4,37 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:view="clr-namespace:MauiBank.View"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Disabled">
 
 
-    <ShellContent
+    <!--<ShellContent
         Title="Главная"
         ContentTemplate="{DataTemplate view:MainPage}"
-        Route="MainPage">
-        <FlyoutItem>
-            <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
+        Route="MainPage" />-->
+
+
+   
+        <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
+            <!--<Tab>
                 <ShellContent ContentTemplate="{DataTemplate view:RegPage}" Route="RegPage" />
-            </ShellContent>
-            <ShellContent ContentTemplate="{DataTemplate view:CardDetailPage}" Route="CardDetailPage" />
-        </FlyoutItem>
+                <ShellContent ContentTemplate="{DataTemplate view:MainPage}" Route="MainPage">
+                    <Tab>
+                        <ShellContent ContentTemplate="{DataTemplate view:CardDetailPage}" Route="CardDetailPage" />
+                    </Tab>
+                </ShellContent>
+            </Tab>-->
+
+        </ShellContent>
+
+    
 
 
-    </ShellContent>
 
-    <ShellContent
+
+    <!--<ShellContent
         Title="Персональные данные"
         ContentTemplate="{DataTemplate view:UserDataPage}"
-        Route="UserDataPage" />
+        Route="UserDataPage" />-->
 
 
 </Shell>

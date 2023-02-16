@@ -13,34 +13,43 @@ public partial class AuthViewModel : BaseViewModel
 
 	public AuthViewModel()
 	{
-
+		TextError = String.Empty;
 	}
 
 	[RelayCommand]
 	public async Task TryEntry()
 	{
+		TextError = String.Empty;
+		Password = Password.Trim();
+		Login = Login.Trim();
+
 		int userId = -1;
-		if (!String.IsNullOrEmpty(Login) || !String.IsNullOrEmpty(Password))
+		if (!String.IsNullOrWhiteSpace(Login) || !String.IsNullOrWhiteSpace(Password))
 		{
-			userId = await ApiClient.GetUserId(Login, Password);
+			try
+			{
+				userId = await ApiClient.GetUserId(Login, Password);
+			}
+			catch (Exception ex)
+			{
+				TextError = ex.Message;
+				return;
+			}
+			
 		}
 		else
 		{
 			TextError = "Заполните поля";
 			return;
 		}
-
-		if (userId == -1) TextError = "Проверьте введенные данные";
-
-		//null if ERROR
-		//"-1" if not found
-		Trace.WriteLine(userId);
-
+		if (userId == -1) { TextError = "Проверьте введенные данные"; return; }
+		await Shell.Current.GoToAsync("main");
 	}
 
 	[RelayCommand]
 	public void OpenRegPage()
 	{
-		Shell.Current.GoToAsync("//MainPage/auth/reg");
+		TextError = String.Empty;
+		Shell.Current.GoToAsync("reg");
 	}
 }

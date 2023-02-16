@@ -36,16 +36,10 @@ public class ApiClient
 
 	public static async Task<int> GetUserId(string login, string password)
 	{
-		string uri = "";
-		string uriTemplate = $"api/users/get?login={login}&password={password}";
+		string uri = Routes.getUserIdUri
+			.Replace(@"{0}",login)
+			.Replace(@"{1}",password);
 
-#if ANDROID
-		uri = (isNgrok == 0) ?
-			$"{emulatorhost}:{port}/" + uriTemplate :
-			$"{ngrokUri} + {uriTemplate}";
-#elif WINDOWS
-		uri = $"{localhost}:{port}/" + uriTemplate;
-#endif
 		try
 		{
 			var result = await _client.GetAsync(uri);
@@ -55,12 +49,12 @@ public class ApiClient
 		}
 		catch (Exception ex)
 		{
+			Trace.WriteLine(@"\tERROR {0}", ex.Message);
 			return -1;
-			throw;
+			
 		}
 
-		
-
+	
 	}
 
 	public static async Task SaveUserAsync(UserAccount account, bool isNewItem = true)

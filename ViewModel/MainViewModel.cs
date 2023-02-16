@@ -8,14 +8,14 @@ public partial class MainViewModel : BaseViewModel
 	CardsService cardsService;
 	public ObservableCollection<Card> cards { get; set; } = new();
 
-	public int currentUserId { get; set; }
+	public static int currentUserId { get; set; }
 
 	[ObservableProperty]
 	Card selectedCard;
 
 	public MainViewModel(CardsService cs)
 	{
-
+		Shell.Current.GoToAsync("auth");
 		cardsService = cs;
 		currentUserId = 1;
 		GetCards();
@@ -46,7 +46,7 @@ public partial class MainViewModel : BaseViewModel
 	[RelayCommand]
 	static async void GoToAuth()
 	{
-		await Shell.Current.GoToAsync("//MainPage/auth");
+		await Shell.Current.GoToAsync("auth");
 	}
 
 	[RelayCommand]
@@ -109,6 +109,6 @@ public partial class MainViewModel : BaseViewModel
 		{
 			{ "Card", SelectedCard }
 		};
-		await Shell.Current.GoToAsync("//MainPage/carddetail", navigationParameter);
+		await Shell.Current.GoToAsync("carddetail", navigationParameter);
 	}
 }

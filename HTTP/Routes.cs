@@ -40,4 +40,17 @@ public static class Routes
 #endif
 	#endregion
 
+	#region GetUserId
+#if WINDOWS
+	public static string getUserIdUri =
+		localhost + port + @"api/users/get?login={0}&password={1}";
+#elif ANDROID
+	public static string getUserIdUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"api/users/get?login={0}&password={1}" :
+		ngrokUri + @"api/users/get?login={0}&password={1}";
+
+#endif
+	#endregion
+
 }

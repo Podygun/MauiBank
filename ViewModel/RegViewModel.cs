@@ -19,28 +19,50 @@ public partial class RegViewModel : BaseViewModel
 
 	public RegViewModel()
 	{
-		
+		TextError= string.Empty;
 	}
 
 	[RelayCommand]
 	public async Task RegEntry()
 	{
-		if(String.IsNullOrWhiteSpace(Login) ||
-		   String.IsNullOrWhiteSpace(Password) ||
-		   String.IsNullOrWhiteSpace(ConfirmPassword)) 
+		TextError = string.Empty;
+		Password = Password.Trim();
+		Login = Login.Trim();
+		ConfirmPassword = ConfirmPassword.Trim();
+
+		
+		if (String.IsNullOrWhiteSpace(Login) || String.IsNullOrWhiteSpace(Password) || String.IsNullOrWhiteSpace(ConfirmPassword)) 
 		{
-			//bad	
+			TextError = "Заполнены не все поля";
 			return;							   
 		}
+		if (Password != ConfirmPassword)
+		{
+			TextError = "Пароли не совпадают";
+			return;
+		}
+
 
 		string Salt = "test";
+
 		UserAccount acc = new()
 		{
 			login = Login,
 			password = Password,
 			salt = Salt
 		};
-		await ApiClient.SaveUserAsync(acc);
+		try
+		{
+			await ApiClient.SaveUserAsync(acc);
+			if (await ApiClient.GetUserId(Login, Password) != -1)
+				await Shell.Current.GoToAsync("main");
+			else TextError= "Неверные данные";
+		}
+		catch (Exception)
+		{
 
+			TextError = "Что-то пошло не так";
+		}
+		
 	}
 }
