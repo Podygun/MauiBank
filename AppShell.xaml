@@ -13,9 +13,9 @@
         Route="MainPage" />-->
 
 
-   
-        <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
-            <!--<Tab>
+
+    <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
+        <!--<Tab>
                 <ShellContent ContentTemplate="{DataTemplate view:RegPage}" Route="RegPage" />
                 <ShellContent ContentTemplate="{DataTemplate view:MainPage}" Route="MainPage">
                     <Tab>
@@ -24,9 +24,9 @@
                 </ShellContent>
             </Tab>-->
 
-        </ShellContent>
+    </ShellContent>
 
-    
+
 
 
 

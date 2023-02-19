@@ -30,15 +30,16 @@ public static class MauiProgram
 		builder.Services.AddSingleton<RegPage>();
 		builder.Services.AddSingleton<AuthPage>();
 		builder.Services.AddSingleton<UserDataPage>();
-		builder.Services.AddSingleton<CardDetailPage>();
+		builder.Services.AddTransient<CardDetailPage>();
 
 		builder.Services.AddSingleton<CardsService>();
+		builder.Services.AddSingleton<MainService>();
 
 		builder.Services.AddSingleton<MainViewModel>();
 		builder.Services.AddSingleton<RegViewModel>();
 		builder.Services.AddSingleton<AuthViewModel>();
 		builder.Services.AddSingleton<UserDataViewModel>();
-		builder.Services.AddSingleton<CardDetailViewModel>();
+		builder.Services.AddTransient<CardDetailViewModel>();
 		
 
 		return builder.Build();
