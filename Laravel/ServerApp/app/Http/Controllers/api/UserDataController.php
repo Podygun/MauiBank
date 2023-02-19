@@ -48,6 +48,7 @@ class UserDataController extends Controller
     public function show($id)
     {
         $clientId = client::where('user_account_id', $id)->get('id')->first();
+
         return DB::table('bank_accounts')
             ->select(
                 'bank_accounts.balance'
