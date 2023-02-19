@@ -1,5 +1,6 @@
 ﻿namespace MauiBank.ViewModel;
 
+
 public partial class AuthViewModel : BaseViewModel
 {
 	[ObservableProperty]
@@ -20,7 +21,7 @@ public partial class AuthViewModel : BaseViewModel
 		Password = "test";
 		TryEntry();
 	}
-
+#nullable enable
 	[RelayCommand]
 	public async Task TryEntry()
 	{
@@ -31,20 +32,18 @@ public partial class AuthViewModel : BaseViewModel
 		int userId = -1;
 		if (!String.IsNullOrWhiteSpace(Login) || !String.IsNullOrWhiteSpace(Password))
 		{
-			try
-			{
-				string uri = Routes.getUserIdUri
-					.Replace(@"{0}", Login)
-					.Replace(@"{1}", Password);
 
-				Id _id = await ApiClient<Id>.GetAsync(uri);
-				userId = _id.id;
-			}
-			catch (Exception ex)
-			{
-				TextError = "Проверьте введенные данные";
+			string uri = Routes.getUserIdUri
+				.Replace(@"{0}", Login)
+				.Replace(@"{1}", Password);
+
+			Id? _id = await ApiClient<Id>.GetAsync(uri);
+			
+			if(_id == null) {
+				TextError = "Что-то пошло не так";
 				return;
 			}
+			userId = _id.id;
 
 		}
 		else

@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System.Security.Principal;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MauiBank.HTTP;
-
+#nullable enable
 public class ApiClient<T>
 {
 	static HttpClient _client = new();
@@ -76,16 +78,19 @@ public class ApiClient<T>
 		}
 	}
 
-#nullable enable
+
 	public static async Task<HttpResponseMessage?> PostAsync(string uri, T obj, bool isNewItem = true)
-	{
+	{ 
 		try
 		{
 			string json = JsonConvert.SerializeObject(obj);
 			StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 			HttpResponseMessage? response = null;
 			if (isNewItem)
-				response = await _client.PostAsync(uri, content);
+			{ 
+				var task = _client.PostAsync(uri, content);
+				response = await task.WaitAsync(TimeSpan.FromSeconds(1));
+			}
 			else
 				response = await _client.PutAsync(uri, content);
 
@@ -93,25 +98,31 @@ public class ApiClient<T>
 				Trace.WriteLine("\nNew UserAccounnt successfully saved.\n");
 			return response;
 		}
-		catch
+		catch(Exception ex)
 		{
-			Trace.WriteLine("\nFAIL TO POST REQUEST\n");
+			if (ex is TimeoutException) Trace.WriteLine("TIMEOUT");
+			else Trace.WriteLine("FAIL TO POST REQUEST");
 			return null;
 		}
 	}
-#nullable disable
-	public static async Task<T> GetAsync(string uri)
+
+	public static async Task<T?> GetAsync(string uri)
 	{
 		try
 		{
-			var result = await _client.GetAsync(uri);
+			HttpResponseMessage? result = null;
+			var task = _client.GetAsync(uri);
+			result = await task.WaitAsync(TimeSpan.FromSeconds(1));
+
+
 			string jsonStr = result.Content.ReadAsStringAsync().Result;
-			T response = JsonConvert.DeserializeObject<T>(jsonStr);
+			T? response = JsonConvert.DeserializeObject<T>(jsonStr);
 			return response;
 		}
 		catch (Exception ex)
 		{
-			Trace.WriteLine(@"\nERROR {0}\n", ex.Message);
+			if (ex is TimeoutException) Trace.WriteLine("TIMEOUT");
+			else Trace.WriteLine("FAIL TO GET REQUEST");
 			return default;
 		}
 	}

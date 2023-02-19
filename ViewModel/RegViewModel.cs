@@ -40,7 +40,6 @@ public partial class RegViewModel : BaseViewModel
 			return;
 		}
 
-
 		string Salt = "test";
 
 		UserAccount acc = new()
@@ -51,14 +50,12 @@ public partial class RegViewModel : BaseViewModel
 		};
 
 		string uriNewClient = Routes.postUserAccountUri;
-		HttpResponseMessage? response = await ApiClient<Object>.PostAsync(uriNewClient, acc);
-		Trace.WriteLine(response.IsSuccessStatusCode);
-		if (response == null)			   TextError = "Что-то пошло не так";
-		if (!response.IsSuccessStatusCode) TextError = "Неверные данные"; 
+
+		HttpResponseMessage? response = await ApiClient<object>.PostAsync(uriNewClient, acc);
+		if (response == null) TextError = "Что-то пошло не так";
+
 
 		//await Shell.Current.GoToAsync("main");
-
-		
 
 	}
 }
