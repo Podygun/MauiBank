@@ -1,47 +1,23 @@
-﻿using MauiBank.Static;
+﻿using MauiBank.Service;
 
 namespace MauiBank.ViewModel;
 
-public partial class MainViewModel : BaseViewModel
+
+public partial class MainViewModel : BaseViewModel, IQueryAttributable
 {
 
-	CardsService cardsService;
+	MainService mainService;
 	public ObservableCollection<Card> cards { get; set; } = new();
 
-	public static int currentUserId { get; set; }
+	private int currentUserId { get; set; }
 
 	[ObservableProperty]
 	Card selectedCard;
 
-	public MainViewModel(CardsService cs)
+	public MainViewModel(MainService ms)
 	{
-		Shell.Current.GoToAsync("auth");
-		cardsService = cs;
-		currentUserId = 1;
-		GetCards();
-		ApiClient.GetUserId("1","1");
+		mainService = ms;	
 	}
-
-
-	//[RelayCommand]
-	//void GetFakeCards()
-	//{
-	//	var tempCards = new ObservableCollection<Card>
-	//	{
-	//		new Card{ Number="12345678912346729", Cvv="123", Id="1", Type="VISA", DateEnd="12.12.23", Color="#8916FF", Balance="57813.53"},
-	//		new Card{ Number="1234567893862", Cvv="123", Id="2", Type="МИР", DateEnd="12.12.23", Color="#ECC200", Balance="0.00"},
-	//		new Card{ Number="1234567891234562907", Cvv="123", Id="3", Type="MAESTRO", DateEnd="12.12.23", Color="#424874", Balance="6928544.32"}
-	//	};
-
-	//	foreach (var card in tempCards)
-	//	{
-
-	//		cards.Add(card);
-	//	}
-
-
-	//	cards = tempCards;
-	//}
 
 	[RelayCommand]
 	static async void GoToAuth()
@@ -49,31 +25,14 @@ public partial class MainViewModel : BaseViewModel
 		await Shell.Current.GoToAsync("auth");
 	}
 
-	[RelayCommand]
-	async void GetCards()
+	private void SetEmptyCard()
 	{
-		try
+		Card emptyCard = new()
 		{
-			Busy = true;
-			int userId = 1;		
-			var cardsList = await MainService.GetCardsAsync(userId);
-			if (cards.Count != 0)
-				cards.Clear();
-			foreach (var card in cardsList)
-			{
-				cards.Add(card);
-			}
-		}
-		catch (Exception ex) 
-		{ 
-			await Shell.Current.DisplayAlert("Error", $"Unable to get cards: {ex.Message}", "OK"); 
-		}
-		finally
-		{
-			Busy = false;
-		}
-		
-		
+			Type = "Открыть карту"
+		};
+		cards.Clear();
+		cards.Add(emptyCard);
 	}
 
 	[RelayCommand]
@@ -82,19 +41,16 @@ public partial class MainViewModel : BaseViewModel
 		try
 		{
 			Busy = true;
-			int userId = 1;
-
-			var cardsList = await MainService.GetCardsAsync(userId);
-			if (cards.Count != 0)
-				cards.Clear();
-			foreach (var card in cardsList)
+			List<Card> tempCards = await mainService.GetCardsAsync(currentUserId);
+			foreach (var card in tempCards)
 			{
 				cards.Add(card);
 			}
+
 		}
 		catch (Exception ex)
 		{
-			await Shell.Current.DisplayAlert("Error", $"Unable to get cards: {ex.Message}", "OK");
+			await Shell.Current.DisplayAlert("Error", $"{ex.Message}", "OK");
 		}
 		finally
 		{
@@ -111,4 +67,30 @@ public partial class MainViewModel : BaseViewModel
 		};
 		await Shell.Current.GoToAsync("carddetail", navigationParameter);
 	}
+
+
+	//Принятие id с форм авторизации
+	public void ApplyQueryAttributes(IDictionary<string, object> query)
+	{
+		currentUserId = (int)query["UserId"];
+		OnPropertyChanged();
+		Load();
+		
+	}
+
+	[RelayCommand]
+	public async Task Load()
+	{
+		bool isClientExists = await ApiClient<bool>.IsClientExist(currentUserId);
+
+		if (!isClientExists)
+		{
+			SetEmptyCard();
+			Trace.WriteLine("setted empty card");
+			return;
+		}
+		GetUserData();
+		Trace.WriteLine("getted user data");
+	}
+
 }

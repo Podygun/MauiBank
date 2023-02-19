@@ -14,6 +14,11 @@ public partial class AuthViewModel : BaseViewModel
 	public AuthViewModel()
 	{
 		TextError = String.Empty;
+
+		//TODO
+		Login = "test";
+		Password = "test";
+		TryEntry();
 	}
 
 	[RelayCommand]
@@ -28,14 +33,19 @@ public partial class AuthViewModel : BaseViewModel
 		{
 			try
 			{
-				userId = await ApiClient.GetUserId(Login, Password);
+				string uri = Routes.getUserIdUri
+					.Replace(@"{0}", Login)
+					.Replace(@"{1}", Password);
+
+				Id _id = await ApiClient<Id>.GetAsync(uri);
+				userId = _id.id;
 			}
 			catch (Exception ex)
 			{
-				TextError = ex.Message;
+				TextError = "Проверьте введенные данные";
 				return;
 			}
-			
+
 		}
 		else
 		{
@@ -43,7 +53,13 @@ public partial class AuthViewModel : BaseViewModel
 			return;
 		}
 		if (userId == -1) { TextError = "Проверьте введенные данные"; return; }
-		await Shell.Current.GoToAsync("main");
+
+		var navigationParameter = new Dictionary<string, object>
+		{
+			{ "UserId", userId }
+		};
+		//await Shell.Current.GoToAsync("main", navigationParameter);
+		TextError = userId.ToString();
 	}
 
 	[RelayCommand]

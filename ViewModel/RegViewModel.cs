@@ -1,7 +1,4 @@
-﻿
-using System.Diagnostics;
-
-namespace MauiBank.ViewModel;
+﻿namespace MauiBank.ViewModel;
 
 public partial class RegViewModel : BaseViewModel
 {
@@ -19,9 +16,10 @@ public partial class RegViewModel : BaseViewModel
 
 	public RegViewModel()
 	{
-		TextError= string.Empty;
+		TextError = string.Empty;
 	}
 
+#nullable enable
 	[RelayCommand]
 	public async Task RegEntry()
 	{
@@ -30,11 +28,11 @@ public partial class RegViewModel : BaseViewModel
 		Login = Login.Trim();
 		ConfirmPassword = ConfirmPassword.Trim();
 
-		
-		if (String.IsNullOrWhiteSpace(Login) || String.IsNullOrWhiteSpace(Password) || String.IsNullOrWhiteSpace(ConfirmPassword)) 
+
+		if (String.IsNullOrWhiteSpace(Login) || String.IsNullOrWhiteSpace(Password) || String.IsNullOrWhiteSpace(ConfirmPassword))
 		{
 			TextError = "Заполнены не все поля";
-			return;							   
+			return;
 		}
 		if (Password != ConfirmPassword)
 		{
@@ -51,18 +49,16 @@ public partial class RegViewModel : BaseViewModel
 			password = Password,
 			salt = Salt
 		};
-		try
-		{
-			await ApiClient.SaveUserAsync(acc);
-			if (await ApiClient.GetUserId(Login, Password) != -1)
-				await Shell.Current.GoToAsync("main");
-			else TextError= "Неверные данные";
-		}
-		catch (Exception)
-		{
 
-			TextError = "Что-то пошло не так";
-		}
+		string uriNewClient = Routes.postUserAccountUri;
+		HttpResponseMessage? response = await ApiClient<Object>.PostAsync(uriNewClient, acc);
+		Trace.WriteLine(response.IsSuccessStatusCode);
+		if (response == null)			   TextError = "Что-то пошло не так";
+		if (!response.IsSuccessStatusCode) TextError = "Неверные данные"; 
+
+		//await Shell.Current.GoToAsync("main");
+
 		
+
 	}
 }

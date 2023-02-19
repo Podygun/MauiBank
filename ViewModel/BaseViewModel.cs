@@ -1,7 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿namespace MauiBank.ViewModel;
 
-
-namespace MauiBank.ViewModel;
 
 public partial class BaseViewModel : ObservableObject
 {
@@ -10,11 +8,6 @@ public partial class BaseViewModel : ObservableObject
 
 	[ObservableProperty]
 	bool busy;
-
-	public BaseViewModel()
-	{
-
-	}
 
 	public bool isNotBusy() => !Busy;
 }
