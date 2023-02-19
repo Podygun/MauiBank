@@ -5,8 +5,8 @@ namespace MauiBank.HTTP;
 
 public static class Routes
 {
-	private const short isNgrok = 1;
-	private const string ngrokUri = @"https://7827-136-169-210-93.eu.ngrok.io/";
+	private const short isNgrok = 0;
+	private const string ngrokUri = @"";
 
 	private const string port = "8000/";
 	private const string localhost = @"http://127.0.0.1:";
@@ -47,9 +47,33 @@ public static class Routes
 #elif ANDROID
 	public static string getUserIdUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/users/get?login={0}&password={1}" :
-		ngrokUri + @"api/users/get?login={0}&password={1}";
+		emulatorhost + port + @"api/userAccounts/get?login={0}&password={1}" :
+		ngrokUri + @"api/userAccounts/get?login={0}&password={1}";
+#endif
+	#endregion
 
+	#region GetClientOnUserIdUri
+#if WINDOWS
+	public static string getClientOnUserIdUri =
+		localhost + port + @"api/clients/getOnUserAccountId?id={0}";
+#elif ANDROID
+	public static string getClientOnUserIdUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"api/clients/getOnUserAccountId?id={0}" :
+		ngrokUri + @"api/clients/getOnUserAccountId?id={0}";
+
+#endif
+	#endregion
+
+	#region GetValutes
+#if WINDOWS
+	public static string getValutesUri =
+		localhost + port + @"api/valutes/";
+#elif ANDROID
+	public static string getValutesUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"api/userAccounts/get?login={0}&password={1}" :
+		ngrokUri + @"api/userAccounts/get?login={0}&password={1}";
 #endif
 	#endregion
 
