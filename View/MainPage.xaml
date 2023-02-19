@@ -7,38 +7,46 @@
     xmlns:model="clr-namespace:MauiBank.Model"
     xmlns:view="clr-namespace:MauiBank.View"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
-    Title="Welcome"
+    Title=""
     x:DataType="vm:MainViewModel">
     <ContentPage.Resources>
         <converters:StringToColor x:Key="StringToColor" />
         <converters:ToShortNumber x:Key="ToShortNumber" />
     </ContentPage.Resources>
 
+
+
+
     <Grid Background="{StaticResource Primary}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid
             Grid.Row="0"
+            Margin="40,15,20,0"
+            VerticalOptions="CenterAndExpand">
+            <Label
+                FontFamily="Bold"
+                FontSize="20"
+                HorizontalOptions="Start"
+                Style="{StaticResource BaseWhiteLbl}"
+                Text="Главная" />
+            <ImageButton
+                Command="{Binding GoToClientInfoCommand}"
+                HorizontalOptions="End"
+                Source="user.png" />
+        </Grid>
+
+        <Grid
+            Grid.Row="1"
             Margin="0,20,0,20"
             Padding="0,0,0,0"
             VerticalOptions="Start">
-            <!--<Grid>
-                <ImageButton
-                    Margin="15,0,0,0"
-                    HeightRequest="32"
-                    HorizontalOptions="Start"
-                    Source="burger.png"
-                    WidthRequest="32" />
-                <Label
-                    HorizontalOptions="Center"
-                    Style="{StaticResource BaseWhiteLbl}"
-                    Text="Welcome" />
-            </Grid>-->
+
             <CarouselView
                 x:Name="cardsCarousel"
-                Grid.Row="1"
                 BackgroundColor="{StaticResource Primary}"
                 CurrentItem="{Binding SelectedCard}"
                 HorizontalScrollBarVisibility="Always"
@@ -99,7 +107,6 @@
             </CarouselView>
 
         </Grid>
-
 
         <Grid
             Grid.Row="2"

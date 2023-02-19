@@ -31,6 +31,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<AuthPage>();
 		builder.Services.AddSingleton<UserDataPage>();
 		builder.Services.AddTransient<CardDetailPage>();
+		builder.Services.AddTransient<ClientInfoPage>();
 
 		builder.Services.AddSingleton<CardsService>();
 		builder.Services.AddSingleton<MainService>();
@@ -40,6 +41,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<AuthViewModel>();
 		builder.Services.AddSingleton<UserDataViewModel>();
 		builder.Services.AddTransient<CardDetailViewModel>();
+		builder.Services.AddTransient<ClientInfoViewModel>();
 		
 
 		return builder.Build();

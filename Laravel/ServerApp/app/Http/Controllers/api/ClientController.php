@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return Client::all();
     }
 
     /**
@@ -46,24 +46,18 @@ class ClientController extends Controller
         return Client::where('user_account_id', $request->id)
             ->get('id')->first();
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    public function getAllOnUserAccountId(Request $request)
+    {
+        return Client::where('user_account_id', $request->id)
+            ->get()->first();
+    }
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

@@ -114,7 +114,6 @@ public class ApiClient<T>
 			var task = _client.GetAsync(uri);
 			result = await task.WaitAsync(TimeSpan.FromSeconds(1));
 
-
 			string jsonStr = result.Content.ReadAsStringAsync().Result;
 			T? response = JsonConvert.DeserializeObject<T>(jsonStr);
 			return response;

@@ -32,6 +32,7 @@ use App\Http\Controllers\api;
 
 Route::get('/userAccounts/get', [Controllers\api\UserAccountController::class, 'get']);
 Route::get('/clients/getOnUserAccountId', [Controllers\api\ClientController::class, 'getOnUserAccountId']);
+Route::get('/clients/getAllOnUserAccountId', [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
 
 
 Route::apiResources([

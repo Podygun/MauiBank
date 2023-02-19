@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.ClientInfoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:ClientInfoViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="Medium"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout BackgroundColor="Black">
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.first_name}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.second_name}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.last_name}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.phone}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.email}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.gender}"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding Client.created_at}"
+            VerticalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>

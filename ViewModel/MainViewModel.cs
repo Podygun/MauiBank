@@ -93,4 +93,15 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		Trace.WriteLine("getted user data");
 	}
 
+	[RelayCommand]
+	public async void GoToClientInfo()
+	{
+		var navigationParameter = new Dictionary<string, object>
+		{
+			{ "userId", 1 }
+		};
+		await Shell.Current.GoToAsync("clientinfo", navigationParameter);
+	}
+
+
 }

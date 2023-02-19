@@ -4,37 +4,41 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:view="clr-namespace:MauiBank.View"
+    FlyoutHeaderBehavior="CollapseOnScroll"
     Shell.FlyoutBehavior="Disabled">
 
 
-    <!--<ShellContent
-        Title="Главная"
-        ContentTemplate="{DataTemplate view:MainPage}"
-        Route="MainPage" />-->
+    <FlyoutItem>
+        <ShellContent
+            Title="main"
+            ContentTemplate="{DataTemplate view:MainPage}"
+            Route="MainPage" />
+        <ShellContent
+            Title="auth"
+            ContentTemplate="{DataTemplate view:AuthPage}"
+            Route="AuthPage" />
+        <ShellContent
+            Title="reg"
+            ContentTemplate="{DataTemplate view:RegPage}"
+            Route="RegPage" />
+    </FlyoutItem>
+
+    <!--<Tab Title="Tab" Icon="user.png">
+            <ShellContent
+                Title="main"
+                ContentTemplate="{DataTemplate view:MainPage}"
+                Route="MainPage" />
+            <ShellContent
+                Title="auth"
+                ContentTemplate="{DataTemplate view:AuthPage}"
+                Route="AuthPage" />
+            <ShellContent
+                Title="reg"
+                ContentTemplate="{DataTemplate view:RegPage}"
+                Route="RegPage" />
+        </Tab>-->
 
 
-
-    <ShellContent ContentTemplate="{DataTemplate view:AuthPage}" Route="AuthPage">
-        <!--<Tab>
-                <ShellContent ContentTemplate="{DataTemplate view:RegPage}" Route="RegPage" />
-                <ShellContent ContentTemplate="{DataTemplate view:MainPage}" Route="MainPage">
-                    <Tab>
-                        <ShellContent ContentTemplate="{DataTemplate view:CardDetailPage}" Route="CardDetailPage" />
-                    </Tab>
-                </ShellContent>
-            </Tab>-->
-
-    </ShellContent>
-
-
-
-
-
-
-    <!--<ShellContent
-        Title="Персональные данные"
-        ContentTemplate="{DataTemplate view:UserDataPage}"
-        Route="UserDataPage" />-->
 
 
 </Shell>

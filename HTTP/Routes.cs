@@ -77,4 +77,18 @@ public static class Routes
 #endif
 	#endregion
 
+
+	#region GetAllClientOnUserIdUri
+#if WINDOWS
+	public static string getAllClientOnUserIdUri =
+		localhost + port + @"api/clients/getAllOnUserAccountId?id={0}";
+#elif ANDROID
+	public static string getAllClientOnUserIdUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"api/clients/getAllOnUserAccountId?id={0}" :
+		ngrokUri + @"api/clients/getAllOnUserAccountId?id={0}";
+
+#endif
+	#endregion
+
 }
