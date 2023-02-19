@@ -40,12 +40,11 @@
                 x:Name="cardsCarousel"
                 Grid.Row="1"
                 BackgroundColor="{StaticResource Primary}"
-                ItemsSource="{Binding cards, Mode=TwoWay}"
                 CurrentItem="{Binding SelectedCard}"
-                >
-                <CarouselView.ItemTemplate
-                    
-                    >
+                HorizontalScrollBarVisibility="Always"
+                IsSwipeEnabled="True"
+                ItemsSource="{Binding cards, Mode=TwoWay}">
+                <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="model:Card">
                         <Frame
                             x:Name="cardFrame"
@@ -151,14 +150,10 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
-                    Command="{Binding GetCardsCommand}"
+                    Command="{Binding LoadCommand}"
                     HorizontalOptions="Fill"
                     Style="{StaticResource MainBtn}"
-                    Text="GetReal">
-                    <!--<Button.ContentLayout>
-
-                    </Button.ContentLayout>-->
-                </Button>
+                    Text="IsClientExists" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
