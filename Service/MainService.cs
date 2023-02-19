@@ -4,14 +4,10 @@ public class MainService
 {
 	private static List<UserData> userDatas = new();
 
-	public MainService()
+	public async Task<List<Card>> GetCardsAsync(int userId)
 	{
-		
-	}
-
-	public static async Task<List<Card>> GetCardsAsync(int userId)
-	{
-		userDatas = await ApiClient.GetUserDataAsync(userId);
+		string uri = Routes.getUserDataUri.Replace("id", userId.ToString());
+		userDatas = await ApiClient<List<UserData>>.GetAsync(uri);
 
 		List<Card> tempCards = new();
 
