@@ -30,9 +30,12 @@ use App\Http\Controllers\api;
 //Route::get('/users/update', [Controllers\UserAccountController::class, 'update']);
 //Route::get('/users/delete', [Controllers\UserAccountController::class, 'delete']);
 
-Route::get('/userAccounts/get', [Controllers\api\UserAccountController::class, 'get']);
-Route::get('/clients/getOnUserAccountId', [Controllers\api\ClientController::class, 'getOnUserAccountId']);
-Route::get('/clients/getAllOnUserAccountId', [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
+Route::get('/userAccounts/get',
+    [Controllers\api\UserAccountController::class, 'get']);
+Route::get('/clients/getOnUserAccountId',
+    [Controllers\api\ClientController::class, 'getOnUserAccountId']);
+Route::get('/clients/getAllOnUserAccountId',
+    [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
 
 
 Route::apiResources([
