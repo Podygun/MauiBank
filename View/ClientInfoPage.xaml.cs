@@ -7,4 +7,5 @@ public partial class ClientInfoPage : ContentPage
 		InitializeComponent();
 		BindingContext= vm;
 	}
+
 }

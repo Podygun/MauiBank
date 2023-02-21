@@ -7,42 +7,89 @@
     x:DataType="vm:ClientInfoViewModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="White"/>
-                <Setter Property="FontFamily" Value="Medium"/>
-                <Setter Property="FontSize" Value="20"/>
+            <Style TargetType="Border">
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Stroke" Value="#7165E3" />
+                <Setter Property="BackgroundColor" Value="#E3E0F9" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10" />
             </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="Regular" />
+                <Setter Property="Margin" Value="25,0,0,0" />
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
-    <VerticalStackLayout BackgroundColor="Black">
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.first_name}"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.second_name}"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.last_name}"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.phone}"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.email}"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.gender}"
-            VerticalOptions="Center" />
-        <Label
-            HorizontalOptions="Center"
-            Text="{Binding Client.created_at}"
-            VerticalOptions="Center" />
+    <VerticalStackLayout
+        Margin="20"
+        BackgroundColor="White"
+        Spacing="10">
+ 
+        <VerticalStackLayout>
+            <Label Text="Фамилия" />
+            <Border x:Name="BorderSecondName">
 
+                <Entry
+                    Margin="20,5,20,5"
+                    Style="{StaticResource NewEntry}"
+                    Text="{Binding Client.second_name}" />
+            </Border>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Label Text="Имя" />
+            <Border>
+                <Entry
+                    Margin="20,5,20,5"
+                    Style="{StaticResource NewEntry}"
+                    Text="{Binding Client.first_name}" />
+            </Border>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Label Text="Отчество" />
+            <Border>
+                <Entry
+                    Margin="20,5,20,5"
+                    Style="{StaticResource NewEntry}"
+                    Text="{Binding Client.last_name}" />
+            </Border>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Label Text="Номер телефона" />
+            <Border>
+                <Entry
+                    Margin="20,5,20,5"
+                    Style="{StaticResource NewEntry}"
+                    Text="{Binding Client.phone}" />
+            </Border>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Label Text="Адрес эл. почты" />
+            <Border>
+                <Entry
+                    Margin="20,5,20,5"
+                    Style="{StaticResource NewEntry}"
+                    Text="{Binding Client.email}" />
+            </Border>
+        </VerticalStackLayout>
+        <VerticalStackLayout>
+            <Label Text="Пол" />
+            <Border>
+                <Entry
+                    Margin="20,5,20,5"
+                    Style="{StaticResource NewEntry}"
+                    Text="{Binding Client.gender}" />
+            </Border>
+        </VerticalStackLayout>
+        <Button
+            FontSize="18"
+            FontFamily="Bold"
+            FontAutoScalingEnabled="True"
+            Margin="3,30,3,0"
+            BackgroundColor="#1C1939"
+            Text="Подтвердить" />
     </VerticalStackLayout>
+
 </ContentPage>

@@ -148,7 +148,6 @@
             <Grid
                 Grid.Row="1"
                 Margin="20"
-                BackgroundColor="{StaticResource Secondary}"
                 ColumnDefinitions="*,*,*"
                 ColumnSpacing="20"
                 RowDefinitions="*,*"
@@ -161,22 +160,93 @@
                     HorizontalOptions="Fill"
                     Style="{StaticResource MainBtn}"
                     Text="IsClientExists" />
-                <Button
+                <Border
+                    x:Name="test"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Style="{StaticResource MainBtn}"
-                    Text="GetFake" />
+                    HeightRequest="{Binding Source={x:Reference test}, Path=WidthRequest}"
+                    Stroke="Black"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    WidthRequest="100"
+                    ZIndex="1">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapHistory" />
+                    </Border.GestureRecognizers>
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.9"
+                            Radius="100"
+                            Offset="10,10" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="10">
+                        <Border
+                            Margin="30,10,30,0"
+                            BackgroundColor="{StaticResource Violet100Accent}"
+                            HeightRequest="50"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 10"
+                            WidthRequest="50">
+                            <Image Margin="10" Source="history.svg" />
+                        </Border>
+
+                        <Label
+                            FontFamily="Medium"
+                            FontSize="16"
+                            HorizontalTextAlignment="Center"
+                            Text="История" />
+                    </VerticalStackLayout>
+
+                </Border>
+
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
                     Command="{Binding GoToAuthCommand}"
                     Style="{StaticResource MainBtn}"
                     Text="Войти" />
-                <Button
+                <Border
+                    x:Name="QR"
                     Grid.Row="1"
                     Grid.Column="0"
-                    Style="{StaticResource MainBtn}"
-                    Text="4" />
+                    HeightRequest="{Binding Source={x:Reference test}, Path=WidthRequest}"
+                    Stroke="Black"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    WidthRequest="100"
+                    ZIndex="1">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapQR" />
+                    </Border.GestureRecognizers>
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.9"
+                            Radius="100"
+                            Offset="10,10" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="10">
+                        <Border
+                            Margin="30,10,30,0"
+                            BackgroundColor="{StaticResource Violet100Accent}"
+                            HeightRequest="50"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 10"
+                            WidthRequest="50">
+                            <Image Margin="10" Source="qr_code.svg" />
+                        </Border>
+
+                        <Label
+                            FontFamily="Medium"
+                            FontSize="16"
+                            HorizontalTextAlignment="Center"
+                            Text="Принять" />
+                    </VerticalStackLayout>
+
+                </Border>
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
