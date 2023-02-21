@@ -89,7 +89,7 @@ public class ApiClient<T>
 			if (isNewItem)
 			{ 
 				var task = _client.PostAsync(uri, content);
-				response = await task.WaitAsync(TimeSpan.FromSeconds(1));
+				response = await task.WaitAsync(TimeSpan.FromSeconds(2));
 			}
 			else
 				response = await _client.PutAsync(uri, content);
@@ -112,7 +112,7 @@ public class ApiClient<T>
 		{
 			HttpResponseMessage? result = null;
 			var task = _client.GetAsync(uri);
-			result = await task.WaitAsync(TimeSpan.FromSeconds(1));
+			result = await task.WaitAsync(TimeSpan.FromSeconds(2));
 
 			string jsonStr = result.Content.ReadAsStringAsync().Result;
 			T? response = JsonConvert.DeserializeObject<T>(jsonStr);

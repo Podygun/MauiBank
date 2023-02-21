@@ -5,7 +5,7 @@ namespace MauiBank.HTTP;
 
 public static class Routes
 {
-	private const short isNgrok = 0;
+	private const short isNgrok =0;
 	private const string ngrokUri = @"";
 
 	private const string port = "8000/";
@@ -76,7 +76,6 @@ public static class Routes
 		ngrokUri + @"api/userAccounts/get?login={0}&password={1}";
 #endif
 	#endregion
-
 
 	#region GetAllClientOnUserIdUri
 #if WINDOWS
