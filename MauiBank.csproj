@@ -49,8 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\add_card.svg" />
+	  <None Remove="Resources\Images\credit_card.svg" />
+	  <None Remove="Resources\Images\history.svg" />
+	  <None Remove="Resources\Images\payment.svg" />
+	  <None Remove="Resources\Images\qr_code.svg" />
+	  <None Remove="Resources\Images\qr_code_large.svg" />
 	  <None Remove="Resources\Images\sim.png" />
 	  <None Remove="Resources\Images\user.png" />
+	  <None Remove="Resources\Images\wallet.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

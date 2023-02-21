@@ -17,8 +17,8 @@ public partial class AuthViewModel : BaseViewModel
 		TextError = String.Empty;
 
 		//TODO
-		Login = "test";
-		Password = "test";
+		Login = "1";
+		Password = "1";
 		TryEntry();
 	}
 #nullable enable
@@ -57,8 +57,7 @@ public partial class AuthViewModel : BaseViewModel
 		{
 			{ "UserId", userId }
 		};
-		//await Shell.Current.GoToAsync("main", navigationParameter);
-		TextError = userId.ToString();
+		await Shell.Current.GoToAsync("main", navigationParameter);
 	}
 
 	[RelayCommand]
