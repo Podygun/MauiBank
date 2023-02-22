@@ -19,14 +19,20 @@ public partial class MainPage : ContentPage
 
 	private async void TapHistory(object sender, TappedEventArgs e)
 	{
-		await test.ScaleTo(0.95, 50);
-		await test.ScaleTo(1, 200);
+		await history.ScaleTo(0.95, 50);
+		await history.ScaleTo(1, 200);
 	}
 
 	private async void TapQR(object sender, TappedEventArgs e)
 	{
 		await QR.ScaleTo(0.95, 50);
 		await QR.ScaleTo(1, 200);
+	}
+
+	private async void TapUserInfo(object sender, TappedEventArgs e)
+	{
+		await UserInfo.ScaleTo(0.95, 50);
+		await UserInfo.ScaleTo(1, 200);
 	}
 }
 

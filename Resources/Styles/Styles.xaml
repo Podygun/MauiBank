@@ -543,8 +543,6 @@
 
     </Style>
 
-    <Style x:Key="FlatBtn" TargetType="ImageButton">
-        
-    </Style>
+    <Style x:Key="FlatBtn" TargetType="ImageButton" />
 
 </ResourceDictionary>
