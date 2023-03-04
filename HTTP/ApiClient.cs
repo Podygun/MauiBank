@@ -1,21 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System.Security.Principal;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace MauiBank.HTTP;
 #nullable enable
 public class ApiClient<T>
 {
 	static HttpClient _client = new();
-
-
-	public ApiClient()
-	{
-
-	}
-
 
 	//public static async Task<List<UserData>> GetUserDataAsync(int id)
 	//{
@@ -78,7 +69,6 @@ public class ApiClient<T>
 		}
 	}
 
-
 	public static async Task<HttpResponseMessage?> PostAsync(string uri, T obj, bool isNewItem = true)
 	{ 
 		try
@@ -112,7 +102,7 @@ public class ApiClient<T>
 		{
 			HttpResponseMessage? result = null;
 			var task = _client.GetAsync(uri);
-			result = await task.WaitAsync(TimeSpan.FromSeconds(2));
+			result = await task.WaitAsync(TimeSpan.FromSeconds(3));
 
 			string jsonStr = result.Content.ReadAsStringAsync().Result;
 			T? response = JsonConvert.DeserializeObject<T>(jsonStr);

@@ -25,6 +25,9 @@ public partial class AuthViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task TryEntry()
 	{
+		
+		if (Busy) return;
+		Busy = true;
 		TextError = String.Empty;
 		Password = Password.Trim();
 		Login = Login.Trim();
@@ -49,14 +52,16 @@ public partial class AuthViewModel : BaseViewModel
 		else
 		{
 			TextError = "Заполните поля";
+			Busy = false;
 			return;
 		}
-		if (userId == -1) { TextError = "Проверьте введенные данные"; return; }
+		if (userId == -1) { TextError = "Проверьте введенные данные"; Busy = false; return; }
 
 		var navigationParameter = new Dictionary<string, object>
 		{
 			{ "UserId", userId }
 		};
+		Busy = false;
 		await Shell.Current.GoToAsync("main", navigationParameter);
 	}
 

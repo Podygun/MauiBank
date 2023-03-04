@@ -3,5 +3,5 @@ namespace MauiBank.Static;
 
 public static class TempData
 {
-	public static Card currentCard = new();
+	public static Client currentClient = null;
 }

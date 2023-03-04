@@ -1,4 +1,6 @@
 ﻿
+using MauiBank.Static;
+
 namespace MauiBank.ViewModel;
 
 public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
@@ -8,13 +10,17 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 	[ObservableProperty]
 	Client client;
 
+    public ClientInfoViewModel()
+    {
+		client = TempData.currentClient;
+    }
 
-	public void ApplyQueryAttributes(IDictionary<string, object> query)
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
-		userId = (int)query["userId"];
+		//userId = (int)query["userId"];
 		OnPropertyChanged();
 		
-		Load();
+		//Load();
 
 	}
 

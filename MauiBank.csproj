@@ -32,7 +32,9 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg">
+		  <Color>#FFF</Color>
+		</MauiIcon>
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -49,9 +51,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Resources\Styles\MainPageStyle.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\AppIcon\appicon.svg" />
 	  <None Remove="Resources\Images\add_card.svg" />
 	  <None Remove="Resources\Images\credit_card.svg" />
 	  <None Remove="Resources\Images\history.svg" />
+	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\payment.svg" />
 	  <None Remove="Resources\Images\qr_code.svg" />
 	  <None Remove="Resources\Images\qr_code_large.svg" />
@@ -85,6 +93,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\ClientInfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\HistoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\RegPage.xaml">

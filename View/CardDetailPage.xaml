@@ -8,12 +8,14 @@
     xmlns:view="clr-namespace:MauiBank.View"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     Title="Подробно"
+    Loaded="CardDetailPage_Loaded"
     x:DataType="vm:CardDetailViewModel">
     <ContentPage.Resources>
         <converters:StringToColor x:Key="StringToColor" />
     </ContentPage.Resources>
     <VerticalStackLayout BackgroundColor="{StaticResource Primary}">
         <Label
+            x:Name="lbl"
             Margin="20,20,0,0"
             FontFamily="Bold"
             FontSize="20"

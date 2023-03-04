@@ -1,4 +1,5 @@
 ﻿using MauiBank.Service;
+using MauiBank.Static;
 
 namespace MauiBank.ViewModel;
 
@@ -7,6 +8,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 {
 
 	MainService mainService;
+
 	public ObservableCollection<Card> cards { get; set; } = new();
 
 	private int currentUserId { get; set; }
@@ -14,8 +16,11 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	[ObservableProperty]
 	Card selectedCard;
 
+	private bool flagFirstEntry = true;
+
 	public MainViewModel(MainService ms)
 	{
+		
 		mainService = ms;	
 	}
 
@@ -72,6 +77,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	//Принятие id с форм авторизации
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
+		if (!flagFirstEntry) return;
 		currentUserId = (int)query["UserId"];
 		OnPropertyChanged();
 		Load();
@@ -91,16 +97,23 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		}
 		GetUserData();
 		Trace.WriteLine("getted user data");
+		flagFirstEntry = false;
 	}
 
 	[RelayCommand]
 	public async void GoToClientInfo()
 	{
-		var navigationParameter = new Dictionary<string, object>
+		if(TempData.currentClient == null)
 		{
-			{ "userId", 1 }
-		};
-		await Shell.Current.GoToAsync("clientinfo", navigationParameter);
+			TempData.currentClient = new()
+			{
+				first_name = "Vasya",
+				second_name= "Petrov",
+				phone = "8800555353"
+			};
+		}
+
+		await Shell.Current.GoToAsync("clientinfo");
 	}
 
 
