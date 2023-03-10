@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.CardTransferPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:CardTransferViewModel">
+
+    <Grid Padding="0" BackgroundColor="White">
+        <Border
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{StaticResource Primary}"
+            StrokeShape="RoundRectangle 30"
+            StrokeThickness="0">
+            <Grid RowDefinitions="*,70">
+                <VerticalStackLayout Grid.Row="0" Spacing="20">
+                    <Label
+                        FontFamily="Bold"
+                        FontSize="24"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="Перевод на карту" />
+
+                    <Frame
+                        BackgroundColor="{StaticResource Primary}"
+                        BorderColor="{StaticResource Tertiary}"
+                        CornerRadius="15"
+                        HasShadow="False"
+                        HeightRequest="70">
+                        <Entry
+                            HeightRequest="80"
+                            Placeholder="Номер карты"
+                            PlaceholderColor="{StaticResource Gray300}"
+                            Style="{StaticResource BaseEntry}"
+                            TextColor="White" 
+                            Text="{Binding CardNumber}"
+                            />
+                    </Frame>
+
+                </VerticalStackLayout>
+                <Button
+                    Command="{Binding TransferCommand}"
+                    Grid.Row="1"
+                    Style="{StaticResource MainBtn}"
+                    Text="Перевести" />
+            </Grid>
+
+
+
+
+        </Border>
+
+    </Grid>
+</ContentPage>
