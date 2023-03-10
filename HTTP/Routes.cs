@@ -3,10 +3,10 @@
 
 public static class Routes
 {
-	private const short isNgrok =1;
-	private const string ngrokUri = @"https://ff83-136-169-210-93.eu.ngrok.io/";
+	private const short isNgrok = 1;
+	private const string ngrokUri = @"https://d116-136-169-210-93.eu.ngrok.io/api/";
 
-	private const string port = "8000/";
+	private const string port = "8000/api/";
 	private const string localhost = @"http://127.0.0.1:";
 	private const string emulatorhost = @"http://10.0.2.2:";
 
@@ -15,12 +15,12 @@ public static class Routes
 
 	#region GetUserData
 #if WINDOWS
-	public static string getUserDataUri = localhost + port + @"api/userdata/id";
+	public static string getUserDataUri = localhost + port + @"userdata/id";
 #elif ANDROID
 	public static string getUserDataUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/userdata/id" :
-		ngrokUri + @"api/userdata/id";
+		emulatorhost + port + @"userdata/id" :
+		ngrokUri + @"userdata/id";
 
 #endif
 	#endregion
@@ -28,12 +28,12 @@ public static class Routes
 	#region SaveUserAccount
 #if WINDOWS
 	public static string postUserAccountUri =
-		localhost + port + @"api/userAccounts";
+		localhost + port + @"userAccounts";
 #elif ANDROID
 	public static string postUserAccountUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/userAccounts" :
-		ngrokUri + @"api/userAccounts";
+		emulatorhost + port + @"userAccounts" :
+		ngrokUri + @"userAccounts";
 
 #endif
 	#endregion
@@ -41,24 +41,24 @@ public static class Routes
 	#region GetUserId
 #if WINDOWS
 	public static string getUserIdUri =
-		localhost + port + @"api/users/get?login={0}&password={1}";
+		localhost + port + @"users/get?login={0}&password={1}";
 #elif ANDROID
 	public static string getUserIdUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/userAccounts/get?login={0}&password={1}" :
-		ngrokUri + @"api/userAccounts/get?login={0}&password={1}";
+		emulatorhost + port + @"userAccounts/get?login={0}&password={1}" :
+		ngrokUri + @"userAccounts/get?login={0}&password={1}";
 #endif
 	#endregion
 
 	#region GetClientOnUserIdUri
 #if WINDOWS
 	public static string getClientOnUserIdUri =
-		localhost + port + @"api/clients/getOnUserAccountId?id={0}";
+		localhost + port + @"clients/getOnUserAccountId?id={0}";
 #elif ANDROID
 	public static string getClientOnUserIdUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/clients/getOnUserAccountId?id={0}" :
-		ngrokUri + @"api/clients/getOnUserAccountId?id={0}";
+		emulatorhost + port + @"clients/getOnUserAccountId?id={0}" :
+		ngrokUri + @"clients/getOnUserAccountId?id={0}";
 
 #endif
 	#endregion
@@ -66,24 +66,63 @@ public static class Routes
 	#region GetValutes
 #if WINDOWS
 	public static string getValutesUri =
-		localhost + port + @"api/valutes/";
+		localhost + port + @"valutes/";
 #elif ANDROID
 	public static string getValutesUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/userAccounts/get?login={0}&password={1}" :
-		ngrokUri + @"api/userAccounts/get?login={0}&password={1}";
+		emulatorhost + port + @"userAccounts/get?login={0}&password={1}" :
+		ngrokUri + @"userAccounts/get?login={0}&password={1}";
 #endif
 	#endregion
 
 	#region GetAllClientOnUserIdUri
 #if WINDOWS
 	public static string getAllClientOnUserIdUri =
-		localhost + port + @"api/clients/getAllOnUserAccountId?id={0}";
+		localhost + port + @"clients/getAllOnUserAccountId?id={0}";
 #elif ANDROID
 	public static string getAllClientOnUserIdUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"api/clients/getAllOnUserAccountId?id={0}" :
-		ngrokUri + @"api/clients/getAllOnUserAccountId?id={0}";
+		emulatorhost + port + @"clients/getAllOnUserAccountId?id={0}" :
+		ngrokUri + @"clients/getAllOnUserAccountId?id={0}";
+
+#endif
+	#endregion
+
+	#region GetPrimaryFavours
+#if WINDOWS
+	public static string getPrimaryFavoursUri =
+		localhost + port + @"favours/primary";
+#elif ANDROID
+	public static string getPrimaryFavoursUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"favours/primary" :
+		ngrokUri + @"favours/primary";
+
+#endif
+	#endregion
+
+	#region GetSecondaryFavours
+#if WINDOWS
+	public static string getSecondaryFavoursUri =
+		localhost + port + @"favours/secondary?id={0}";
+#elif ANDROID
+	public static string getSecondaryFavoursUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"favours/secondary?id={0}" :
+		ngrokUri + @"favours/secondary?id={0}";
+
+#endif
+	#endregion
+
+	#region SetNewPayment
+#if WINDOWS
+	public static string setNewPaymentUri =
+		localhost + port + @"payCheck";
+#elif ANDROID
+	public static string setNewPaymentUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"payCheck" :
+		ngrokUri + @"payCheck";
 
 #endif
 	#endregion
