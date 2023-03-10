@@ -401,22 +401,21 @@
     </Style>
 
     <Style x:Key="MainBtn" TargetType="Button">
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="Background" Value="White" />
-        <Setter Property="FontFamily" Value="Regular" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        <Setter Property="Background" Value="{StaticResource Tertiary}" />
+        <Setter Property="FontFamily" Value="Medium" />
+        <Setter Property="FontSize" Value="24" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Padding" Value="14,10" />
-        <Setter Property="HeightRequest" Value="100" />
 
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
+
+                    <VisualState x:Name="Normal">
                         <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Tertiary}}" />
+                            <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Primary}}" />
                         </VisualState.Setters>
 
                     </VisualState>
@@ -537,7 +536,6 @@
 
     <Style x:Key="NewEntry" TargetType="Entry">
         <Setter Property="CharacterSpacing" Value="0" />
-
         <Setter Property="IsSpellCheckEnabled" Value="True" />
         <Setter Property="IsTextPredictionEnabled" Value="True" />
         <Setter Property="ClearButtonVisibility" Value="WhileEditing" />
@@ -548,19 +546,7 @@
         <Setter Property="PlaceholderColor" Value="Transparent" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Fill" />
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
-                        </VisualState.Setters>
-                    </VisualState>
 
-                </VisualStateGroup>
-            </VisualStateGroupList>
-        </Setter>
 
     </Style>
 
