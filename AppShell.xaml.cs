@@ -11,5 +11,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("history", typeof(HistoryPage));
 		Routing.RegisterRoute("carddetail", typeof(CardDetailPage));
 		Routing.RegisterRoute("clientinfo", typeof(ClientInfoPage));
+		Routing.RegisterRoute("payment", typeof(PaymentPage));
+		Routing.RegisterRoute("cardtransfer", typeof(CardTransferPage));
 	}
 }

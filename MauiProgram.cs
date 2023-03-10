@@ -33,19 +33,23 @@ public static class MauiProgram
 		builder.Services.AddSingleton<HistoryPage>();
 		builder.Services.AddTransient<CardDetailPage>();
 		builder.Services.AddTransient<ClientInfoPage>();
+		builder.Services.AddTransient<PaymentPage>();
+		builder.Services.AddTransient<CardTransferPage>();
+		
 
 		builder.Services.AddSingleton<CardsService>();
 		builder.Services.AddSingleton<MainService>();
+
 
 		builder.Services.AddSingleton<MainViewModel>();
 		builder.Services.AddSingleton<RegViewModel>();
 		builder.Services.AddSingleton<AuthViewModel>();
 		builder.Services.AddSingleton<UserDataViewModel>();
-		builder.Services.AddSingleton<HistoryViewModel>();
-
+		builder.Services.AddSingleton<HistoryViewModel>();	
 		builder.Services.AddTransient<CardDetailViewModel>();
 		builder.Services.AddTransient<ClientInfoViewModel>();
-		
+		builder.Services.AddTransient<PaymentViewModel>();
+		builder.Services.AddTransient<CardTransferViewModel>();
 
 		return builder.Build();
 	}
