@@ -15,12 +15,12 @@ public static class Routes
 
 	#region GetUserData
 #if WINDOWS
-	public static string getUserDataUri = localhost + port + @"userdata/id";
+	public static string getUserDataUri = localhost + port + @"userdata/{0}";
 #elif ANDROID
 	public static string getUserDataUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"userdata/id" :
-		ngrokUri + @"userdata/id";
+		emulatorhost + port + @"userdata/{0}" :
+		ngrokUri + @"userdata/{0}";
 
 #endif
 	#endregion
@@ -127,4 +127,17 @@ public static class Routes
 #endif
 	#endregion
 
+
+	#region GetCardsUriOnUserId
+#if WINDOWS
+	public static string getCardsUriOnUserId =
+		localhost + port + @"cards/";
+#elif ANDROID
+	public static string getCardsUriOnUserId =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"cards/" :
+		ngrokUri + @"cards/";
+
+#endif
+	#endregion
 }

@@ -8,8 +8,8 @@
     xmlns:view="clr-namespace:MauiBank.View"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     Title="Подробно"
-    Loaded="CardDetailPage_Loaded"
-    x:DataType="vm:CardDetailViewModel">
+    x:DataType="vm:CardDetailViewModel"
+    Loaded="CardDetailPage_Loaded">
     <ContentPage.Resources>
         <converters:StringToColor x:Key="StringToColor" />
     </ContentPage.Resources>
@@ -59,7 +59,7 @@
                             FontSize="22"
                             HorizontalTextAlignment="Center"
                             Style="{StaticResource BaseEntry}"
-                            Text="{Binding CurrentCard.Number}"
+                            Text="{Binding CurrentCard.number}"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center">
                             <Label.GestureRecognizers>
@@ -79,7 +79,7 @@
                     FontSize="24"
                     HorizontalOptions="Start"
                     Style="{StaticResource BaseWhiteLbl}"
-                    Text="{Binding CurrentCard.Type}" />
+                    Text="{Binding CurrentCard.type_name}" />
                 <HorizontalStackLayout Grid.Row="1" HorizontalOptions="End">
 
                     <Label
@@ -102,7 +102,7 @@
                             FontSize="20"
                             HorizontalOptions="Start"
                             Style="{StaticResource BaseWhiteLbl}"
-                            Text="{Binding CurrentCard.Cvv}">
+                            Text="{Binding CurrentCard.cvv}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="CopyCvv" />
                             </Label.GestureRecognizers>
@@ -121,7 +121,7 @@
                         FontSize="16"
                         HorizontalTextAlignment="Start"
                         Style="{StaticResource BaseWhiteLbl}"
-                        Text="{Binding CurrentCard.Date_end}" />
+                        Text="{Binding CurrentCard.date_end}" />
                 </HorizontalStackLayout>
 
             </Grid>

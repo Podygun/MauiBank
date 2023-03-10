@@ -38,7 +38,6 @@ public static class MauiProgram
 		
 
 		builder.Services.AddSingleton<CardsService>();
-		builder.Services.AddSingleton<MainService>();
 
 
 		builder.Services.AddSingleton<MainViewModel>();

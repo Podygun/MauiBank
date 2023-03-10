@@ -1,6 +1,5 @@
 ﻿namespace MauiBank.Model;
 
-#nullable
 public class PayCheck
 {
 	public int id { get; set; }

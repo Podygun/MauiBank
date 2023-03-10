@@ -1,5 +1,4 @@
-﻿using MauiBank.Service;
-using MauiBank.Static;
+﻿using MauiBank.Static;
 
 namespace MauiBank.ViewModel;
 
@@ -7,20 +6,21 @@ namespace MauiBank.ViewModel;
 public partial class MainViewModel : BaseViewModel, IQueryAttributable
 {
 
-	MainService mainService;
-
 	public ObservableCollection<Card> cards { get; set; } = new();
 
 	private int currentUserId { get; set; }
+
+	private UserData userData { get; set; }
+
 
 	[ObservableProperty]
 	Card selectedCard;
 
 	private bool flagFirstEntry = true;
 
-	public MainViewModel(MainService ms)
-	{	
-		mainService = ms;	
+	public MainViewModel()
+	{
+
 	}
 
 
@@ -28,24 +28,20 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	{
 		Card emptyCard = new()
 		{
-			Type = "Открыть карту"
+			type_name = "Открыть карту"
 		};
 		cards.Clear();
 		cards.Add(emptyCard);
 	}
 
-	[RelayCommand]
-	async void GetUserData()
+	private async Task GetUserData()
 	{
+		if (Busy) return;
 		try
 		{
 			Busy = true;
-			List<Card> tempCards = await mainService.GetCardsAsync(currentUserId);
-			foreach (var card in tempCards)
-			{
-				cards.Add(card);
-			}
-
+			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", currentUserId.ToString()));
+			userData = tempUserData[0];
 		}
 		catch (Exception ex)
 		{
@@ -57,25 +53,42 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		}
 	}
 
-	[RelayCommand]
-	async void CardDetail()
+	private async Task FillCardsAsync()
 	{
-		var navigationParameter = new Dictionary<string, object>
+		if (Busy) return;
+		try
 		{
-			{ "Card", SelectedCard }
-		};
-		await Shell.Current.GoToAsync("carddetail", navigationParameter);
+			Busy = true;
+			var tempCards = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId + currentUserId);
+
+			for (int i = 0, j = 0; j < tempCards.Count; i++, j++)
+			{
+				if (i == Colors.Length) i = 0;
+				tempCards[j].color = Colors[i];
+			}
+
+			foreach (var card in tempCards)
+			{
+				cards.Add(card);
+			}
+		}
+		catch (Exception ex)
+		{
+			Trace.WriteLine(ex.Message);
+		}
+		finally
+		{
+			Busy = false;
+		}
 	}
 
-
-	//Принятие id с форм авторизации
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
 		if (!flagFirstEntry) return;
 		currentUserId = (int)query["UserId"];
 		OnPropertyChanged();
 		Load();
-		
+
 	}
 
 	[RelayCommand]
@@ -89,36 +102,48 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 			Trace.WriteLine("setted empty card");
 			return;
 		}
-		GetUserData();
-		Trace.WriteLine("getted user data");
+		await FillCardsAsync();
+		Trace.WriteLine("SUCCESS CARDS");
+
+		await GetUserData();
+		Trace.WriteLine("SUCCESS USERDATA");
+
 		flagFirstEntry = false;
-		Preferences.Default.Set("bank_account_id", selectedCard.);
+		Preferences.Default.Set("bank_account_id", SelectedCard.bank_account_id);
 	}
 
 	[RelayCommand]
-	public async void GoToClientInfo()
-	{
-		if(TempData.currentClient == null)
+	public async Task GoToClientInfo() =>
+		await Shell.Current.GoToAsync("clientinfo",true, 
+		new Dictionary<string, object>
 		{
-			TempData.currentClient = new()
-			{
-				first_name = "Vasya",
-				second_name= "Petrov",
-				phone = "8800555353"
-			};
-		}
-
-		await Shell.Current.GoToAsync("clientinfo");
-	}
+			{"UserData", userData }
+		});
+	
 
 	[RelayCommand]
-	static async void GoToAuth() => await Shell.Current.GoToAsync("auth");
+	public async Task GoToAuth() => await Shell.Current.GoToAsync("auth");
 
 	[RelayCommand]
-	static async void GoToPayment() => await Shell.Current.GoToAsync("payment",
+	public async Task GoToPayment() => await Shell.Current.GoToAsync("payment",
 		true, new Dictionary<string, object>
 		{
 			{ "Favour", new Favour{ Id=-1, Name=""} }
 		});
+
+	[RelayCommand]
+	public async Task GoToCardDetail() => await Shell.Current.GoToAsync("carddetail", true,
+		new Dictionary<string, object>
+			{
+				{ "Card", SelectedCard }
+			});
+
+
+	readonly static string[] Colors = new string[]
+	{
+		"#8916FF",
+		"#ECC200",
+		"#424874"
+	};
 
 }

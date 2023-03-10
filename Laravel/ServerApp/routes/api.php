@@ -41,6 +41,8 @@ Route::get('/favours/primary',
 Route::get('/favours/secondary',
     [Controllers\api\FavourController::class, 'secondary']);
 
+
+
 Route::get('/listRequisites/getOnFavour',
     [Controllers\api\ListRequisitesController::class, 'getOnFavour']);
 

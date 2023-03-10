@@ -23,73 +23,143 @@
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    <VerticalStackLayout
-        Margin="20"
-        BackgroundColor="White"
-        Spacing="10">
- 
-        <VerticalStackLayout>
-            <Label Text="Фамилия" />
-            <Border x:Name="BorderSecondName">
+    <Grid Padding="0">
+        <Border
+            Padding="20"
+            BackgroundColor="{StaticResource Primary}"
+            StrokeThickness="0">
+            <Grid RowDefinitions="*,70">
+                <VerticalStackLayout Grid.Row="0" Spacing="20">
 
-                <Entry
-                    Margin="20,5,20,5"
-                    Style="{StaticResource NewEntry}"
-                    Text="{Binding Client.second_name}" />
-            </Border>
-        </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Имя" />
-            <Border>
-                <Entry
-                    Margin="20,5,20,5"
-                    Style="{StaticResource NewEntry}"
-                    Text="{Binding Client.first_name}" />
-            </Border>
-        </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Отчество" />
-            <Border>
-                <Entry
-                    Margin="20,5,20,5"
-                    Style="{StaticResource NewEntry}"
-                    Text="{Binding Client.last_name}" />
-            </Border>
-        </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Номер телефона" />
-            <Border>
-                <Entry
-                    Margin="20,5,20,5"
-                    Style="{StaticResource NewEntry}"
-                    Text="{Binding Client.phone}" />
-            </Border>
-        </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Адрес эл. почты" />
-            <Border>
-                <Entry
-                    Margin="20,5,20,5"
-                    Style="{StaticResource NewEntry}"
-                    Text="{Binding Client.email}" />
-            </Border>
-        </VerticalStackLayout>
-        <VerticalStackLayout>
-            <Label Text="Пол" />
-            <Border>
-                <Entry
-                    Margin="20,5,20,5"
-                    Style="{StaticResource NewEntry}"
-                    Text="{Binding Client.gender}" />
-            </Border>
-        </VerticalStackLayout>
-        <Button
-            FontSize="18"
-            FontFamily="Bold"
-            FontAutoScalingEnabled="True"
-            Margin="3,30,3,0"
-            BackgroundColor="#1C1939"
-            Text="Подтвердить" />
-    </VerticalStackLayout>
+                    <Label
+                        FontFamily="Bold"
+                        FontSize="24"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="Данные" />
+
+                    <Border BackgroundColor="{StaticResource Secondary}" StrokeShape="RoundRectangle 30">
+                        <VerticalStackLayout
+                            Margin="0"
+                            Padding="20,20,20,50"
+                            Spacing="10">
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="24"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Фамилия" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Фамилия"
+                                    Style="{StaticResource NewEntry}"
+                                    Text="{Binding UserData.second_name}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Имя" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Имя"
+                                    Style="{StaticResource NewEntry}"
+                                    Text="{Binding UserData.first_name}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Отчество" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Отчество"
+                                    Style="{StaticResource NewEntry}"
+                                    Text="{Binding UserData.last_name}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Номер телефона" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Номер телефона"
+                                    Style="{StaticResource NewEntry}"
+                                    Text="{Binding UserData.phone}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Эл. почта" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Эл. почта"
+                                    Style="{StaticResource NewEntry}"
+                                    Text="{Binding UserData.email}" />
+                            </Frame>
+                        </VerticalStackLayout>
+
+
+
+                    </Border>
+
+
+
+                </VerticalStackLayout>
+                <Button
+                    Grid.Row="1"
+                    Command="{Binding SaveChangesCommand}"
+                    IsVisible="{Binding IsVisibleButton}"
+                    Style="{StaticResource MainBtn}"
+                    Text="Подтвердить" />
+            </Grid>
+        </Border>
+
+    </Grid>
+
 
 </ContentPage>

@@ -6,14 +6,18 @@
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     x:DataType="vm:CardTransferViewModel">
 
-    <Grid Padding="0" BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Padding="0">
         <Border
-            Margin="20"
             Padding="20"
             BackgroundColor="{StaticResource Primary}"
-            StrokeShape="RoundRectangle 30"
             StrokeThickness="0">
             <Grid RowDefinitions="*,70">
+
                 <VerticalStackLayout Grid.Row="0" Spacing="20">
                     <Label
                         FontFamily="Bold"
@@ -21,34 +25,88 @@
                         Style="{StaticResource BaseDarkLbl}"
                         Text="Перевод на карту" />
 
-                    <Frame
-                        BackgroundColor="{StaticResource Primary}"
-                        BorderColor="{StaticResource Tertiary}"
-                        CornerRadius="15"
-                        HasShadow="False"
-                        HeightRequest="70">
-                        <Entry
-                            HeightRequest="80"
-                            Placeholder="Номер карты"
-                            PlaceholderColor="{StaticResource Gray300}"
-                            Style="{StaticResource BaseEntry}"
-                            TextColor="White" 
-                            Text="{Binding CardNumber}"
-                            />
-                    </Frame>
+                    <Border BackgroundColor="{StaticResource Secondary}" StrokeShape="RoundRectangle 30">
+                        <VerticalStackLayout
+                            Margin="0"
+                            Padding="20,20,20,50"
+                            Spacing="10">
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Номер карты" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Номер карты"
+                                    PlaceholderColor="{StaticResource Gray300}"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding CardNumber, Mode=TwoWay}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Сумма" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Сумма"
+                                    PlaceholderColor="{StaticResource Gray300}"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding Sum, Mode=TwoWay}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Комиссия" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    IsReadOnly="True"
+                                    Placeholder="Сумма"
+                                    PlaceholderColor="{StaticResource Gray300}"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding Fee}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Border>
 
                 </VerticalStackLayout>
+
                 <Button
-                    Command="{Binding TransferCommand}"
                     Grid.Row="1"
+                    Command="{Binding TransferCommand}"
                     Style="{StaticResource MainBtn}"
                     Text="Перевести" />
             </Grid>
-
-
-
-
         </Border>
-
     </Grid>
 </ContentPage>

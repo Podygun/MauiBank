@@ -1,37 +1,32 @@
-﻿
-using MauiBank.Static;
-
-namespace MauiBank.ViewModel;
+﻿namespace MauiBank.ViewModel;
 
 public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 {
-	int userId;
 
 	[ObservableProperty]
-	Client client;
+	UserData userData;
 
-    public ClientInfoViewModel()
+	[ObservableProperty]
+	bool isVisibleButton = true;
+
+
+	public ClientInfoViewModel()
     {
-		client = TempData.currentClient;
+
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
-		//userId = (int)query["userId"];
+
+		UserData = query["UserData"] as UserData;
 		OnPropertyChanged();
-		
-		//Load();
 
 	}
 
+
 	[RelayCommand]
-	public async void Load()
+	public async Task SaveChanges()
 	{
-		string uri = Routes.getAllClientOnUserIdUri;
-		uri = uri.Replace("{0}", userId.ToString());
-
-		Client = await ApiClient<Client>.GetAsync(uri);
-
 		OnPropertyChanged();
 	}
 }

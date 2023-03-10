@@ -55,7 +55,7 @@
                     <DataTemplate x:DataType="model:Card">
                         <Frame
                             x:Name="cardFrame"
-                            Background="{Binding Color, Converter={StaticResource StringToColor}}"
+                            Background="{Binding color, Converter={StaticResource StringToColor}}"
                             BindingContext="{x:Reference cardFrame}"
                             BorderColor="Transparent"
                             CornerRadius="30">
@@ -75,7 +75,7 @@
                                         FontSize="24"
                                         HorizontalTextAlignment="Start"
                                         Style="{StaticResource BaseWhiteLbl}"
-                                        Text="{Binding Number, Converter={StaticResource ToShortNumber}}" />
+                                        Text="{Binding number, Converter={StaticResource ToShortNumber}}" />
 
                                 </HorizontalStackLayout>
 
@@ -86,7 +86,7 @@
                                     FontSize="24"
                                     HorizontalOptions="Start"
                                     Style="{StaticResource BaseWhiteLbl}"
-                                    Text="{Binding Type}" />
+                                    Text="{Binding type_name}" />
 
                                 <HorizontalStackLayout Grid.Row="2">
                                     <Label
@@ -95,7 +95,7 @@
                                         FontSize="16"
                                         HorizontalTextAlignment="Start"
                                         Style="{StaticResource BaseWhiteLbl}"
-                                        Text="{Binding Date_end}" />
+                                        Text="{Binding date_end}" />
                                 </HorizontalStackLayout>
 
                             </Grid>
@@ -128,7 +128,7 @@
                         FontSize="28"
                         HorizontalOptions="Start"
                         Style="{StaticResource BaseWhiteLbl}"
-                        Text="{Binding Source={x:Reference cardsCarousel}, Path=CurrentItem.Balance}" />
+                        Text="{Binding Source={x:Reference cardsCarousel}, Path=CurrentItem.balance}" />
                 </VerticalStackLayout>
 
                 <Image
@@ -317,9 +317,7 @@
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Command="{Binding GoToPaymentCommand}"
-                        Tapped="TapPay" />
+                    <TapGestureRecognizer Command="{Binding GoToPaymentCommand}" Tapped="TapPay" />
                 </Border.GestureRecognizers>
 
                 <VerticalStackLayout Spacing="10" VerticalOptions="Center">

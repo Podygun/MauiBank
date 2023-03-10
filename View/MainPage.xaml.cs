@@ -38,7 +38,7 @@ public partial class MainPage : ContentPage
 		await Task.WhenAll(animations);
 	}
 
-	private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) => viewmodel.CardDetailCommand.Execute(null);
+	private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) => viewmodel.GoToCardDetailCommand.Execute(null);
     
 	private async void TapHistory(object sender, TappedEventArgs e)		=> await Anim(history);
 	private async void TapQR(object sender, TappedEventArgs e)			=> await Anim(QR);
