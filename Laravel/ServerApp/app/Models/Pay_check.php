@@ -6,21 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Requisites_list extends Model
+class Pay_check extends Model
 {
     use HasFactory;
     use SoftDeletes;
     protected $guarded = false;
 
+    const time = 'creation_date';
 
-    public function requisite()
+
+    public function account()
     {
-        return $this->hasMany(requisite::class);
+        return $this->hasOne(account::class);
     }
 
-    public function organisation()
+    public function organization()
     {
-        return $this->hasMany(organisation::class);
+        return $this->hasOne(account::class);
     }
-
 }

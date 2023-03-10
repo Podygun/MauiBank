@@ -36,6 +36,13 @@ Route::get('/clients/getOnUserAccountId',
     [Controllers\api\ClientController::class, 'getOnUserAccountId']);
 Route::get('/clients/getAllOnUserAccountId',
     [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
+Route::get('/favours/primary',
+    [Controllers\api\FavourController::class, 'primary']);
+Route::get('/favours/secondary',
+    [Controllers\api\FavourController::class, 'secondary']);
+
+Route::get('/listRequisites/getOnFavour',
+    [Controllers\api\ListRequisitesController::class, 'getOnFavour']);
 
 
 Route::apiResources([
@@ -44,6 +51,9 @@ Route::apiResources([
     , 'valutes'=>api\ValuteController::class
     , 'clients'=>api\ClientController::class
     , 'cards'=>api\CardController::class
+    , 'favours'=>api\FavourController::class
+    , 'listRequisites'=>api\ListRequisitesController::class
+    , 'payCheck'=>api\PayCheckController::class
 ]);
 
 

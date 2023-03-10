@@ -22,7 +22,7 @@ class FavourController extends Controller
 
     public function show($id)
     {
-        //
+        return Favour::find($id);
     }
 
     public function update(Request $request, $id)
@@ -35,8 +35,18 @@ class FavourController extends Controller
         //
     }
 
-    public function getPrimaryFavours(){
-        return Favour::query()
-            ->where('')
+    public function primary()
+    {
+        return Favour::query()->where('favour_id', null) ->get();
     }
+
+    public function secondary(Request $request)
+    {
+        return Favour::query()->where('favour_id', $request->id) ->get();
+    }
+
+//    public function getPrimaryFavours(){
+//        return Favour::query()
+//            ->where('')
+//    }
 }
