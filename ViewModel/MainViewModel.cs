@@ -19,16 +19,10 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	private bool flagFirstEntry = true;
 
 	public MainViewModel(MainService ms)
-	{
-		
+	{	
 		mainService = ms;	
 	}
 
-	[RelayCommand]
-	static async void GoToAuth()
-	{
-		await Shell.Current.GoToAsync("auth");
-	}
 
 	private void SetEmptyCard()
 	{
@@ -98,6 +92,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		GetUserData();
 		Trace.WriteLine("getted user data");
 		flagFirstEntry = false;
+		Preferences.Default.Set("bank_account_id", selectedCard.);
 	}
 
 	[RelayCommand]
@@ -116,5 +111,14 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		await Shell.Current.GoToAsync("clientinfo");
 	}
 
+	[RelayCommand]
+	static async void GoToAuth() => await Shell.Current.GoToAsync("auth");
+
+	[RelayCommand]
+	static async void GoToPayment() => await Shell.Current.GoToAsync("payment",
+		true, new Dictionary<string, object>
+		{
+			{ "Favour", new Favour{ Id=-1, Name=""} }
+		});
 
 }
