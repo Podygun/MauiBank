@@ -1,5 +1,4 @@
-﻿
-namespace MauiBank.Model;
+﻿namespace MauiBank.Model;
 
 
 public class UserData

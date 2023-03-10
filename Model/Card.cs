@@ -21,6 +21,9 @@ public partial class Card : ObservableObject
 	string color;
 
 	[ObservableProperty]
+	int bank_account_id;
+
+	[ObservableProperty]
 	double balance;
 
 	[ObservableProperty]
