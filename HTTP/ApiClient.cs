@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
+using System.Threading.Tasks;
 
 
 namespace MauiBank.HTTP;
@@ -79,19 +80,24 @@ public class ApiClient<T>
 			if (isNewItem)
 			{ 
 				var task = _client.PostAsync(uri, content);
-				response = await task.WaitAsync(TimeSpan.FromSeconds(2));
+				response = await task.WaitAsync(TimeSpan.FromSeconds(3));
 			}
 			else
-				response = await _client.PutAsync(uri, content);
+			{ 
+				var task = _client.PutAsync(uri, content);
+				response = await task.WaitAsync(TimeSpan.FromSeconds(3));
+			}
+				
 
 			if (response.IsSuccessStatusCode)
-				Trace.WriteLine("\nNew UserAccounnt successfully saved.\n");
+				Trace.WriteLine("\nSUCCESS new item saved.\n");
+			else Trace.WriteLine($"\n{response.StatusCode} , {response.ReasonPhrase}\n");
 			return response;
 		}
 		catch(Exception ex)
 		{
 			if (ex is TimeoutException) Trace.WriteLine("TIMEOUT");
-			else Trace.WriteLine("FAIL TO POST REQUEST");
+			else Trace.WriteLine($"\nFAIL TO   POST   REQUEST: {ex.Message}");
 			return null;
 		}
 	}
@@ -111,7 +117,7 @@ public class ApiClient<T>
 		catch (Exception ex)
 		{
 			if (ex is TimeoutException) Trace.WriteLine("TIMEOUT");
-			else Trace.WriteLine("FAIL TO GET REQUEST: " + ex.Message);
+			else Trace.WriteLine("\nFAIL TO   GET   REQUEST: " + ex.Message);
 			return default;
 		}
 	}

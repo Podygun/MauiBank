@@ -59,7 +59,8 @@
                                     HeightRequest="80"
                                     Placeholder="Фамилия"
                                     Style="{StaticResource NewEntry}"
-                                    Text="{Binding UserData.second_name}" />
+                                    Text="{Binding UserData.second_name}"
+                                    TextChanged="Entry_TextChanged" />
                             </Frame>
 
                             <Label

@@ -42,7 +42,9 @@ public partial class CardTransferViewModel : BaseViewModel
 			if (result.IsSuccessStatusCode)
 			{
 				await Shell.Current.DisplayAlert("Успешно", "Перевод выполнен", "OK");
-				await Shell.Current.GoToAsync("main");
+				Preferences.Default.Set("IsUpdateCards", 1);
+				await Shell.Current.GoToAsync("main", true);
+
 			}
 	
 		}

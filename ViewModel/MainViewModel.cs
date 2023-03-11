@@ -1,20 +1,26 @@
-﻿using MauiBank.Static;
-
+﻿
 namespace MauiBank.ViewModel;
 
 
 public partial class MainViewModel : BaseViewModel, IQueryAttributable
 {
 
-	public ObservableCollection<Card> cards { get; set; } = new();
-
-	private int currentUserId { get; set; }
+	[ObservableProperty]
+	ObservableCollection<Card> cards = new();
 
 	private UserData userData { get; set; }
 
-
-	[ObservableProperty]
-	Card selectedCard;
+	
+	private Card selectedCard;
+	public Card SelectedCard
+	{
+		get => selectedCard;
+		set
+		{
+			SetProperty(ref selectedCard, value);
+			Preferences.Default.Set("bank_account_id", SelectedCard.bank_account_id);
+		}
+	}
 
 	private bool flagFirstEntry = true;
 
@@ -30,8 +36,8 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		{
 			type_name = "Открыть карту"
 		};
-		cards.Clear();
-		cards.Add(emptyCard);
+		Cards.Clear();
+		Cards.Add(emptyCard);
 	}
 
 	private async Task GetUserData()
@@ -40,7 +46,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		try
 		{
 			Busy = true;
-			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", currentUserId.ToString()));
+			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", Preferences.Default.Get("UserId", -1).ToString()));
 			userData = tempUserData[0];
 		}
 		catch (Exception ex)
@@ -59,7 +65,8 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		try
 		{
 			Busy = true;
-			var tempCards = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId + currentUserId);
+			
+			var tempCards = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId + Preferences.Default.Get("UserId",-1));
 
 			for (int i = 0, j = 0; j < tempCards.Count; i++, j++)
 			{
@@ -69,7 +76,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 
 			foreach (var card in tempCards)
 			{
-				cards.Add(card);
+				Cards.Add(card);
 			}
 		}
 		catch (Exception ex)
@@ -84,9 +91,25 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
+
+		if (Preferences.Default.Get("IsUpdateCards", 0) != 0)
+		{
+			if (Cards?.Count > 0)
+				Cards?.Clear();
+			FillCardsAsync();
+			Preferences.Default.Remove("IsUpdateCards");
+			return;
+		} 
+			
+		
 		if (!flagFirstEntry) return;
-		currentUserId = (int)query["UserId"];
-		OnPropertyChanged();
+
+		try
+		{
+			Preferences.Default.Set("UserId", (int)query["UserId"]);
+		}
+		catch { }
+
 		Load();
 
 	}
@@ -94,7 +117,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	[RelayCommand]
 	public async Task Load()
 	{
-		bool isClientExists = await ApiClient<bool>.IsClientExist(currentUserId);
+		bool isClientExists = await ApiClient<bool>.IsClientExist(Preferences.Default.Get("UserId", -1));
 
 		if (!isClientExists)
 		{
@@ -125,11 +148,13 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	public async Task GoToAuth() => await Shell.Current.GoToAsync("auth");
 
 	[RelayCommand]
-	public async Task GoToPayment() => await Shell.Current.GoToAsync("payment",
+	public async Task GoToPayment() =>
+		await Shell.Current.GoToAsync("payment",
 		true, new Dictionary<string, object>
 		{
 			{ "Favour", new Favour{ Id=-1, Name=""} }
 		});
+
 
 	[RelayCommand]
 	public async Task GoToCardDetail() => await Shell.Current.GoToAsync("carddetail", true,
@@ -145,5 +170,8 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		"#ECC200",
 		"#424874"
 	};
+
+
+	
 
 }

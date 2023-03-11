@@ -50,7 +50,9 @@ class UserDataController extends Controller
         $clientId = client::where('user_account_id', $id)->get('id')->first();
 
         return DB::table('clients as c')
-            ->select('c.first_name as first_name'
+            ->select(
+                'c.first_name as first_name'
+                ,'c.id as id'
                  ,'c.second_name as second_name'
                  , 'c.last_name as last_name'
                  , 'c.phone as phone'

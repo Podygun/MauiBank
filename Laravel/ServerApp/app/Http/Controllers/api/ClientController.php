@@ -17,6 +17,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $client = Client::create($request->all());
+
         return $client;
     }
 
@@ -39,7 +40,11 @@ class ClientController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $oldClient = Client::find($id);
+        $oldClient->update($request->json()->all());
+        return $oldClient;
+
+
     }
 
     public function destroy($id)

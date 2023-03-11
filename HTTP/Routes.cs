@@ -3,8 +3,8 @@
 
 public static class Routes
 {
-	private const short isNgrok = 1;
-	private const string ngrokUri = @"https://d116-136-169-210-93.eu.ngrok.io/api/";
+	private const short isNgrok = 0;
+	private const string ngrokUri = @"https/api/";
 
 	private const string port = "8000/api/";
 	private const string localhost = @"http://127.0.0.1:";
@@ -127,7 +127,6 @@ public static class Routes
 #endif
 	#endregion
 
-
 	#region GetCardsUriOnUserId
 #if WINDOWS
 	public static string getCardsUriOnUserId =
@@ -137,6 +136,19 @@ public static class Routes
 	(isNgrok == 0) ?
 		emulatorhost + port + @"cards/" :
 		ngrokUri + @"cards/";
+
+#endif
+	#endregion
+
+	#region UpdateClient
+#if WINDOWS
+	public static string updateClientUri =
+		localhost + port + @"clients/";
+#elif ANDROID
+	public static string updateClientUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"clients/" :
+		ngrokUri + @"clients/";
 
 #endif
 	#endregion
