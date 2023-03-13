@@ -74,14 +74,14 @@
                                         Padding="10"
                                         BackgroundColor="{StaticResource Secondary}">
                                         <Label
+                                            HorizontalTextAlignment="Start"
                                             Grid.Column="1"
                                             Margin="0,13,0,0"
                                             FontFamily="Medium"
                                             FontSize="16"
                                             Style="{StaticResource BaseWhiteLbl}"
-                                            Text="123456.00" />
+                                            Text="12 774.21" />
                                         <Label
-                                            Margin="2,0,0,0"
                                             FontFamily="Light"
                                             FontSize="14"
                                             HorizontalTextAlignment="Start"
