@@ -148,13 +148,15 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	public async Task GoToAuth() => await Shell.Current.GoToAsync("auth");
 
 	[RelayCommand]
+	public async Task GoToHistory() => await Shell.Current.GoToAsync("history");
+
+	[RelayCommand]
 	public async Task GoToPayment() =>
 		await Shell.Current.GoToAsync("payment",
 		true, new Dictionary<string, object>
 		{
 			{ "Favour", new Favour{ Id=-1, Name=""} }
 		});
-
 
 	[RelayCommand]
 	public async Task GoToCardDetail() => await Shell.Current.GoToAsync("carddetail", true,

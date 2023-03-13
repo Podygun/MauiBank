@@ -30,7 +30,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<RegPage>();
 		builder.Services.AddSingleton<AuthPage>();
 		builder.Services.AddSingleton<UserDataPage>();
-		builder.Services.AddSingleton<HistoryPage>();
+		builder.Services.AddTransient<HistoryPage>();
 		builder.Services.AddTransient<CardDetailPage>();
 		builder.Services.AddTransient<ClientInfoPage>();
 		builder.Services.AddTransient<PaymentPage>();
@@ -44,7 +44,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<RegViewModel>();
 		builder.Services.AddSingleton<AuthViewModel>();
 		builder.Services.AddSingleton<UserDataViewModel>();
-		builder.Services.AddSingleton<HistoryViewModel>();	
+		builder.Services.AddTransient<HistoryViewModel>();	
 		builder.Services.AddTransient<CardDetailViewModel>();
 		builder.Services.AddTransient<ClientInfoViewModel>();
 		builder.Services.AddTransient<PaymentViewModel>();

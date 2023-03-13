@@ -41,7 +41,7 @@ public static class Routes
 	#region GetUserId
 #if WINDOWS
 	public static string getUserIdUri =
-		localhost + port + @"users/get?login={0}&password={1}";
+		localhost + port + @"userAccounts/get?login={0}&password={1}";
 #elif ANDROID
 	public static string getUserIdUri =
 	(isNgrok == 0) ?
@@ -149,6 +149,19 @@ public static class Routes
 	(isNgrok == 0) ?
 		emulatorhost + port + @"clients/" :
 		ngrokUri + @"clients/";
+
+#endif
+	#endregion
+
+	#region PayChecks
+#if WINDOWS
+	public static string payChecksOnBankAccIdUri =
+		localhost + port + @"payChecks/bankAcc?id=";
+#elif ANDROID
+	public static string payChecksOnBankAccIdUri =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"payChecks/bankAcc?id=" :
+		ngrokUri + @"payChecks/bankAcc?id=";
 
 #endif
 	#endregion

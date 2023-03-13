@@ -46,6 +46,8 @@ Route::get('/favours/secondary',
 Route::get('/listRequisites/getOnFavour',
     [Controllers\api\ListRequisitesController::class, 'getOnFavour']);
 
+Route::get('/payChecks/bankAcc',
+    [Controllers\api\PayCheckController::class, 'findByBankAccId']);
 
 Route::apiResources([
     'userdata' => api\UserDataController::class

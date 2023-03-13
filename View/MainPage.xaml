@@ -195,7 +195,9 @@
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapHistory" />
+                    <TapGestureRecognizer 
+                        Command="{Binding GoToHistoryCommand}"
+                        Tapped="TapHistory" />
                 </Border.GestureRecognizers>
 
                 <VerticalStackLayout Spacing="10" VerticalOptions="Center">

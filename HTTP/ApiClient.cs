@@ -117,7 +117,7 @@ public class ApiClient<T>
 		catch (Exception ex)
 		{
 			if (ex is TimeoutException) Trace.WriteLine("TIMEOUT");
-			else Trace.WriteLine("\nFAIL TO   GET   REQUEST: " + ex.Message);
+			else Trace.WriteLine("\tfail GET request: " + ex.Message + $"\turi:{uri}");
 			return default;
 		}
 	}

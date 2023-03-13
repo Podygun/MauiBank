@@ -64,7 +64,8 @@
                     FontSize="20"
                     HeightRequest="50"
                     Text="Войти"
-                    WidthRequest="{Binding Source={x:Reference btnsPanel}, Path=WidthRequest}" />
+                    WidthRequest="{Binding Source={x:Reference btnsPanel}, Path=WidthRequest}"
+                    ZIndex="1" />
                 <Button
                     Margin="0,-10,-15,0"
                     BackgroundColor="Transparent"
