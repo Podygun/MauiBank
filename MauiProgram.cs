@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
+using ZXing.Net.Maui.Controls;
 
 namespace MauiBank;
 
@@ -10,6 +11,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseBarcodeReader()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("Inter-Thin.ttf", "Thin");
@@ -35,8 +37,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<ClientInfoPage>();
 		builder.Services.AddTransient<PaymentPage>();
 		builder.Services.AddTransient<CardTransferPage>();
+		builder.Services.AddSingleton<QRPage>();
 		
-
+		
 		builder.Services.AddSingleton<CardsService>();
 
 
@@ -49,6 +52,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<ClientInfoViewModel>();
 		builder.Services.AddTransient<PaymentViewModel>();
 		builder.Services.AddTransient<CardTransferViewModel>();
+		builder.Services.AddSingleton<QRViewModel>();
+
 
 		return builder.Build();
 	}

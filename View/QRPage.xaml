@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.QRPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:MauiBank.Model"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:QRViewModel">
+    <Grid BackgroundColor="{StaticResource Primary}" RowDefinitions="50,*">
+        <Label
+            Margin="0,10,0,0"
+            FontFamily="Medium"
+            FontSize="20"
+            Style="{StaticResource BaseDarkLbl}"
+            Text="Выберите действие" />
+
+        <!--<Grid>
+                <zxing:CameraBarcodeReaderView x:Name="barCodeReader" BarcodesDetected="barCodeReader_BarcodesDetected"/>
+            </Grid>-->
+
+        <Border
+            Grid.Row="1"
+            Margin="20,0"
+            Padding="0,40"
+            BackgroundColor="{StaticResource Secondary}"
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 30"
+            VerticalOptions="Center">
+            <Grid
+                Padding="20"
+                ColumnDefinitions="*,*"
+                VerticalOptions="Fill">
+
+                <!--  MY CODE  -->
+                <Border
+                    x:Name="MyQrCode"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HeightRequest="{Binding Source={x:Reference MyQrCode}, Path=WidthRequest}"
+                    Style="{StaticResource MainPageBtn}">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToMyQrCodeCommand}" Tapped="MyQrCodeTapped" />
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Border
+                            Margin="30,0"
+                            Padding="5"
+                            BackgroundColor="{StaticResource Secondary}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 10">
+                            <Image Source="qr_code.svg" />
+                        </Border>
+
+                        <Label
+                            FontFamily="Medium"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            Text="Мой QR" />
+                    </VerticalStackLayout>
+
+                </Border>
+
+                <!--  SCAN CODE  -->
+                <Border
+                    x:Name="ScanQrCode"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HeightRequest="{Binding Source={x:Reference ScanQrCode}, Path=WidthRequest}"
+                    Style="{StaticResource MainPageBtn}">
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToScanQrCodeCommand}" Tapped="ScanQrCodeTapped" />
+                    </Border.GestureRecognizers>
+
+                    <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Border
+                            Margin="30,0"
+                            Padding="5"
+                            BackgroundColor="{StaticResource Secondary}"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 10">
+                            <Image Source="barcode_scanner.svg" />
+                        </Border>
+
+                        <Label
+                            FontFamily="Medium"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            Text="Распознать" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+
+
+            </Grid>
+        </Border>
+
+        <!--<Grid
+            Grid.Row="3"
+            Margin="20,20,20,40"
+            BackgroundColor="Transparent"
+            ColumnDefinitions="*,*"
+            VerticalOptions="Fill">
+
+        -->
+        <!--  MY CODE  -->
+        <!--
+            <Border
+                x:Name="MyQrCode"
+                Grid.Row="0"
+                Grid.Column="0"
+                HeightRequest="{Binding Source={x:Reference UserInfo}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToMyQrCodeCommand}" Tapped="MyQrCodeTapped" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="qr_code.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Мой QR" />
+                </VerticalStackLayout>
+
+            </Border>
+
+        -->
+        <!--  SCAN CODE  -->
+        <!--
+            <Border
+                x:Name="ScanQrCode"
+                Grid.Row="0"
+                Grid.Column="1"
+                HeightRequest="{Binding Source={x:Reference UserInfo}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToScanQrCodeCommand}" Tapped="ScanQrCodeTapped" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="qr_code.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Скан" />
+                </VerticalStackLayout>
+
+            </Border>
+
+
+
+        </Grid>-->
+
+    </Grid>
+</ContentPage>

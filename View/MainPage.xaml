@@ -195,9 +195,7 @@
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Command="{Binding GoToHistoryCommand}"
-                        Tapped="TapHistory" />
+                    <TapGestureRecognizer Command="{Binding GoToHistoryCommand}" Tapped="TapHistory" />
                 </Border.GestureRecognizers>
 
                 <VerticalStackLayout Spacing="10" VerticalOptions="Center">
@@ -259,7 +257,7 @@
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapQR" />
+                    <TapGestureRecognizer Command="{Binding GoToQRCommand}" Tapped="TapQR" />
                 </Border.GestureRecognizers>
                 <VerticalStackLayout Spacing="10" VerticalOptions="Center">
                     <Border
@@ -275,7 +273,7 @@
                         FontFamily="Medium"
                         FontSize="18"
                         HorizontalTextAlignment="Center"
-                        Text="Принять" />
+                        Text="QR" />
                 </VerticalStackLayout>
 
             </Border>

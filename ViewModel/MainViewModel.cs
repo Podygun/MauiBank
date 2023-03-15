@@ -29,7 +29,6 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 
 	}
 
-
 	private void SetEmptyCard()
 	{
 		Card emptyCard = new()
@@ -142,7 +141,6 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		{
 			{"UserData", userData }
 		});
-	
 
 	[RelayCommand]
 	public async Task GoToAuth() => await Shell.Current.GoToAsync("auth");
@@ -164,6 +162,10 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 			{
 				{ "Card", SelectedCard }
 			});
+
+	[RelayCommand]
+	public async Task GoToQR() => await Shell.Current.GoToAsync("QR");
+	
 
 
 	readonly static string[] Colors = new string[]

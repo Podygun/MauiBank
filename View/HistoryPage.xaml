@@ -74,13 +74,13 @@
                                         Padding="10"
                                         BackgroundColor="{StaticResource Secondary}">
                                         <Label
-                                            HorizontalTextAlignment="Start"
                                             Grid.Column="1"
                                             Margin="0,13,0,0"
                                             FontFamily="Medium"
                                             FontSize="16"
+                                            HorizontalTextAlignment="Start"
                                             Style="{StaticResource BaseWhiteLbl}"
-                                            Text="12 774.21" />
+                                            Text="{Binding sum}" />
                                         <Label
                                             FontFamily="Light"
                                             FontSize="14"

@@ -554,9 +554,9 @@
         <Setter Property="Shadow">
             <Setter.Value>
                 <Shadow
-                    Brush="Black"
-                    Opacity="0.5"
-                    Radius="100"
+                    Brush="{StaticResource Tertiary}"
+                    Opacity="0.6"
+                    Radius="70"
                     Offset="0,0" />
             </Setter.Value>
         </Setter>
