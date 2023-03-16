@@ -14,5 +14,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("payment", typeof(PaymentPage));
 		Routing.RegisterRoute("cardtransfer", typeof(CardTransferPage));
 		Routing.RegisterRoute("QR", typeof(QRPage));
+		Routing.RegisterRoute("myQR", typeof(MyQRPage));
+		Routing.RegisterRoute("scanQR", typeof(ScanQRPage));
 	}
 }

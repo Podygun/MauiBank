@@ -14,9 +14,7 @@
             Style="{StaticResource BaseDarkLbl}"
             Text="Выберите действие" />
 
-        <!--<Grid>
-                <zxing:CameraBarcodeReaderView x:Name="barCodeReader" BarcodesDetected="barCodeReader_BarcodesDetected"/>
-            </Grid>-->
+
 
         <Border
             Grid.Row="1"
