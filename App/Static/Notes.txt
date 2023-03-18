@@ -1,0 +1,40 @@
+﻿
+Логика запуска__________________________________________________
+
+MauiProgram:
+	UseMauiApp<App> -> 
+	
+App:
+	MainPage = new AppShell() ->
+
+AppShell:
+	<ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate view:MainPage}"
+        Route="MainPage" />
+
+MainPage (это свойство)
+
+________________________________________________________________
+
+Однако сам класс App непосредственно не определяет графический интерфейс - 
+он лишь устанавливается главную страницу с помощью свойства MainPage.
+
+В .NET MAUI графический интерфейс состоит из страниц. Каждая страница 
+представляет собой объект класса Page. Страница занимает все пространство 
+экрана. То есть то, что мы видим на экране мобильного устройства или в окне 
+десктопного приложения - это страница. Приложение может иметь одну или несколько страниц.
+
+В данном случае в качестве главной страницы приложения используется объект класса AppShell. 
+Одним из родительских классов AppShell является класс Page, поэтому AppShell по сути также 
+является страницей. Однако AppShell не простая страница, а фактически представляет собой оболочку, 
+в которую помещаются простые страницы. Смысл AppShell состоит в том, чтобы упростить организацию 
+страниц и различные действия с ними, в частности, навигацию между страницами.
+
+https://metanit.com/sharp/maui/2.2.php
+
+
+;net7.0-ios;net7.0-maccatalyst
+<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>

@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\Models",
+    "\\config",
+    "\\database",
+    "\\database\\factories",
+    "\\database\\migrations",
+    "\\routes"
+  ],
+  "SelectedNode": "\\app\\Models\\Card.php",
+  "PreviewInSolutionExplorer": false
+}

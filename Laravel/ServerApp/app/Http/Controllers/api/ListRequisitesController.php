@@ -45,12 +45,21 @@ class ListRequisitesController extends Controller
 
             ->where('list_requisites.favour_id', $request->id)
             ->get();
-
-
-
-
-
     }
+
+    public function getOnOrganisationId(request $request)
+    {
+        return DB::table('list_requisites')
+            ->select(
+                ', req.id as Id'
+                , 'req.name as Requisite')
+            ->join('organisations as org','lists.organisation_id', '=', 'org.id')
+            ->join('requisites as req','req.id', '=', 'lists.requisite_id')
+            ->where('org.id', $request->id)
+            ->get();
+    }
+
+
 
     public function update(Request $request, $id)
     {

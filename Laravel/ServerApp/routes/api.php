@@ -32,22 +32,19 @@ use App\Http\Controllers\api;
 
 Route::get('/userAccounts/get',
     [Controllers\api\UserAccountController::class, 'get']);
-Route::get('/clients/getOnUserAccountId',
-    [Controllers\api\ClientController::class, 'getOnUserAccountId']);
-Route::get('/clients/getAllOnUserAccountId',
-    [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
-Route::get('/favours/primary',
-    [Controllers\api\FavourController::class, 'primary']);
-Route::get('/favours/secondary',
-    [Controllers\api\FavourController::class, 'secondary']);
 
+Route::get('/clients/getOnUserAccountId', [Controllers\api\ClientController::class, 'getOnUserAccountId']);
+Route::get('/clients/getAllOnUserAccountId', [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
 
+Route::get('/favours/primary', [Controllers\api\FavourController::class, 'primary']);
+Route::get('/favours/secondary', [Controllers\api\FavourController::class, 'secondary']);
 
-Route::get('/listRequisites/getOnFavour',
-    [Controllers\api\ListRequisitesController::class, 'getOnFavour']);
+Route::get('/organisations/getOrganisationsOnFavourId', [Controllers\api\OrganisationController::class, 'getOrganisationsOnFavourId']);
 
-Route::get('/payChecks/bankAcc',
-    [Controllers\api\PayCheckController::class, 'findByBankAccId']);
+Route::get('/listRequisites/getOnOrganisationId', [Controllers\api\ListRequisitesController::class, 'getOnOrganisationId']);
+Route::get('/listRequisites/getOnFavour', [Controllers\api\ListRequisitesController::class, 'getOnFavour']);
+
+Route::get('/payChecks/bankAcc', [Controllers\api\PayCheckController::class, 'findByBankAccId']);
 
 Route::apiResources([
     'userdata' => api\UserDataController::class
@@ -58,6 +55,7 @@ Route::apiResources([
     , 'favours'=>api\FavourController::class
     , 'listRequisites'=>api\ListRequisitesController::class
     , 'payCheck'=>api\PayCheckController::class
+    , 'organisations'=>api\OrganisationController::class
 ]);
 
 

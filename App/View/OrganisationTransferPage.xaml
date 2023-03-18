@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.OrganisationTransferPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:MauiBank.Model"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:OrganisationTransferViewModel">
+    <Grid Padding="0">
+        <Border
+            Padding="20"
+            BackgroundColor="{StaticResource Primary}"
+            StrokeThickness="0">
+            <Grid RowDefinitions="*,70">
+
+                <VerticalStackLayout Grid.Row="0" Spacing="20">
+                    <Label
+                        FontFamily="Bold"
+                        FontSize="24"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="Оплата услуг" />
+
+                    <Border BackgroundColor="{StaticResource Secondary}" StrokeShape="RoundRectangle 30">
+                        <VerticalStackLayout
+                            Margin="0"
+                            Padding="20,20,20,50"
+                            Spacing="15">
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Организация" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    IsReadOnly="True"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding Organisation}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Реквизит" />
+                            <Picker ItemsSource="{Binding Requisites}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            <Frame
+                                x:Name="RequsiteValue"
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Значение"
+                                    PlaceholderColor="{StaticResource Gray300}"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding RequisiteValue, Mode=TwoWay}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Сумма" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    Placeholder="Сумма"
+                                    PlaceholderColor="{StaticResource Gray300}"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding Sum, Mode=TwoWay}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+
+                            <Label
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Комиссия" />
+                            <Frame
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Entry
+                                    HeightRequest="80"
+                                    IsReadOnly="True"
+                                    Placeholder="Сумма"
+                                    PlaceholderColor="{StaticResource Gray300}"
+                                    Style="{StaticResource BaseEntry}"
+                                    Text="{Binding Fee}"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </VerticalStackLayout>
+
+                <Button
+                    Grid.Row="1"
+                    Command="{Binding TransferCommand}"
+                    Style="{StaticResource MainBtn}"
+                    Text="Перевести" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

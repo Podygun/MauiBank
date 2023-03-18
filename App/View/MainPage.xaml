@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBank.View.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiBank.Service.Converters"
+    xmlns:model="clr-namespace:MauiBank.Model"
+    xmlns:view="clr-namespace:MauiBank.View"
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:MainViewModel">
+    <ContentPage.Resources>
+        <converters:StringToColor x:Key="StringToColor" />
+        <converters:ToShortNumber x:Key="ToShortNumber" />
+        <StyleSheet Source="/Resources/Styles/mycss.css" />
+
+
+
+    </ContentPage.Resources>
+
+
+
+
+    <Grid BackgroundColor="{StaticResource Primary}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
+
+        <Label
+            x:Name="lbl"
+            Margin="40,0,0,0"
+            FontFamily="Bold"
+            FontSize="20"
+            HorizontalOptions="Start"
+            Style="{StaticResource BaseDarkLbl}"
+            Text="Главная" />
+
+        <!--  Card block  -->
+        <Grid
+            x:Name="cardBlock"
+            Grid.Row="1"
+            Padding="20"
+            VerticalOptions="Fill">
+
+            <CarouselView
+                x:Name="cardsCarousel"
+                CurrentItem="{Binding SelectedCard}"
+                HorizontalScrollBarVisibility="Always"
+                IsSwipeEnabled="True"
+                ItemsSource="{Binding Cards, Mode=TwoWay}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Card">
+                        <Frame
+                            x:Name="cardFrame"
+                            Background="{Binding color, Converter={StaticResource StringToColor}}"
+                            BindingContext="{x:Reference cardFrame}"
+                            BorderColor="Transparent"
+                            CornerRadius="30">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer x:DataType="vm:MainViewModel" Tapped="TapGestureRecognizer_Tapped" />
+                            </Frame.GestureRecognizers>
+                            <Grid RowDefinitions="*,*,*">
+                                <HorizontalStackLayout Spacing="60">
+                                    <Image
+                                        HeightRequest="40"
+                                        HorizontalOptions="Start"
+                                        Source="sim.png"
+                                        WidthRequest="40" />
+
+                                    <Label
+                                        FontFamily="SemiBold"
+                                        FontSize="24"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{StaticResource BaseWhiteLbl}"
+                                        Text="{Binding number, Converter={StaticResource ToShortNumber}}" />
+
+                                </HorizontalStackLayout>
+
+                                <Label
+                                    Grid.Row="1"
+                                    Margin="5,5,0,0"
+                                    FontFamily="SemiBold"
+                                    FontSize="24"
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource BaseWhiteLbl}"
+                                    Text="{Binding type_name}" />
+
+                                <HorizontalStackLayout Grid.Row="2">
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontFamily="Light"
+                                        FontSize="16"
+                                        HorizontalTextAlignment="Start"
+                                        Style="{StaticResource BaseWhiteLbl}"
+                                        Text="{Binding date_end}" />
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        </Grid>
+
+        <!--  Balance block  -->
+        <Frame
+            x:Name="balanceBlock"
+            Grid.Row="2"
+            Margin="20,20,20,0"
+            BackgroundColor="{StaticResource Tertiary}"
+            BorderColor="Transparent"
+            CornerRadius="20"
+            HeightRequest="120">
+            <Grid ColumnDefinitions="3*,*">
+                <VerticalStackLayout Grid.ColumnSpan="3" VerticalOptions="Center">
+                    <Label
+                        FontFamily="Regular"
+                        FontSize="14"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="Текущий баланс" />
+                    <Label
+                        FontFamily="SemiBold"
+                        FontSize="28"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="{Binding Source={x:Reference cardsCarousel}, Path=CurrentItem.balance}" />
+                </VerticalStackLayout>
+
+                <Image
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    Source="bagmoney.png"
+                    VerticalOptions="Fill"
+                    WidthRequest="50" />
+            </Grid>
+        </Frame>
+
+        <!--  Buttons block  -->
+        <Grid
+            x:Name="btnsBlock"
+            Grid.Row="3"
+            Margin="20"
+            BackgroundColor="Transparent"
+            ColumnDefinitions="*,*,*"
+            ColumnSpacing="20"
+            RowDefinitions="*,*"
+            RowSpacing="20"
+            VerticalOptions="Fill">
+
+
+
+
+            <!--  UserInfo  -->
+            <!--<Border
+                x:Name="UserInfo"
+                Grid.Row="0"
+                Grid.Column="0"
+                HeightRequest="{Binding Source={x:Reference UserInfo}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToClientInfoCommand}" Tapped="TapUserInfo" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="user.png" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Данные" />
+                </VerticalStackLayout>
+
+            </Border>-->
+            <Border
+                x:Name="UserInfo"
+                Grid.Row="0"
+                Grid.Column="0"
+                HeightRequest="{Binding Source={x:Reference UserInfo}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToOrganisationCommand}" Tapped="TapUserInfo" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="user.png" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Организации" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!--  History  -->
+            <!--<Border
+                x:Name="history"
+                Grid.Row="0"
+                Grid.Column="1"
+                HeightRequest="{Binding Source={x:Reference history}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToHistoryCommand}" Tapped="TapHistory" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="history.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="История" />
+                </VerticalStackLayout>
+
+            </Border>-->
+
+            <!--  Auth  -->
+            <Border
+                x:Name="Auth"
+                Grid.Row="0"
+                Grid.Column="2"
+                HeightRequest="{Binding Source={x:Reference Auth}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapAuth" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="logout.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Выйти" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!--  QR  -->
+            <Border
+                x:Name="QR"
+                Grid.Row="1"
+                Grid.Column="0"
+                HeightRequest="{Binding Source={x:Reference QR}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToQRCommand}" Tapped="TapQR" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="qr_code.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="QR" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!--  NewCard  -->
+            <Border
+                x:Name="NewCard"
+                Grid.Row="1"
+                Grid.Column="1"
+                HeightRequest="{Binding Source={x:Reference NewCard}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapNewCard" />
+                </Border.GestureRecognizers>
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="credit_card.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="Открыть" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!--  Payment  -->
+            <Border
+                x:Name="Pay"
+                Grid.Row="1"
+                Grid.Column="2"
+                HeightRequest="{Binding Source={x:Reference Pay}, Path=WidthRequest}"
+                Style="{StaticResource MainPageBtn}">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToPaymentCommand}" Tapped="TapPay" />
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Border
+                        Margin="30,0"
+                        Padding="5"
+                        BackgroundColor="{StaticResource Secondary}"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 10">
+                        <Image Source="payment.svg" />
+                    </Border>
+
+                    <Label
+                        FontFamily="Medium"
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        Text="Оплатить" />
+                </VerticalStackLayout>
+
+            </Border>
+
+
+
+        </Grid>
+
+
+    </Grid>
+</ContentPage>

@@ -1,0 +1,22 @@
+$posts = Post::where('is_published', 1)->get();
+									   ->first();
+									   
+									   
+Ctrl + W 	=> выделение строки
+Alt + J		=> выделение такого же слова ниже
+
+Запрос на данные карт
+
+use laravel;
+SELECT 
+cards.* 
+, bank_accounts.balance 
+, valutes.code 
+, clients.first_name 
+, clients.second_name 
+FROM cards 
+join bank_accounts on cards.bank_account_id = bank_accounts.id 
+join valutes on bank_accounts.valute_id = valutes.id 
+join clients on clients.id = 1 
+where bank_accounts.client_id = 1;
+
