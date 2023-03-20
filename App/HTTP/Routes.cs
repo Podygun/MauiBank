@@ -4,14 +4,12 @@
 public static class Routes
 {
 	private const short isNgrok = 1;
-	private const string ngrokUri = @"https://93fd-136-169-210-93.eu.ngrok.io/api/";
+	private const string ngrokUri = @"https://9115-136-169-210-93.eu.ngrok.io/api/";
 
 	private const string port = "8000/api/";
 	private const string localhost = @"http://127.0.0.1:";
 	private const string emulatorhost = @"http://10.0.2.2:";
 
-
-	
 
 	#region GetUserData
 #if WINDOWS
