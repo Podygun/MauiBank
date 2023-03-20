@@ -42,7 +42,7 @@
                                     HeightRequest="80"
                                     IsReadOnly="True"
                                     Style="{StaticResource BaseEntry}"
-                                    Text="{Binding Organisation}"
+                                    Text="{Binding OrganisationName}"
                                     TextColor="{StaticResource Tertiary}" />
                             </Frame>
 
@@ -53,8 +53,24 @@
                                 HorizontalOptions="Start"
                                 Style="{StaticResource BaseWhiteLbl}"
                                 Text="Реквизит" />
-                            <Picker ItemsSource="{Binding Requisites}" SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             <Frame
+                                Padding="20,4"
+                                BackgroundColor="White"
+                                BorderColor="{StaticResource Tertiary}"
+                                CornerRadius="15"
+                                HasShadow="False"
+                                HeightRequest="60">
+                                <Picker
+                                    Margin="0,0"
+                                    HorizontalTextAlignment="Start"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    ItemsSource="{Binding Requisites}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged"
+                                    TextColor="{StaticResource Tertiary}" />
+                            </Frame>
+
+                            <Frame
+                                Margin="0,-10,0,0"
                                 x:Name="RequsiteValue"
                                 BackgroundColor="White"
                                 BorderColor="{StaticResource Tertiary}"

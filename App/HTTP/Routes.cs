@@ -4,7 +4,7 @@
 public static class Routes
 {
 	private const short isNgrok = 1;
-	private const string ngrokUri = @"https://9115-136-169-210-93.eu.ngrok.io/api/";
+	private const string ngrokUri = @"https://fb8b-136-169-210-93.eu.ngrok.io/api/";
 
 	private const string port = "8000/api/";
 	private const string localhost = @"http://127.0.0.1:";
@@ -167,12 +167,27 @@ public static class Routes
 	#region GetOrganisationsOnFavourId
 #if WINDOWS
 	public static string getOrganisationsOnFavourIdUri =
-		localhost + port + @"getOrganisationsOnFavourId?id=";
+		localhost + port + @"organisations/getOrganisationsOnFavourId?id=";
 #elif ANDROID
 	public static string getOrganisationsOnFavourIdUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"getOrganisationsOnFavourId?id=" :
-		ngrokUri + @"getOrganisationsOnFavourId?id=";
+		emulatorhost + port + @"organisations/getOrganisationsOnFavourId?id=" :
+		ngrokUri + @"organisations/getOrganisationsOnFavourId?id=";
+
+#endif
+	#endregion
+
+
+
+	#region GetRequisitesOnOrganisationId
+#if WINDOWS
+	public static string getRequisitesOnOrganisationId =
+		localhost + port + @"listRequisites/getOnOrganisationId?id=";
+#elif ANDROID
+	public static string getRequisitesOnOrganisationId =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"listRequisites/getOnOrganisationId?id=" :
+		ngrokUri + @"listRequisites/getOnOrganisationId?id=";
 
 #endif
 	#endregion

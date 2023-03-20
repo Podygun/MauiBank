@@ -172,7 +172,6 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 	public async Task GoToQR() => await Shell.Current.GoToAsync("QR");
 	
 
-
 	readonly static string[] Colors = new string[]
 	{
 		"#8916FF",

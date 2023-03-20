@@ -8,10 +8,11 @@ public partial class PaymentViewModel : BaseViewModel, IQueryAttributable
 
 	public Favour mainFavour;
 
-    public PaymentViewModel()
-    {
-		
-	}
+	private bool flagOrganisation = false;
+
+    public PaymentViewModel(){	}
+
+
 
 	private async Task LoadPrimaryFavours()
 	{
@@ -43,6 +44,12 @@ public partial class PaymentViewModel : BaseViewModel, IQueryAttributable
 		{
 			var tempFavours = await ApiClient<List<Favour>>
 				.GetAsync(Routes.getSecondaryFavoursUri.Replace("{0}", id.ToString()));
+			if(tempFavours.Count == 0)
+			{
+				await LoadOrganisations(id);
+				Preferences.Default.Set("favour_id",id);
+				return;
+			}
 			foreach (var favour in tempFavours)
 			{
 				Favours.Add(favour);
@@ -55,16 +62,50 @@ public partial class PaymentViewModel : BaseViewModel, IQueryAttributable
 
 	}
 
+	private async Task LoadOrganisations(int id)
+	{
+		try
+		{
+			var tempOragnisations = await ApiClient<List<Organisation>>
+				.GetAsync(Routes.getOrganisationsOnFavourIdUri + id);
+            foreach (var org in tempOragnisations)
+			{
+				var fakeFavour = new Favour
+				{
+					Name = org.Name,
+					Id = org.Id,
+				};
+				Favours.Add(fakeFavour);
+			}
+			flagOrganisation = true;
+		}
+		catch (Exception ex)
+		{
+			Trace.WriteLine(ex.Message);
+		}
+		
+
+	}
+
 	[RelayCommand]
 	public async Task TapFavour(Favour favour)
 	{
 		Trace.WriteLine("Нажатие на услугу");
+
+		if (flagOrganisation)
+		{
+			await Shell.Current.GoToAsync("orgtransfer", true, new Dictionary<string, object>
+			{
+				{"Organisation", favour }
+			});
+			return;
+		}
+
 		if (favour.Id == 1)
 		{
 			await LoadCardPayment();
 			return;
 		}
-
 
 		if (Busy) return;
 		try
@@ -97,15 +138,16 @@ public partial class PaymentViewModel : BaseViewModel, IQueryAttributable
 		Trace.WriteLine("Аттрибуты");
 		Favours.Clear();
 		mainFavour = (Favour)query["Favour"];
-		//LoadList(mainFavour);
-		Transfer();
+		LoadList(mainFavour);
+		
 
 	}
 
 	private async Task LoadList(Favour favour)
-	{ 
+	{
 		if (favour.Id == -1) await LoadPrimaryFavours();
 		else await LoadSubFavours(favour.Id);
+		
 	
 	}
 
@@ -115,39 +157,5 @@ public partial class PaymentViewModel : BaseViewModel, IQueryAttributable
 		await Shell.Current.GoToAsync("cardtransfer");
 	}
 
-	public async Task Transfer()
-	{
-		if (Busy) return;
-		try
-		{
-			Busy = true;
-			PayCheck payCheck = new PayCheck
-			{
-				bank_account_id = Preferences.Default.Get("bank_account_id", -1),
-				sum = 100,
-				fee = 0,
-				requisite_value = "toto",
-				favour_id = 1
-			};
-
-			var result = await ApiClient<PayCheck>.PostAsync(Routes.setNewPaymentUri, payCheck);
-
-			if (result.IsSuccessStatusCode)
-			{
-				await Shell.Current.DisplayAlert("Успешно", "Перевод выполнен", "OK");
-				Preferences.Default.Set("IsUpdateCards", 1);
-				await Shell.Current.GoToAsync("main", true);
-
-			}
-
-		}
-		catch (Exception ex)
-		{
-			Trace.WriteLine(ex.Message);
-		}
-		finally
-		{
-			Busy = false;
-		}
-	}
+	
 }

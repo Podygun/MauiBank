@@ -1,0 +1,201 @@
+is_global = true
+build_property.TargetFramework = net7.0-android
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = true
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = MauiBank
+build_property.ProjectDir = D:\MauiBank\
+
+[D:/MauiBank/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[D:/MauiBank/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[D:/MauiBank/App/obj/Release/net7.0-windows10.0.19041.0/win10-x64/Platforms/Windows/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.App.obj.Release.net7._0_windows10._0._19041._0.win10_x64.Platforms.Windows.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App\obj\Release\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xaml
+build_metadata.AdditionalFiles.RelativePath = App\obj\Release\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xaml
+
+[D:/MauiBank/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
+
+[D:/MauiBank/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[D:/MauiBank/View/AuthPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.AuthPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\AuthPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\AuthPage.xaml
+
+[D:/MauiBank/View/CardDetailPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.CardDetailPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\CardDetailPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\CardDetailPage.xaml
+
+[D:/MauiBank/View/CardTransferPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.CardTransferPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\CardTransferPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\CardTransferPage.xaml
+
+[D:/MauiBank/View/ClientInfoPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.ClientInfoPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\ClientInfoPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\ClientInfoPage.xaml
+
+[D:/MauiBank/View/HistoryPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.HistoryPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\HistoryPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\HistoryPage.xaml
+
+[D:/MauiBank/View/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\MainPage.xaml
+
+[D:/MauiBank/View/MyQRPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.MyQRPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\MyQRPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\MyQRPage.xaml
+
+[D:/MauiBank/View/PaymentPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.PaymentPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\PaymentPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\PaymentPage.xaml
+
+[D:/MauiBank/View/QRPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.QRPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\QRPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\QRPage.xaml
+
+[D:/MauiBank/View/RegPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.RegPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\RegPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\RegPage.xaml
+
+[D:/MauiBank/View/ScanQRPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.ScanQRPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\ScanQRPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\ScanQRPage.xaml
+
+[D:/MauiBank/View/UserDataPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.View.UserDataPage.xaml
+build_metadata.AdditionalFiles.TargetPath = View\UserDataPage.xaml
+build_metadata.AdditionalFiles.RelativePath = View\UserDataPage.xaml
+
+[D:/MauiBank/Laravel/ServerApp/resources/css/app.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.resources.css.app.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\resources\css\app.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\resources\css\app.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/filp/whoops/src/Whoops/Resources/css/prism.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.filp.whoops.src.Whoops.Resources.css.prism.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\filp\whoops\src\Whoops\Resources\css\prism.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\filp\whoops\src\Whoops\Resources\css\prism.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/filp/whoops/src/Whoops/Resources/css/whoops.base.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.filp.whoops.src.Whoops.Resources.css.whoops.base.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\filp\whoops\src\Whoops\Resources\css\whoops.base.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\filp\whoops\src\Whoops\Resources\css\whoops.base.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/laravel/framework/src/Illuminate/Mail/resources/views/html/themes/default.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.laravel.framework.src.Illuminate.Mail.resources.views.html.themes.default.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\laravel\framework\src\Illuminate\Mail\resources\views\html\themes\default.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\laravel\framework\src\Illuminate\Mail\resources\views\html\themes\default.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/css/bootstrap.min.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.phpunit.php_code_coverage.src.Report.Html.Renderer.Template.css.bootstrap.min.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\bootstrap.min.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\bootstrap.min.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/css/custom.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.phpunit.php_code_coverage.src.Report.Html.Renderer.Template.css.custom.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\custom.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\custom.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/css/nv.d3.min.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.phpunit.php_code_coverage.src.Report.Html.Renderer.Template.css.nv.d3.min.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\nv.d3.min.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\nv.d3.min.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/css/octicons.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.phpunit.php_code_coverage.src.Report.Html.Renderer.Template.css.octicons.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\octicons.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\octicons.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/phpunit/php-code-coverage/src/Report/Html/Renderer/Template/css/style.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.phpunit.php_code_coverage.src.Report.Html.Renderer.Template.css.style.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\style.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\phpunit\php-code-coverage\src\Report\Html\Renderer\Template\css\style.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/symfony/error-handler/Resources/assets/css/error.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.symfony.error_handler.Resources.assets.css.error.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\symfony\error-handler\Resources\assets\css\error.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\symfony\error-handler\Resources\assets\css\error.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/symfony/error-handler/Resources/assets/css/exception.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.symfony.error_handler.Resources.assets.css.exception.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\symfony\error-handler\Resources\assets\css\exception.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\symfony\error-handler\Resources\assets\css\exception.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/symfony/error-handler/Resources/assets/css/exception_full.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.symfony.error_handler.Resources.assets.css.exception_full.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\symfony\error-handler\Resources\assets\css\exception_full.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\symfony\error-handler\Resources\assets\css\exception_full.css
+
+[D:/MauiBank/Laravel/ServerApp/vendor/symfony/var-dumper/Resources/css/htmlDescriptor.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Laravel.ServerApp.vendor.symfony.var_dumper.Resources.css.htmlDescriptor.css
+build_metadata.AdditionalFiles.TargetPath = Laravel\ServerApp\vendor\symfony\var-dumper\Resources\css\htmlDescriptor.css
+build_metadata.AdditionalFiles.RelativePath = Laravel\ServerApp\vendor\symfony\var-dumper\Resources\css\htmlDescriptor.css
+
+[D:/MauiBank/Resources/Styles/mycss.css]
+build_metadata.AdditionalFiles.GenKind = Css
+build_metadata.AdditionalFiles.ManifestResourceName = MauiBank.Resources.Styles.mycss.css
+build_metadata.AdditionalFiles.TargetPath = Resources\Styles\mycss.css
+build_metadata.AdditionalFiles.RelativePath = Resources\Styles\mycss.css

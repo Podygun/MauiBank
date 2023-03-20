@@ -49,13 +49,14 @@ class ListRequisitesController extends Controller
 
     public function getOnOrganisationId(request $request)
     {
-        return DB::table('list_requisites')
+        return DB::table('list_requisites as lists')
             ->select(
-                ', req.id as Id'
-                , 'req.name as Requisite')
+                'req.id as Id'
+                , 'req.name as Name')
             ->join('organisations as org','lists.organisation_id', '=', 'org.id')
             ->join('requisites as req','req.id', '=', 'lists.requisite_id')
             ->where('org.id', $request->id)
+            ->distinct()
             ->get();
     }
 

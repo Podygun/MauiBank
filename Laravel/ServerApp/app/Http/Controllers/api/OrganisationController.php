@@ -40,8 +40,8 @@ class OrganisationController extends Controller
             ->join('organisations as org','lists.organisation_id', '=', 'org.id')
             ->join('favours as f','f.id', '=', 'lists.favour_id')
             ->select(
-                'org.id as Id '
-                , 'org.name as Organisation'
+                'org.id as Id'
+                , 'org.name as Name'
                 , 'org.money_number as Money_number')
 
             ->where('f.id',$request->id)

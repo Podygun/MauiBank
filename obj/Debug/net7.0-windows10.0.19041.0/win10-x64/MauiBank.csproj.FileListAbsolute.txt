@@ -1,0 +1,13 @@
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\MauiBank.csproj.AssemblyReference.cache
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\MauiBank.csproj.ResolveComReference.cache
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\mauiimage.inputs
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\mauifont.inputs
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\mauisplash.inputs
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\mauimanifest.stamp
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.i.cs
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.cs
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\XamlTypeInfo.g.cs
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xaml
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xbf
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\XamlSaveStateFile.xml
+D:\MauiBank\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\MauiBank.GeneratedMSBuildEditorConfig.editorconfig
