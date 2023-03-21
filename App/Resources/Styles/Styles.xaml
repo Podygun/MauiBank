@@ -555,15 +555,15 @@
                 <Shadow
                     Brush="{StaticResource Tertiary}"
                     Opacity="0.6"
-                    Radius="70"
+                    Radius="50"
                     Offset="0,0" />
             </Setter.Value>
         </Setter>
         <Setter Property="StrokeThickness" Value="0" />
         <Setter Property="StrokeShape" Value="RoundRectangle 20" />
-        <Setter Property="WidthRequest" Value="115" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
         <Setter Property="ZIndex" Value="1" />
-        <Setter Property="Margin" Value="5" />
+        <Setter Property="Margin" Value="10" />
 
     </Style>
 
