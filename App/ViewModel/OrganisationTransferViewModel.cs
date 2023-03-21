@@ -31,6 +31,7 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 		{
 			SetProperty(ref sum, value);
 			ComputeFee();
+
 		}
 	}
 

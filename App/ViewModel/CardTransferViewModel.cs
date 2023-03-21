@@ -2,6 +2,8 @@
 
 public partial class CardTransferViewModel : BaseViewModel
 {
+	bool fromQr = false;
+
 	[ObservableProperty]
 	string cardNumber = string.Empty;
 
@@ -20,7 +22,9 @@ public partial class CardTransferViewModel : BaseViewModel
 		{
 			CardNumber = Preferences.Default.Get("cardToTransfer", "Неверные данные");
 			Preferences.Default.Clear("cardToTransfer");
+			fromQr = true;
 		}
+		else fromQr = false;
 		//TODO
         //if doesnt MAUIBANK set FEE = 0.1% from sum
     }
@@ -49,7 +53,9 @@ public partial class CardTransferViewModel : BaseViewModel
 			{
 				await Shell.Current.DisplayAlert("Успешно", "Перевод выполнен", "OK");
 				Preferences.Default.Set("IsUpdateCards", 1);
-				await Shell.Current.GoToAsync("main", true);
+				await GoBack();
+
+				
 
 			}
 	
@@ -62,5 +68,11 @@ public partial class CardTransferViewModel : BaseViewModel
 		{
 			Busy = false;
 		}
+	}
+
+	private async Task GoBack()
+	{
+		if (fromQr) await Shell.Current.GoToAsync("../../..", true);
+		else		await Shell.Current.GoToAsync("main", true);
 	}
 }

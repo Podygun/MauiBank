@@ -1,7 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.Input;
-
-namespace MauiBank.ViewModel;
+﻿namespace MauiBank.ViewModel;
 
 
 public partial class MainViewModel : BaseViewModel, IQueryAttributable
@@ -169,7 +166,11 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 			});
 
 	[RelayCommand]
-	public async Task GoToQR() => await Shell.Current.GoToAsync("QR");
+	public async Task GoToQR() => await Shell.Current.GoToAsync("QR", true, new Dictionary<string, object>
+	{
+		{"UserName", userData.first_name + " " + userData.last_name },
+		{"CardNumber", SelectedCard.number }
+	});
 	
 
 	readonly static string[] Colors = new string[]
