@@ -145,18 +145,17 @@
             x:Name="btnsBlock"
             Grid.Row="3"
             Margin="20"
+            Padding="-10,0,-10,0"
             BackgroundColor="Transparent"
             ColumnDefinitions="*,*,*"
-            ColumnSpacing="20"
             RowDefinitions="*,*"
-            RowSpacing="20"
-            VerticalOptions="Fill">
+            VerticalOptions="FillAndExpand">
 
 
 
 
             <!--  UserInfo  -->
-            <!--<Border
+            <Border
                 x:Name="UserInfo"
                 Grid.Row="0"
                 Grid.Column="0"
@@ -167,14 +166,15 @@
                     <TapGestureRecognizer Command="{Binding GoToClientInfoCommand}" Tapped="TapUserInfo" />
                 </Border.GestureRecognizers>
 
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <VerticalStackLayout VerticalOptions="CenterAndExpand">
                     <Border
-                        Margin="30,0"
+                        Margin="20,0"
                         Padding="5"
                         BackgroundColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center"
                         Stroke="Transparent"
                         StrokeShape="RoundRectangle 10">
-                        <Image Source="user.png" />
+                        <Image Source="person.svg" />
                     </Border>
 
                     <Label
@@ -182,41 +182,13 @@
                         FontSize="18"
                         HorizontalTextAlignment="Center"
                         Text="Данные" />
-                </VerticalStackLayout>
 
-            </Border>-->
-            <Border
-                x:Name="UserInfo"
-                Grid.Row="0"
-                Grid.Column="0"
-                HeightRequest="{Binding Source={x:Reference UserInfo}, Path=WidthRequest}"
-                Style="{StaticResource MainPageBtn}">
-
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoToOrganisationCommand}" Tapped="TapUserInfo" />
-                </Border.GestureRecognizers>
-
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
-                    <Border
-                        Margin="30,0"
-                        Padding="5"
-                        BackgroundColor="{StaticResource Secondary}"
-                        Stroke="Transparent"
-                        StrokeShape="RoundRectangle 10">
-                        <Image Source="user.png" />
-                    </Border>
-
-                    <Label
-                        FontFamily="Medium"
-                        FontSize="18"
-                        HorizontalTextAlignment="Center"
-                        Text="Организации" />
                 </VerticalStackLayout>
 
             </Border>
 
             <!--  History  -->
-            <!--<Border
+            <Border
                 x:Name="history"
                 Grid.Row="0"
                 Grid.Column="1"
@@ -227,11 +199,12 @@
                     <TapGestureRecognizer Command="{Binding GoToHistoryCommand}" Tapped="TapHistory" />
                 </Border.GestureRecognizers>
 
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <VerticalStackLayout VerticalOptions="Center">
                     <Border
-                        Margin="30,0"
+                        Margin="20,0"
                         Padding="5"
                         BackgroundColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center"
                         Stroke="Transparent"
                         StrokeShape="RoundRectangle 10">
                         <Image Source="history.svg" />
@@ -244,7 +217,7 @@
                         Text="История" />
                 </VerticalStackLayout>
 
-            </Border>-->
+            </Border>
 
             <!--  Auth  -->
             <Border
@@ -258,11 +231,12 @@
                     <TapGestureRecognizer Tapped="TapAuth" />
                 </Border.GestureRecognizers>
 
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <VerticalStackLayout VerticalOptions="CenterAndExpand">
                     <Border
-                        Margin="30,0"
+                        Margin="20,0"
                         Padding="5"
                         BackgroundColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center"
                         Stroke="Transparent"
                         StrokeShape="RoundRectangle 10">
                         <Image Source="logout.svg" />
@@ -288,11 +262,12 @@
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToQRCommand}" Tapped="TapQR" />
                 </Border.GestureRecognizers>
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <VerticalStackLayout VerticalOptions="CenterAndExpand">
                     <Border
-                        Margin="30,0"
+                        Margin="20,0"
                         Padding="5"
                         BackgroundColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center"
                         Stroke="Transparent"
                         StrokeShape="RoundRectangle 10">
                         <Image Source="qr_code.svg" />
@@ -318,11 +293,12 @@
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapNewCard" />
                 </Border.GestureRecognizers>
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <VerticalStackLayout VerticalOptions="CenterAndExpand">
                     <Border
-                        Margin="30,0"
+                        Margin="20,0"
                         Padding="5"
                         BackgroundColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center"
                         Stroke="Transparent"
                         StrokeShape="RoundRectangle 10">
                         <Image Source="credit_card.svg" />
@@ -349,11 +325,12 @@
                     <TapGestureRecognizer Command="{Binding GoToPaymentCommand}" Tapped="TapPay" />
                 </Border.GestureRecognizers>
 
-                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <VerticalStackLayout VerticalOptions="CenterAndExpand">
                     <Border
-                        Margin="30,0"
+                        Margin="20,0"
                         Padding="5"
                         BackgroundColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center"
                         Stroke="Transparent"
                         StrokeShape="RoundRectangle 10">
                         <Image Source="payment.svg" />

@@ -35,7 +35,8 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     HeightRequest="{Binding Source={x:Reference MyQrCode}, Path=WidthRequest}"
-                    Style="{StaticResource MainPageBtn}">
+                    Style="{StaticResource MainPageBtn}"
+                    WidthRequest="150">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMyQrCodeCommand}" Tapped="MyQrCodeTapped" />
@@ -43,9 +44,10 @@
 
                     <VerticalStackLayout Spacing="10" VerticalOptions="Center">
                         <Border
-                            Margin="30,0"
+                            Margin="20,0"
                             Padding="5"
                             BackgroundColor="{StaticResource Secondary}"
+                            HorizontalOptions="Center"
                             Stroke="Transparent"
                             StrokeShape="RoundRectangle 10">
                             <Image Source="qr_code.svg" />
@@ -53,7 +55,7 @@
 
                         <Label
                             FontFamily="Medium"
-                            FontSize="18"
+                            FontSize="20"
                             HorizontalTextAlignment="Center"
                             Text="Мой QR" />
                     </VerticalStackLayout>
@@ -74,9 +76,10 @@
 
                     <VerticalStackLayout Spacing="10" VerticalOptions="Center">
                         <Border
-                            Margin="30,0"
+                            Margin="20,0"
                             Padding="5"
                             BackgroundColor="{StaticResource Secondary}"
+                            HorizontalOptions="Center"
                             Stroke="Transparent"
                             StrokeShape="RoundRectangle 10">
                             <Image Source="barcode_scanner.svg" />
@@ -84,7 +87,7 @@
 
                         <Label
                             FontFamily="Medium"
-                            FontSize="18"
+                            FontSize="20"
                             HorizontalTextAlignment="Center"
                             Text="Распознать" />
 

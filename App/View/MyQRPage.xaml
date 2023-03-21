@@ -5,11 +5,102 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:m="clr-namespace:MauiBank.Model"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
     x:DataType="vm:MyQRViewModel">
-    <VerticalStackLayout>
+    <Grid BackgroundColor="{StaticResource Secondary}" RowDefinitions="50,*,200">
         <Label
+            Margin="0,20,0,0"
+            FontFamily="Bold"
+            FontSize="24"
+            Style="{StaticResource BaseWhiteLbl}"
+            Text="Мой QR Код" />
+        <Border
+            x:Name="qrborder"
+            Grid.Row="1"
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{StaticResource Primary}"
             HorizontalOptions="Center"
-            Text="My QR"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 20"
+            VerticalOptions="Center"
+            WidthRequest="350">
+            <Border.Shadow>
+                <Shadow
+                    Brush="{StaticResource Tertiary}"
+                    Radius="30"
+                    Offset="0,0" />
+            </Border.Shadow>
+
+            <VerticalStackLayout Padding="0,0,0,20" Spacing="40">
+                <Grid
+                    Margin="20,0"
+                    HorizontalOptions="StartAndExpand"
+                    RowDefinitions="*,*">
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="Medium"
+                        FontSize="16"
+                        HorizontalOptions="StartAndExpand"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="Имя владельца"
+                        TextColor="{StaticResource LightText}" />
+                    <Label
+                        Grid.Row="1"
+                        FontFamily="Bold"
+                        FontSize="20"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="{Binding OwnerName}"
+                        TextColor="{StaticResource Tertiary}" />
+                </Grid>
+                <zxing:BarcodeGeneratorView
+                    BackgroundColor="Transparent"
+                    Format="Codabar"
+                    HeightRequest="70"
+                    HorizontalOptions="Fill"
+                    Value="{Binding BarcodeValue}" />
+
+                <zxing:BarcodeGeneratorView
+                    BackgroundColor="Transparent"
+                    Format="QrCode"
+                    HeightRequest="175"
+                    WidthRequest="175"
+                    Value="{Binding QrcodeValue}" />
+            </VerticalStackLayout>
+
+
+
+        </Border>
+        <Border
+            Grid.Row="2"
+            Margin="20"
+            Padding="20"
+            BackgroundColor="{StaticResource SecondaryDarker}"
+            HeightRequest="100"
+            StrokeShape="RoundRectangle 20"
+            StrokeThickness="0"
+            WidthRequest="350">
+            <Grid ColumnDefinitions="*,3*" WidthRequest="300">
+                <Border
+                    Padding="12"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="60"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="0"
+                    WidthRequest="60">
+                    <Image Aspect="AspectFit" Source="lamp_tip.svg" />
+                </Border>
+
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Margin="3,0,0,0"
+                    VerticalOptions="CenterAndExpand">
+                    <Label Style="{StaticResource BaseWhiteLbl}" Text="Просто покажите QR Код вашим" />
+                    <Label Style="{StaticResource BaseWhiteLbl}" Text="друзьям для перевода!" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+    </Grid>
 </ContentPage>

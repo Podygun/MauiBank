@@ -40,7 +40,7 @@ public partial class MainPage : ContentPage
 
 	private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e) => viewmodel.GoToCardDetailCommand.Execute(null);
     
-	//private async void TapHistory(object sender, TappedEventArgs e)		=> await Anim(history);
+	private async void TapHistory(object sender, TappedEventArgs e)		=> await Anim(history);
 	private async void TapQR(object sender, TappedEventArgs e)			=> await Anim(QR);
 	private async void TapUserInfo(object sender, TappedEventArgs e)	=> await Anim(UserInfo);
 	private async void TapNewCard(object sender, TappedEventArgs e)		=> await Anim(NewCard);
