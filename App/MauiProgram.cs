@@ -38,9 +38,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<PaymentPage>();
 		builder.Services.AddTransient<CardTransferPage>();
 		builder.Services.AddTransient<OrganisationTransferPage>();
-		builder.Services.AddSingleton<QRPage>();
+		builder.Services.AddTransient<QRPage>();
 		builder.Services.AddSingleton<MyQRPage>();
-		builder.Services.AddSingleton<ScanQRPage>();
+		builder.Services.AddTransient<ScanQRPage>();
 		
 		
 		builder.Services.AddSingleton<CardsService>();
@@ -56,9 +56,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<PaymentViewModel>();
 		builder.Services.AddTransient<CardTransferViewModel>();
 		builder.Services.AddTransient<OrganisationTransferViewModel>();
-		builder.Services.AddSingleton<QRViewModel>();
+		builder.Services.AddTransient<QRViewModel>();
 		builder.Services.AddSingleton<MyQRViewModel>();
-		builder.Services.AddSingleton<ScanQRViewModel>();
+		builder.Services.AddTransient<ScanQRViewModel>();
 
 
 		return builder.Build();
