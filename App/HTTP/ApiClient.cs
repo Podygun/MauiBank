@@ -9,39 +9,6 @@ public class ApiClient<T>
 {
 	static HttpClient _client = new();
 
-	//public static async Task<List<UserData>> GetUserDataAsync(int id)
-	//{
-		
-	//	var result = await _client.GetAsync(uri);
-	//	string jsonStr = result.Content.ReadAsStringAsync().Result;
-	//	List<UserData> data = JsonConvert.DeserializeObject<List<UserData>>(jsonStr);
-	//	return data;
-	//}
-
-	//public static async Task<int> GetUserId(string login, string password)
-	//{
-	//	string uri = Routes.getUserIdUri
-	//		.Replace(@"{0}", login)
-	//		.Replace(@"{1}", password);
-
-	//	try
-	//	{
-	//		var result = await _client.GetAsync(uri);
-	//		string jsonStr = result.Content.ReadAsStringAsync().Result;
-	//		Id currentId = JsonConvert.DeserializeObject<Id>(jsonStr);
-	//		return currentId.id;
-	//	}
-	//	catch (Exception ex)
-	//	{
-	//		Trace.WriteLine("\nERROR {0}\n", ex.Message);
-	//		return -1;
-
-	//	}
-
-
-	//}
-
-
 	public static async Task<bool> IsClientExist(int userAccountId)
 	{
 		string uri = Routes.getClientOnUserIdUri
@@ -88,16 +55,19 @@ public class ApiClient<T>
 				response = await task.WaitAsync(TimeSpan.FromSeconds(3));
 			}
 				
-
 			if (response.IsSuccessStatusCode)
-				Trace.WriteLine("\nSUCCESS new item saved.\n");
+			{
+				if (isNewItem) Trace.WriteLine("\tsuccess POST");
+				else Trace.WriteLine("\tsuccess PUT");
+			}
+				
 			else Trace.WriteLine($"\n{response.StatusCode} , {response.ReasonPhrase}\n");
 			return response;
 		}
 		catch(Exception ex)
 		{
 			if (ex is TimeoutException) Trace.WriteLine("TIMEOUT");
-			else Trace.WriteLine($"\nFAIL TO   POST   REQUEST: {ex.Message}");
+			else Trace.WriteLine($"\t fail to POST request: {ex.Message}");
 			return null;
 		}
 	}
@@ -112,6 +82,7 @@ public class ApiClient<T>
 
 			string jsonStr = result.Content.ReadAsStringAsync().Result;
 			T? response = JsonConvert.DeserializeObject<T>(jsonStr);
+			Trace.WriteLine($"\tsuccess GET ({typeof(T)})");
 			return response;
 		}
 		catch (Exception ex)

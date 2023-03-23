@@ -2,13 +2,28 @@
 
 public class History
 {
-	public DateTime? time { get; set; }
-	public double sum { get; set; }
-	public double fee { get; set; }
-	public string requisite_value { get; set; }
-	public string first_name { get; set; }
-	public string second_name { get; set; }
-	public string last_name { get; set; }
-	public string valute { get; set; }
-	public string favour { get; set; }
+	public int Id { get; set; }
+	public DateTime Time { get; set; }
+	public double Sum { get; set; }
+	public double Fee { get; set; }
+	public string Requisite_value { get; set; }
+	public string First_name { get; set; }
+	public string Second_name { get; set; }
+	public string Last_name { get; set; }
+	public string Valute { get; set; }
+	public string Favour { get; set; }
+}
+
+public class HistoryD
+{
+	public int Id { get; set; }
+	public DateOnly Time { get; set; }
+	public double Sum { get; set; }
+	public double Fee { get; set; }
+	public string Requisite_value { get; set; }
+	public string First_name { get; set; }
+	public string Second_name { get; set; }
+	public string Last_name { get; set; }
+	public string Valute { get; set; }
+	public string Favour { get; set; }
 }

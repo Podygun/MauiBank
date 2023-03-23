@@ -6,6 +6,8 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 	[ObservableProperty]
 	UserData userData;
 
+	UserData oldUserData = new();
+
 	[ObservableProperty]
 	public bool isVisibleButton = false;
 
@@ -15,13 +17,8 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 
 	}
 
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
-	{
+    public void ApplyQueryAttributes(IDictionary<string, object> query) => UserData = oldUserData = query["UserData"] as UserData;
 
-		UserData = query["UserData"] as UserData;
-		OnPropertyChanged();
-
-	}
 
 
 	[RelayCommand]
@@ -34,6 +31,7 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 
 			Client client = new Client
 			{
+				id = UserData.id,
 				first_name = UserData.first_name,
 				second_name = UserData.second_name,
 				last_name = UserData.last_name,

@@ -38,14 +38,15 @@ class PayCheckController extends Controller
         return DB::table('pay_checks as pc')
             ->select(
                 'pc.updated_at as time'
-                , 'pc.sum as sum'
-                , 'pc.fee as fee'
-                , 'pc.requisite_value as requisite_value'
-                , 'c.first_name as first_name'
-                , 'c.second_name as second_name'
-                , 'c.last_name as last_name'
-                , 'v.code as valute'
-                , 'f.name as favour'
+                , 'pc.id as Id'
+                , 'pc.sum as Sum'
+                , 'pc.fee as Fee'
+                , 'pc.requisite_value as Requisite_value'
+                , 'c.first_name as First_name'
+                , 'c.second_name as Second_name'
+                , 'c.last_name as Last_name'
+                , 'v.code as Valute'
+                , 'f.name as Favour'
             )
             ->join('bank_accounts as bacc', 'pc.bank_account_id', '=', 'bacc.id' )
             ->join('clients as c', 'bacc.client_id', '=', 'c.id' )

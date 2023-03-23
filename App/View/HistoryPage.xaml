@@ -3,9 +3,13 @@
     x:Class="MauiBank.View.HistoryPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiBank.Service.Converters"
     xmlns:model="clr-namespace:MauiBank.Model"
-    xmlns:viewmodel="clr-namespace:MauiBank.ViewModel"
-    x:DataType="viewmodel:HistoryViewModel">
+    xmlns:vm="clr-namespace:MauiBank.ViewModel"
+    x:DataType="vm:HistoryViewModel">
+    <ContentPage.Resources>
+        <converters:DateToCultureDate x:Key="CultureDate" />
+    </ContentPage.Resources>
     <Grid BackgroundColor="{StaticResource Primary}" RowDefinitions="50,*">
 
         <Label
@@ -27,30 +31,42 @@
             <CollectionView
                 Grid.Row="0"
                 HorizontalOptions="Center"
+                IsGrouped="True"
                 ItemsSource="{Binding Histories}"
                 SelectionMode="Single"
                 VerticalScrollBarVisibility="Always">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="model:History">
+                        <Label
+                            Margin="40,20,0,0"
+                            BackgroundColor="Transparent"
+                            FontFamily="Black"
+                            FontSize="18"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource BaseDarkLbl}"
+                            Text="{Binding Time, Converter={StaticResource CultureDate}}" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:History">
-
-
-                        <Grid Padding="20">
+                        <Grid Padding="20,0" ZIndex="2">
                             <Border
+                                Margin="0,10"
                                 BackgroundColor="{StaticResource Primary}"
                                 BindingContext="{Binding .}"
-                                HeightRequest="90"
-                                HorizontalOptions="Fill"
+                                HorizontalOptions="FillAndExpand"
                                 StrokeShape="RoundRectangle 10"
-                                StrokeThickness="0">
+                                StrokeThickness="0"
+                                VerticalOptions="FillAndExpand">
                                 <Border.Shadow>
                                     <Shadow
-                                        Brush="Black"
-                                        Opacity="0.3"
-                                        Radius="40"
+                                        Brush="{StaticResource Tertiary}"
+                                        Opacity="0.5"
+                                        Radius="20"
                                         Offset="0,0" />
                                 </Border.Shadow>
                                 <Border.GestureRecognizers>
-                                    <!--<TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=TapFavourCommand}" CommandParameter="{Binding .}" />-->
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=GoToHistoryDetailCommand}" CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
 
                                 <Grid ColumnDefinitions="*,110">
@@ -60,44 +76,39 @@
                                             FontSize="16"
                                             HorizontalOptions="StartAndExpand"
                                             Style="{StaticResource BaseDarkLbl}"
-                                            Text="{Binding favour}" />
+                                            Text="{Binding Favour}" />
                                         <Label
                                             FontFamily="Regular"
                                             FontSize="14"
                                             HorizontalOptions="StartAndExpand"
                                             Style="{StaticResource BaseDarkLbl}"
-                                            Text="{Binding requisite_value}" />
+                                            Text="{Binding Requisite_value}" />
                                     </VerticalStackLayout>
 
                                     <VerticalStackLayout
                                         Grid.Column="1"
                                         Padding="10"
-                                        BackgroundColor="{StaticResource Secondary}">
+                                        HorizontalOptions="End">
                                         <Label
                                             Grid.Column="1"
                                             Margin="0,13,0,0"
                                             FontFamily="Medium"
                                             FontSize="16"
                                             HorizontalTextAlignment="Start"
-                                            Style="{StaticResource BaseWhiteLbl}"
-                                            Text="{Binding sum}" />
+                                            Style="{StaticResource BaseDarkLbl}"
+                                            Text="{Binding Sum}" />
                                         <Label
                                             FontFamily="Light"
                                             FontSize="14"
-                                            HorizontalTextAlignment="Start"
-                                            Style="{StaticResource BaseWhiteLbl}"
-                                            Text="{Binding valute}" />
+                                            HorizontalTextAlignment="End"
+                                            Style="{StaticResource BaseDarkLbl}"
+                                            Text="{Binding Valute}" />
                                     </VerticalStackLayout>
 
                                 </Grid>
 
                             </Border>
                         </Grid>
-
-
-
-
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
