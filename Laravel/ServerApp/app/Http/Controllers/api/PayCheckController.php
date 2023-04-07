@@ -33,7 +33,7 @@ class PayCheckController extends Controller
         //$paycheck->update()
     }
 
-    public function findByBankAccId(Request $request )
+    public function findByBankAccId(Request $request)
     {
         return DB::table('pay_checks as pc')
             ->select(
@@ -52,12 +52,9 @@ class PayCheckController extends Controller
             ->join('clients as c', 'bacc.client_id', '=', 'c.id' )
             ->join('valutes as v', 'bacc.valute_id', '=', 'v.id' )
             ->join('favours as f', 'pc.favour_id', '=', 'f.id' )
-
             ->where('pc.bank_account_id', $request->id)
             ->orderBy('pc.updated_at')
             ->get();
-
-
     }
 
     public function destroy($id)

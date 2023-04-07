@@ -41,10 +41,14 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $oldClient = Client::find($id);
+        $oldClient->first_name = $request->input('first_name');
+        $oldClient->second_name = $request->input('second_name');
+        $oldClient->last_name = $request->input('last_name');
+        $oldClient->email = $request->input('email');
+        $oldClient->phone = $request->input('phone');
+        $oldClient->save();
         $oldClient->update($request->json()->all());
-        return $oldClient;
-
-
+        return response()->json(['message' => 'Client updated']);
     }
 
     public function destroy($id)

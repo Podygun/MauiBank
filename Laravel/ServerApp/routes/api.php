@@ -35,6 +35,7 @@ Route::get('/userAccounts/get',
 
 Route::get('/clients/getOnUserAccountId', [Controllers\api\ClientController::class, 'getOnUserAccountId']);
 Route::get('/clients/getAllOnUserAccountId', [Controllers\api\ClientController::class, 'getAllOnUserAccountId']);
+Route::put('/clients/{id}', [Controllers\api\ClientController::class, 'update']);
 
 Route::get('/favours/primary', [Controllers\api\FavourController::class, 'primary']);
 Route::get('/favours/secondary', [Controllers\api\FavourController::class, 'secondary']);
