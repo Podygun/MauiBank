@@ -8,6 +8,7 @@
     <Color x:Key="Tertiary">#1C1939</Color>
     <Color x:Key="MyGray">#6C6A7F</Color>
     <Color x:Key="LightText">#9EA6BE</Color>
+    <Color x:Key="Green">#</Color>
     <!--  9EA6BE  -->
 
 
