@@ -159,7 +159,6 @@
                 x:Name="UserInfo"
                 Grid.Row="0"
                 Grid.Column="0"
-                HeightRequest="{Binding Source={x:Reference UserInfo}, Path=WidthRequest}"
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
@@ -176,13 +175,10 @@
                         StrokeShape="RoundRectangle 10">
                         <Image Source="person.svg" />
                     </Border>
-
                     <Label
                         FontFamily="Medium"
-                        FontSize="18"
-                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BaseDarkLbl}"
                         Text="Данные" />
-
                 </VerticalStackLayout>
 
             </Border>
@@ -212,8 +208,7 @@
 
                     <Label
                         FontFamily="Medium"
-                        FontSize="18"
-                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BaseDarkLbl}"
                         Text="История" />
                 </VerticalStackLayout>
 
@@ -244,8 +239,7 @@
 
                     <Label
                         FontFamily="Medium"
-                        FontSize="18"
-                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BaseDarkLbl}"
                         Text="Выйти" />
                 </VerticalStackLayout>
 
@@ -275,8 +269,7 @@
 
                     <Label
                         FontFamily="Medium"
-                        FontSize="18"
-                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BaseDarkLbl}"
                         Text="QR" />
                 </VerticalStackLayout>
 
@@ -306,8 +299,7 @@
 
                     <Label
                         FontFamily="Medium"
-                        FontSize="18"
-                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BaseDarkLbl}"
                         Text="Открыть" />
                 </VerticalStackLayout>
 
@@ -338,8 +330,7 @@
 
                     <Label
                         FontFamily="Medium"
-                        FontSize="16"
-                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource BaseDarkLbl}"
                         Text="Оплатить" />
                 </VerticalStackLayout>
 

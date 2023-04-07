@@ -68,7 +68,8 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     HeightRequest="{Binding Source={x:Reference ScanQrCode}, Path=WidthRequest}"
-                    Style="{StaticResource MainPageBtn}">
+                    Style="{StaticResource MainPageBtn}"
+                    WidthRequest="150">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToScanQrCodeCommand}" Tapped="ScanQrCodeTapped" />

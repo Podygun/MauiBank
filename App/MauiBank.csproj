@@ -16,7 +16,7 @@
 		<ApplicationTitle>MauiBank</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mauibank</ApplicationId>
+		<ApplicationId>podygun.mauibank</ApplicationId>
 		<ApplicationIdGuid>d1f7e7d8-7f50-4f54-b3d0-0227319a9e5f</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -32,20 +32,24 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
 	  <ApplicationId>com.podygun.mauibank</ApplicationId>
-	  <NoWarn>1701;1702;CS0229;CS0103</NoWarn>
+	  <NoWarn>1701;1702;CS0229;CS0103;0229</NoWarn>
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
 	  <ApplicationId>com.podygun.mauibank</ApplicationId>
-	  <NoWarn>1701;1702;CS0229;CS0103</NoWarn>
+	  <NoWarn>1701;1702;CS0229;CS0103;0229</NoWarn>
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.podygun.mauibank</ApplicationId>
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationId>com.podygun.mauibank</ApplicationId>
+	  <DebugType>embedded</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -87,32 +91,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
-	    <WrapperTool>tlbimp</WrapperTool>
-	    <VersionMinor>4</VersionMinor>
-	    <VersionMajor>2</VersionMajor>
-	    <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
-	  </COMReference>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="MySqlConnector" Version="2.2.5" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="QRCoder" Version="1.4.3" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
+		<PackageReference Include="System.Runtime.Caching" Version="8.0.0-preview.2.23128.3" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.3.0-preview.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Resources\Fonts\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="MessagingToolkit.QRCode">
-	    <HintPath>Resources\MessagingToolkit.QRCode.dll</HintPath>
-	  </Reference>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -122,6 +113,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\Labels.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\AuthPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

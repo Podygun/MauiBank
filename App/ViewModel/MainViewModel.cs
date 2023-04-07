@@ -1,4 +1,6 @@
-﻿namespace MauiBank.ViewModel;
+﻿using Microsoft.Maui.Storage;
+
+namespace MauiBank.ViewModel;
 
 
 public partial class MainViewModel : BaseViewModel, IQueryAttributable

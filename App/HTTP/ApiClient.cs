@@ -8,6 +8,7 @@ namespace MauiBank.HTTP;
 public class ApiClient<T>
 {
 	static HttpClient _client = new();
+	private static readonly TimeSpan timeOut = TimeSpan.FromSeconds(5);
 
 	public static async Task<bool> IsClientExist(int userAccountId)
 	{
@@ -47,12 +48,12 @@ public class ApiClient<T>
 			if (isNewItem)
 			{ 
 				var task = _client.PostAsync(uri, content);
-				response = await task.WaitAsync(TimeSpan.FromSeconds(3));
+				response = await task.WaitAsync(timeOut);
 			}
 			else
 			{ 
 				var task = _client.PutAsync(uri, content);
-				response = await task.WaitAsync(TimeSpan.FromSeconds(3));
+				response = await task.WaitAsync(timeOut);
 			}
 				
 			if (response.IsSuccessStatusCode)
@@ -78,7 +79,7 @@ public class ApiClient<T>
 		{
 			HttpResponseMessage? result = null;
 			var task = _client.GetAsync(uri);
-			result = await task.WaitAsync(TimeSpan.FromSeconds(3));
+			result = await task.WaitAsync(timeOut);
 
 			string jsonStr = result.Content.ReadAsStringAsync().Result;
 			T? response = JsonConvert.DeserializeObject<T>(jsonStr);

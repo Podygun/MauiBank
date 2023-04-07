@@ -5,10 +5,150 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:MauiBank.Service.Converters"
     xmlns:model="clr-namespace:MauiBank.Model"
+    xmlns:triggers="clr-namespace:MauiBank.Service.Triggers"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     x:DataType="vm:HistoryViewModel">
     <ContentPage.Resources>
         <converters:DateToCultureDate x:Key="CultureDate" />
+        <converters:SumSignConverter x:Key="SignSum" />
+
+        <DataTemplate x:Key="positiveSumTemplate" x:DataType="model:HistoryD">
+            <Grid Padding="20,0" ZIndex="2">
+                <Border
+                    Margin="0,10"
+                    BackgroundColor="{StaticResource Primary}"
+                    BindingContext="{Binding .}"
+                    HorizontalOptions="FillAndExpand"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    VerticalOptions="FillAndExpand">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="{StaticResource Tertiary}"
+                            Opacity="0.5"
+                            Radius="20"
+                            Offset="0,0" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=GoToHistoryDetailCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,110">
+                        <VerticalStackLayout Padding="20">
+                            <Label
+                                FontFamily="Bold"
+                                FontSize="16"
+                                HorizontalOptions="StartAndExpand"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Favour}" />
+                            <Label
+                                FontFamily="Regular"
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Requisite_value}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Padding="10"
+                            HorizontalOptions="End">
+                            <Label
+                                Grid.Column="1"
+                                Margin="0,13,0,0"
+                                FontFamily="Medium"
+                                FontSize="16"
+                                HorizontalTextAlignment="Start"
+                                IsVisible="True"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Sum, Converter={StaticResource SignSum}}"
+                                TextColor="{StaticResource Secondary}" />
+                            <Label
+                                FontFamily="Light"
+                                FontSize="14"
+                                HorizontalTextAlignment="End"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Valute}" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="negativeSumTemplate" x:DataType="model:HistoryD">
+            <Grid Padding="20,0" ZIndex="2">
+                <Border
+                    Margin="0,10"
+                    BackgroundColor="{StaticResource Primary}"
+                    BindingContext="{Binding .}"
+                    HorizontalOptions="FillAndExpand"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="0"
+                    VerticalOptions="FillAndExpand">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="{StaticResource Tertiary}"
+                            Opacity="0.5"
+                            Radius="20"
+                            Offset="0,0" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=GoToHistoryDetailCommand}" CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+
+                    <Grid ColumnDefinitions="*,110">
+                        <VerticalStackLayout Padding="20">
+                            <Label
+                                FontFamily="Bold"
+                                FontSize="16"
+                                HorizontalOptions="StartAndExpand"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Favour}" />
+                            <Label
+                                FontFamily="Regular"
+                                FontSize="14"
+                                HorizontalOptions="StartAndExpand"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Requisite_value}" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Padding="10"
+                            HorizontalOptions="End">
+                            <Label
+                                Grid.Column="1"
+                                Margin="0,13,0,0"
+                                FontFamily="Medium"
+                                FontSize="16"
+                                HorizontalTextAlignment="Start"
+                                IsVisible="True"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Sum, Converter={StaticResource SignSum}}"
+                                TextColor="{StaticResource Tertiary}" />
+                            <Label
+                                FontFamily="Light"
+                                FontSize="14"
+                                HorizontalTextAlignment="End"
+                                Style="{StaticResource BaseDarkLbl}"
+                                Text="{Binding Valute}" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <converters:PaymentSumDataTemplateSelector
+            x:Key="colorSelector"
+            NegativeTemplate="{StaticResource negativeSumTemplate}"
+            PositiveTemplate="{StaticResource positiveSumTemplate}" />
+
+
+
     </ContentPage.Resources>
     <Grid BackgroundColor="{StaticResource Primary}" RowDefinitions="50,*">
 
@@ -32,8 +172,9 @@
                 Grid.Row="0"
                 HorizontalOptions="Center"
                 IsGrouped="True"
+                ItemTemplate="{StaticResource colorSelector}"
                 ItemsSource="{Binding Histories}"
-                SelectionMode="Single"
+                SelectionMode="None"
                 VerticalScrollBarVisibility="Always">
                 <CollectionView.GroupHeaderTemplate>
                     <DataTemplate x:DataType="model:History">
@@ -47,70 +188,7 @@
                             Text="{Binding Time, Converter={StaticResource CultureDate}}" />
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:History">
-                        <Grid Padding="20,0" ZIndex="2">
-                            <Border
-                                Margin="0,10"
-                                BackgroundColor="{StaticResource Primary}"
-                                BindingContext="{Binding .}"
-                                HorizontalOptions="FillAndExpand"
-                                StrokeShape="RoundRectangle 10"
-                                StrokeThickness="0"
-                                VerticalOptions="FillAndExpand">
-                                <Border.Shadow>
-                                    <Shadow
-                                        Brush="{StaticResource Tertiary}"
-                                        Opacity="0.5"
-                                        Radius="20"
-                                        Offset="0,0" />
-                                </Border.Shadow>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HistoryViewModel}}, Path=GoToHistoryDetailCommand}" CommandParameter="{Binding .}" />
-                                </Border.GestureRecognizers>
 
-                                <Grid ColumnDefinitions="*,110">
-                                    <VerticalStackLayout Padding="20">
-                                        <Label
-                                            FontFamily="Bold"
-                                            FontSize="16"
-                                            HorizontalOptions="StartAndExpand"
-                                            Style="{StaticResource BaseDarkLbl}"
-                                            Text="{Binding Favour}" />
-                                        <Label
-                                            FontFamily="Regular"
-                                            FontSize="14"
-                                            HorizontalOptions="StartAndExpand"
-                                            Style="{StaticResource BaseDarkLbl}"
-                                            Text="{Binding Requisite_value}" />
-                                    </VerticalStackLayout>
-
-                                    <VerticalStackLayout
-                                        Grid.Column="1"
-                                        Padding="10"
-                                        HorizontalOptions="End">
-                                        <Label
-                                            Grid.Column="1"
-                                            Margin="0,13,0,0"
-                                            FontFamily="Medium"
-                                            FontSize="16"
-                                            HorizontalTextAlignment="Start"
-                                            Style="{StaticResource BaseDarkLbl}"
-                                            Text="{Binding Sum}" />
-                                        <Label
-                                            FontFamily="Light"
-                                            FontSize="14"
-                                            HorizontalTextAlignment="End"
-                                            Style="{StaticResource BaseDarkLbl}"
-                                            Text="{Binding Valute}" />
-                                    </VerticalStackLayout>
-
-                                </Grid>
-
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
             <Button
                 Grid.Row="1"

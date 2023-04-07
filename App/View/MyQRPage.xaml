@@ -53,6 +53,7 @@
                         Text="{Binding OwnerName}"
                         TextColor="{StaticResource Tertiary}" />
                 </Grid>
+                
                 <zxing:BarcodeGeneratorView
                     BackgroundColor="Transparent"
                     Format="Codabar"
@@ -76,7 +77,7 @@
             Margin="20"
             Padding="20"
             BackgroundColor="{StaticResource SecondaryDarker}"
-            HeightRequest="100"
+            HeightRequest="120"
             StrokeShape="RoundRectangle 20"
             StrokeThickness="0"
             WidthRequest="350">

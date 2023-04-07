@@ -1,6 +1,5 @@
 namespace MauiBank.View;
 
-[QueryProperty("selectedHistory", "historyId")]
 public partial class HistoryDetailPage : ContentPage
 {
 	public HistoryDetailPage(HistoryDetailViewModel vm)
@@ -9,14 +8,5 @@ public partial class HistoryDetailPage : ContentPage
 		BindingContext = vm;
 	}
 
-	public string selectedHistory
-	{
-		set
-		{
-			// do smth with id
-		}
-		
-	}
 }
 
-//

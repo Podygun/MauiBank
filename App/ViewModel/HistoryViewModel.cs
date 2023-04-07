@@ -9,16 +9,11 @@ public partial class HistoryViewModel : BaseViewModel
 
 	public HistoryViewModel()
 	{
+
 		if(isFirstEntry) LoadPayChecks();
 		
 	}
 
-	//NODE
-	//	Название организации или ФИО владельца
-	//	Услуга
-	//	Сумма
-	//	Валюта
-	//	Created_at
 
 	[RelayCommand]
 	public async Task LoadPayChecks()
@@ -28,7 +23,15 @@ public partial class HistoryViewModel : BaseViewModel
 		try
 		{
 			Busy = true;
-			var DBPayChecks = await ApiClient<List<History>>.GetAsync(Routes.payChecksOnBankAccIdUri + Preferences.Default.Get("bank_account_id", -1));
+			int bank_account_id = Preferences.Default.Get("bank_account_id", -1);
+
+			var DBPayChecks = await CacheService.GetOrCreateCacheValue(bank_account_id + "-histories", TimeSpan.FromMinutes(1),async () =>
+			{
+				var temp = await ApiClient<List<History>>.GetAsync(Routes.payChecksOnBankAccIdUri + bank_account_id);
+				return temp;
+			});
+
+
 			var ConvertedPayChecks = ConvertDateTimeToDateOnly(DBPayChecks);
 			var groups = ConvertedPayChecks
 				.GroupBy(p => p.Time)
@@ -78,13 +81,17 @@ public partial class HistoryViewModel : BaseViewModel
 	}
 
 	[RelayCommand]
-	public async Task GoToHistoryDetail(History selectedHistory)
+	public async Task GoToHistoryDetail(HistoryD selectedHistory)
 	{
 		if (Busy) return;
+		if (selectedHistory is null) return;	
 		try
 		{
 			Busy = true;
-			await Shell.Current.GoToAsync($"historydetail?historyId={selectedHistory.Id}");
+			await Shell.Current.GoToAsync("historydetail", true, new Dictionary<string, object>
+			{
+				{"history", selectedHistory }
+			});
 		}
 		catch (Exception ex)
 		{

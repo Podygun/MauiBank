@@ -6,10 +6,103 @@
     xmlns:m="clr-namespace:MauiBank.Model"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     x:DataType="vm:HistoryDetailViewModel">
-    <VerticalStackLayout>
+    <ContentPage.Resources />
+    <Grid
+        Padding="20,0,20,20"
+        BackgroundColor="{StaticResource Secondary}"
+        RowDefinitions="50,*">
         <Label
-            HorizontalOptions="Center"
-            Text="HistoryDetail"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+            FontFamily="Medium"
+            FontSize="20"
+            Style="{StaticResource BaseWhiteLbl}"
+            Text="Операция" />
+        <Grid Grid.Row="1" RowDefinitions="150,*">
+            <Border
+                Padding="20"
+                HeightRequest="150"
+                StrokeShape="RoundRectangle 20,20,0,0"
+                StrokeThickness="0">
+                <VerticalStackLayout>
+                    <Label
+                        FontFamily="Bold"
+                        FontSize="30"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="{Binding History.Favour}" />
+                </VerticalStackLayout>
+
+            </Border>
+
+            <Ellipse
+                Margin="-15"
+                Fill="{StaticResource Secondary}"
+                HeightRequest="30"
+                HorizontalOptions="Start"
+                VerticalOptions="End"
+                WidthRequest="30"
+                ZIndex="1" />
+            <Ellipse
+                Margin="-15"
+                Fill="{StaticResource Secondary}"
+                HeightRequest="30"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                WidthRequest="30"
+                ZIndex="1" />
+
+            <Border
+                Grid.Row="1"
+                StrokeShape="RoundRectangle 0,0,20,20"
+                StrokeThickness="0">
+                <VerticalStackLayout Grid.Row="1" Margin="40">
+                    <Label Style="{StaticResource LightLeftLabel}" Text="Отправитель" />
+
+                    <Label
+                        FontFamily="Bold"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        HorizontalTextAlignment="Start"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="{Binding FullName}" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LightLeftLabel}"
+                        Text="Время операции" />
+
+                    <Label Style="{StaticResource DarkBoldLabel}" Text="3.21.2023 14:45:13" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LightLeftLabel}"
+                        Text="Реквизит" />
+                    <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding History.Requisite_value}" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LightLeftLabel}"
+                        Text="Сумма" />
+                    <HorizontalStackLayout>
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding History.Sum}" />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text=" " />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding History.Valute}" />
+                    </HorizontalStackLayout>
+
+
+                    <Label
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LightLeftLabel}"
+                        Text="Комиссия" />
+                    <HorizontalStackLayout>
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding History.Fee}" />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text=" " />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding History.Valute}" />
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+
+    </Grid>
+
 </ContentPage>
