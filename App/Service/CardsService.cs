@@ -3,51 +3,40 @@
 
 public class CardsService
 {
-	public string GetNewCardNumber(string cardSystem)
+	public async Task<string> GetNewCardNumber(string prefix)
 	{
 		string finalNumber;
-
+		bool isUnique;
 		do
 		{
-			finalNumber = string.Empty;
-			switch (cardSystem)
-			{
-				case "мир":
-					finalNumber += "2";
-					break;
-				case "visa":
-					finalNumber += "4";
-					break;
-				case "maestro":
-					finalNumber += "6";
-					break;
-				case "mastercard":
-					finalNumber += "5";
-					break;
-				default:
-					break;
-			}
+			finalNumber = string.Empty + prefix;
 			Random rnd = new();
 			finalNumber += RandomString(rnd, 15);
+			isUnique = await isUniqueNumber(finalNumber);			
 		}
-		while (!isUnique(finalNumber));
-
+		while (!isUnique);
 		return finalNumber;
-
 	}
 
-	private bool isUnique(string finalNumber)
+	private async Task<bool> isUniqueNumber(string sourceNumber)
 	{
-		//TODO
-		//Обращение на уникальность номера к БД
-		return true;
+		Card? foundCard = await ApiClient<Card?>.GetAsync(Routes.getCardOnNumber.Replace("{0}",sourceNumber));
+		if (foundCard == null) return true;
+		return false;
 	}
 
-	public static string RandomString(Random random, int length)
+	public string RandomString(Random random, int length)
 	{
 		const string chars = "0123456789";
 		return new string(Enumerable.Repeat(chars, length)
 			.Select(s => s[random.Next(s.Length)]).ToArray());
 	}
 
+	public string GetCvv(int length = 3)
+	{
+		Random rnd = new();
+		const string chars = "0123456789";
+		return new string(Enumerable.Repeat(chars, length)
+			.Select(s => s[rnd.Next(s.Length)]).ToArray());
+	}
 }

@@ -53,5 +53,7 @@ public partial class MainPage : ContentPage
 		await elem.ScaleTo(0.9, 50);
 		await elem.ScaleTo(1, 100);
 	}
+
+	
 }
 

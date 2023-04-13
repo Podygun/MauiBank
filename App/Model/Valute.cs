@@ -2,8 +2,9 @@
 
 public class Valute
 {
-	public string Code { get; set; }
-	public string Name { get; set; }
-	public string Nominal { get; set; }
-	public string Rate { get; set; }
+	public int id { get; set; }
+	public string code { get; set; }
+	public double measure { get; set; }
+	public double course { get; set; }
+
 }

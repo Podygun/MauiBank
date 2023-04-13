@@ -15,65 +15,65 @@ public partial class AuthViewModel : BaseViewModel
 	public AuthViewModel()
 	{
 		TextError = String.Empty;
-
-		//TODO
-		var navigationParameter = new Dictionary<string, object>
-		{
-			{ "UserId", 1 }
-		};
-		Shell.Current.GoToAsync("main", navigationParameter);
-		Login = "1";
-		Password = "1";
-		//TryEntry();
+		TryEntry();
 	}
 #nullable enable
 	[RelayCommand]
 	public async Task TryEntry()
 	{
-		
 		if (Busy) return;
-		Busy = true;
-		TextError = String.Empty;
-		Password = Password.Trim();
-		Login = Login.Trim();
 
-		int userId = -1;
-		if (!String.IsNullOrWhiteSpace(Login) || !String.IsNullOrWhiteSpace(Password))
+		//TODO убрать эти две строки
+		CacheService.SetValue("UserId", 1, TimeSpan.FromHours(24));
+		await Shell.Current.GoToAsync("main");
+
+		try
 		{
+			Busy = true;
+			TextError = String.Empty;
+			Password = Password?.Trim();
+			Login = Login?.Trim();
 
-			string uri = Routes.getUserIdUri
-				.Replace(@"{0}", Login)
-				.Replace(@"{1}", Password);
+			if (!String.IsNullOrWhiteSpace(Login) || !String.IsNullOrWhiteSpace(Password))
+			{
+				string uri = Routes.getUserIdUri
+					.Replace(@"{0}", Login)
+					.Replace(@"{1}", Password);
 
-			Id? _id = await ApiClient<Id>.GetAsync(uri);
-			
-			if(_id == null) {
-				TextError = "Что-то пошло не так";
+				Id? _id = await ApiClient<Id>.GetAsync(uri) ?? new Id { id = -1 };
+				
+				if (_id.id == -1)
+				{
+					TextError = "Проверьте введенные данные";
+					return;
+				}
+				CacheService.SetValue("UserId", _id.id, TimeSpan.FromHours(24));
+				await Shell.Current.GoToAsync("main");
+			}
+			else
+			{
+				TextError = "Заполните поля";
 				return;
 			}
-			userId = _id.id;
-
+			
+			
 		}
-		else
+		catch (Exception ex)
 		{
-			TextError = "Заполните поля";
+			Trace.WriteLine(ex.Message);
+			TextError = ex.Message;
+		}
+		finally
+		{
 			Busy = false;
-			return;
 		}
-		if (userId == -1) { TextError = "Проверьте введенные данные"; Busy = false; return; }
-
-		var navigationParameter = new Dictionary<string, object>
-		{
-			{ "UserId", userId }
-		};
-		Busy = false;
-		await Shell.Current.GoToAsync("main", navigationParameter);
+		
 	}
 
 	[RelayCommand]
-	public void OpenRegPage()
+	public async Task OpenRegPage()
 	{
 		TextError = String.Empty;
-		Shell.Current.GoToAsync("reg");
+		await Shell.Current.GoToAsync("reg");
 	}
 }

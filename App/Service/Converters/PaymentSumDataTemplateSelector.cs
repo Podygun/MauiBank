@@ -7,6 +7,6 @@ class PaymentSumDataTemplateSelector : DataTemplateSelector
 
 	protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
 	{
-		return ((HistoryD)item).Sum <= 0 ? NegativeTemplate : PositiveTemplate;
+		return ((ShortPayCheck)item).Sum <= 0 ? NegativeTemplate : PositiveTemplate;
 	}
 }

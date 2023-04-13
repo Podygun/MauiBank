@@ -52,10 +52,14 @@ public partial class RegViewModel : BaseViewModel
 		string uriNewClient = Routes.postUserAccountUri;
 
 		HttpResponseMessage? response = await ApiClient<object>.PostAsync(uriNewClient, acc);
-		if (response == null) TextError = "Что-то пошло не так";
+
+		if (response == null) { TextError = "Что-то пошло не так"; return; }
+		if (response.IsSuccessStatusCode)
+		{
+			await Shell.Current.GoToAsync("auth");
+		}
 
 
-		//await Shell.Current.GoToAsync("main");
 
 	}
 }

@@ -44,7 +44,18 @@ class CardController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+
+    }
+
+    public function getByNumber(Request $request)
+    {
+        $card = Card::where('number', $request->number)->get('id')->first();
+        return $card;
+//        if ($card) {
+//            return response()->json($card);
+//        } else {
+//            return response()->json(['error' => 'Card not found'], 404);
+//        }
     }
 
     public function destroy($id)

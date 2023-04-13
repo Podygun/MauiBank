@@ -3,8 +3,8 @@
 
 public static class Routes
 {
-	private const short isNgrok = 1;
-	private const string ngrokUri = @"https://0df3-136-169-210-76.eu.ngrok.io/api/";
+	private const short isNgrok = 0;
+	private const string ngrokUri = @"https://65d4-136-169-210-76.ngrok-free.app/api/";
 	
 	private const string port = "8000/api/";
 	private const string localhost = @"http://127.0.0.1:";
@@ -68,8 +68,8 @@ public static class Routes
 #elif ANDROID
 	public static string getValutesUri =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"userAccounts/get?login={0}&password={1}" :
-		ngrokUri + @"userAccounts/get?login={0}&password={1}";
+		emulatorhost + port + @"valutes/" :
+		ngrokUri + @"valutes/";
 #endif
 	#endregion
 
@@ -150,15 +150,28 @@ public static class Routes
 #endif
 	#endregion
 
-	#region PayChecks
+	#region ShortPayChecks
 #if WINDOWS
-	public static string payChecksOnBankAccIdUri =
-		localhost + port + @"payChecks/bankAcc?id=";
+	public static string getShortPayChecks =
+		localhost + port + @"payChecks/short?id=";
 #elif ANDROID
-	public static string payChecksOnBankAccIdUri =
+	public static string getShortPayChecks =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"payChecks/bankAcc?id=" :
-		ngrokUri + @"payChecks/bankAcc?id=";
+		emulatorhost + port + @"payChecks/short?id=" :
+		ngrokUri + @"payChecks/short?id=";
+
+#endif
+	#endregion
+
+	#region FullPayChecks
+#if WINDOWS
+	public static string getFullPayChecks =
+		localhost + port + @"payChecks/getAllFields?id=";
+#elif ANDROID
+	public static string getFullPayChecks =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"payChecks/getAllFields?id=" :
+		ngrokUri + @"payChecks/getAllFields?id=";
 
 #endif
 	#endregion
@@ -189,4 +202,39 @@ public static class Routes
 #endif
 	#endregion
 
+	#region GetCardOnNumber
+#if WINDOWS
+	public static string getCardOnNumber =
+		localhost + port + @"cards/getByNumber?number={0}";
+#elif ANDROID
+	public static string getCardOnNumber =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"cards/getByNumber?number={0}" :
+		ngrokUri + @"cards/getByNumber?number={0}";
+#endif
+	#endregion
+
+	#region GetCardTypes
+#if WINDOWS
+	public static string getCardTypes =
+		localhost + port + @"card_types/";
+#elif ANDROID
+	public static string getCardTypes =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"card_types/" :
+		ngrokUri + @"card_types/";
+#endif
+	#endregion
+
+	#region PostBankAccount
+#if WINDOWS
+	public static string postBankAccount =
+		localhost + port + @"bank_accounts/";
+#elif ANDROID
+	public static string postBankAccount =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"bank_accounts/" :
+		ngrokUri + @"bank_accounts/";
+#endif
+	#endregion
 }

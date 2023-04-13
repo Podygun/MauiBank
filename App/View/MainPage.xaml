@@ -223,7 +223,7 @@
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapAuth" />
+                    <TapGestureRecognizer Command="{Binding GoToAuthCommand}" Tapped="TapAuth" />
                 </Border.GestureRecognizers>
 
                 <VerticalStackLayout VerticalOptions="CenterAndExpand">
@@ -284,7 +284,7 @@
                 Style="{StaticResource MainPageBtn}">
 
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapNewCard" />
+                    <TapGestureRecognizer Command="{Binding GoToNewCardCommand}" Tapped="TapNewCard" />
                 </Border.GestureRecognizers>
                 <VerticalStackLayout VerticalOptions="CenterAndExpand">
                     <Border

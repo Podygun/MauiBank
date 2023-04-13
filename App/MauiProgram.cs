@@ -31,7 +31,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<MainPage>();
 		builder.Services.AddSingleton<RegPage>();
 		builder.Services.AddSingleton<AuthPage>();
-		builder.Services.AddSingleton<UserDataPage>();
+		//builder.Services.AddSingleton<UserDataPage>();
 		builder.Services.AddTransient<HistoryPage>();
 		builder.Services.AddTransient<CardDetailPage>();
 		builder.Services.AddTransient<ClientInfoPage>();
@@ -42,15 +42,17 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MyQRPage>();
 		builder.Services.AddTransient<ScanQRPage>();
 		builder.Services.AddTransient<HistoryDetailPage>();
+		builder.Services.AddTransient<OpenCardPage>();
 		
 		
 		builder.Services.AddSingleton<CardsService>();
+		builder.Services.AddSingleton<BankAccountService>();
 
 
 		builder.Services.AddTransient<MainViewModel>();
 		builder.Services.AddSingleton<RegViewModel>();
 		builder.Services.AddSingleton<AuthViewModel>();
-		builder.Services.AddSingleton<UserDataViewModel>();
+		//builder.Services.AddSingleton<UserDataViewModel>();
 		builder.Services.AddTransient<HistoryViewModel>();	
 		builder.Services.AddTransient<CardDetailViewModel>();
 		builder.Services.AddTransient<ClientInfoViewModel>();
@@ -61,6 +63,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<MyQRViewModel>();
 		builder.Services.AddTransient<ScanQRViewModel>();
 		builder.Services.AddTransient<HistoryDetailViewModel>();
+		builder.Services.AddTransient<OpenCardViewModel>();
 
 
 		return builder.Build();

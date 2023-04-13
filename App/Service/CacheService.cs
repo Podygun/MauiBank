@@ -1,5 +1,6 @@
-﻿
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
+
+
 namespace MauiBank.Service;
 
 public class CacheService
@@ -19,16 +20,24 @@ public class CacheService
 	//	}
 	//	return cacheEntry;
 	//}
+	public static object GetValue(string key) { return _cache.Get(key); }
+	
 
-	public static async Task <List<History>> GetOrCreateHistories(string key, Func<Task<List<History>>> getHistoriesFromDB)
+	public static void SetValue<T>(string key,  T value, TimeSpan lifeTime = default(TimeSpan))
 	{
-		if (!_cache.TryGetValue(key, out List<History> histories))
-		{
-			histories = await getHistoriesFromDB();
-			_cache.Set(key, histories, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)));
-		}
+		if (lifeTime == default(TimeSpan)) lifeTime = TimeSpan.FromHours(24);
+		
+		_cache.Set(key, value, new MemoryCacheEntryOptions().SetAbsoluteExpiration(lifeTime));
+	}
 
-		return histories;
+	public static T GetOrCreateCacheValue<T>(string key, TimeSpan lifeTime, T value)
+	{
+		if (!_cache.TryGetValue(key, out T _value))
+		{
+			_value = value;
+			_cache.Set(key, _value, new MemoryCacheEntryOptions().SetAbsoluteExpiration(lifeTime));
+		}
+		return _value;
 	}
 
 	public static async Task <T> GetOrCreateCacheValue<T>(string key, TimeSpan lifeTime, Func<Task<T>> getQuerryDB)
@@ -40,6 +49,27 @@ public class CacheService
 		}
 		return items;
 	}
+
+
+
+	public static async Task<ObservableCollection<Grouping<DateOnly, ShortPayCheck>>> GetOrCreateHistories(string key, TimeSpan lifeTime, Func<Task<List<ShortPayCheck>>> getQuerryDB)
+	{
+		if (!_cache.TryGetValue(key, out ObservableCollection<Grouping<DateOnly, ShortPayCheck>> finalList))
+		{
+			var DBData = await getQuerryDB();
+
+			var groups = DBData
+				.GroupBy(p => p.Time)
+				.Select(g => new Grouping<DateOnly, ShortPayCheck>(DateOnly.ParseExact(g.Key, "dd.MM.yyyy"), g))
+				.OrderByDescending(o => o.Time);
+			finalList = new ObservableCollection<Grouping<DateOnly, ShortPayCheck>>(groups);
+			_cache.Set(key, finalList, new MemoryCacheEntryOptions().SetAbsoluteExpiration(lifeTime));
+		}
+		return finalList;
+	}
+
+	
+
 
 
 

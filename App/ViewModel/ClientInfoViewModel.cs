@@ -6,7 +6,6 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 	[ObservableProperty]
 	UserData userData;
 
-	UserData oldUserData = new();
 
 	[ObservableProperty]
 	public bool isVisibleButton = false;
@@ -14,10 +13,13 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 
 	public ClientInfoViewModel()
     {
-
+		//UserData = 
 	}
 
-    public void ApplyQueryAttributes(IDictionary<string, object> query) => UserData = oldUserData = query["UserData"] as UserData;
+	public void ApplyQueryAttributes(IDictionary<string, object> query)
+	{
+		UserData = query["UserData"] as UserData;
+	}
 
 
 
@@ -50,6 +52,7 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 		}
 		catch (Exception ex)
 		{
+			await Shell.Current.DisplayAlert("Ошибка", "Что-то пошло не так", "OK");
 			Trace.WriteLine(ex.Message);
 		}
 		finally

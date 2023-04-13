@@ -45,7 +45,11 @@ Route::get('/organisations/getOrganisationsOnFavourId', [Controllers\api\Organis
 Route::get('/listRequisites/getOnOrganisationId', [Controllers\api\ListRequisitesController::class, 'getOnOrganisationId']);
 Route::get('/listRequisites/getOnFavour', [Controllers\api\ListRequisitesController::class, 'getOnFavour']);
 
-Route::get('/payChecks/bankAcc', [Controllers\api\PayCheckController::class, 'findByBankAccId']);
+Route::get('/payChecks/short', [Controllers\api\PayCheckController::class, 'short']);
+Route::get('/payChecks/getAllFields', [Controllers\api\PayCheckController::class, 'getAllFields']);
+
+
+Route::get('/cards/getByNumber', [Controllers\api\CardController::class, 'getByNumber']);
 
 Route::apiResources([
     'userdata' => api\UserDataController::class
@@ -57,6 +61,7 @@ Route::apiResources([
     , 'listRequisites'=>api\ListRequisitesController::class
     , 'payCheck'=>api\PayCheckController::class
     , 'organisations'=>api\OrganisationController::class
+    , 'card_types'=>api\CardTypesController::class
 ]);
 
 

@@ -7,4 +7,6 @@ public partial class RegPage : ContentPage
 		InitializeComponent();
 		BindingContext = vm;
 	}
+
+	
 }

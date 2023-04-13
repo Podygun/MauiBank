@@ -3,7 +3,7 @@
 namespace MauiBank.ViewModel;
 
 
-public partial class MainViewModel : BaseViewModel, IQueryAttributable
+public partial class MainViewModel : BaseViewModel
 {
 
 	[ObservableProperty]
@@ -27,7 +27,7 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 
 	public MainViewModel()
 	{
-
+		Load();
 	}
 
 	private void SetEmptyCard()
@@ -47,7 +47,11 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		{
 			Busy = true;
 			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", Preferences.Default.Get("UserId", -1).ToString()));
+			
 			userData = tempUserData[0];
+			CacheService.GetOrCreateCacheValue("UserData", TimeSpan.FromMinutes(60), userData);
+			CacheService.SetValue("ClientId", userData.id);
+			Trace.WriteLine("SUCCESS USERDATA");
 		}
 		catch (Exception ex)
 		{
@@ -74,10 +78,9 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 				tempCards[j].color = Colors[i];
 			}
 
-			foreach (var card in tempCards)
-			{
-				Cards.Add(card);
-			}
+			Cards = new ObservableCollection<Card> (tempCards);
+
+			Trace.WriteLine("SUCCESS CARDS");
 		}
 		catch (Exception ex)
 		{
@@ -89,47 +92,32 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 		}
 	}
 
-	public void ApplyQueryAttributes(IDictionary<string, object> query)
+	[RelayCommand]
+	public async Task Load()
 	{
-
 		if (Preferences.Default.Get("IsUpdateCards", 0) != 0)
 		{
 			if (Cards?.Count > 0)
 				Cards?.Clear();
-			FillCardsAsync();
+			await FillCardsAsync();
 			Preferences.Default.Remove("IsUpdateCards");
 			return;
-		} 
-			
-		
+		}
+
+
 		if (!flagFirstEntry) return;
 
-		try
-		{
-			Preferences.Default.Set("UserId", (int)query["UserId"]);
-		}
-		catch { }
+		Id? clientId = await ApiClient<Id?>.GetAsync(Routes.getClientOnUserIdUri.Replace(@"{0}", CacheService.GetValue("UserId").ToString()));
 
-		Load();
-
-	}
-
-	[RelayCommand]
-	public async Task Load()
-	{
-		bool isClientExists = await ApiClient<bool>.IsClientExist(Preferences.Default.Get("UserId", -1));
-
-		if (!isClientExists)
+		if (clientId == null)
 		{
 			SetEmptyCard();
 			Trace.WriteLine("setted empty card");
 			return;
 		}
 		await FillCardsAsync();
-		Trace.WriteLine("SUCCESS CARDS");
-
 		await GetUserData();
-		Trace.WriteLine("SUCCESS USERDATA");
+		
 
 		flagFirstEntry = false;
 		Preferences.Default.Set("bank_account_id", SelectedCard.bank_account_id);
@@ -151,6 +139,9 @@ public partial class MainViewModel : BaseViewModel, IQueryAttributable
 
 	[RelayCommand]
 	public async Task GoToOrganisation() => await Shell.Current.GoToAsync("orgtransfer");
+
+	[RelayCommand]
+	public async Task GoToNewCard() => await Shell.Current.GoToAsync(nameof(OpenCardPage));
 
 	[RelayCommand]
 	public async Task GoToPayment() =>
