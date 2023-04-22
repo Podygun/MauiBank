@@ -1,4 +1,6 @@
-﻿namespace MauiBank.View;
+﻿using Kotlin.Contracts;
+
+namespace MauiBank.View;
 
 
 public partial class MainPage : ContentPage
@@ -54,6 +56,9 @@ public partial class MainPage : ContentPage
 		await elem.ScaleTo(1, 100);
 	}
 
-	
+	protected override bool OnBackButtonPressed()
+	{
+		return true;
+	}
 }
 

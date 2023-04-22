@@ -16,13 +16,15 @@ public partial class AuthViewModel : BaseViewModel
 	{
 		TextError = String.Empty;
 		TryEntry();
+		
 	}
-#nullable enable
+
 	[RelayCommand]
 	public async Task TryEntry()
 	{
 		if (Busy) return;
 
+		
 		//TODO убрать эти две строки
 		CacheService.SetValue("UserId", 1, TimeSpan.FromHours(24));
 		await Shell.Current.GoToAsync("main");

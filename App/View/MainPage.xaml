@@ -49,7 +49,7 @@
                 x:Name="cardsCarousel"
                 CurrentItem="{Binding SelectedCard}"
                 HorizontalScrollBarVisibility="Always"
-                IsSwipeEnabled="True"
+                IsSwipeEnabled="{Binding IsScrollable}"
                 ItemsSource="{Binding Cards, Mode=TwoWay}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="model:Card">

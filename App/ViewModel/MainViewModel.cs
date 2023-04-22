@@ -1,13 +1,17 @@
 ﻿using Microsoft.Maui.Storage;
+using System.Collections.Specialized;
 
 namespace MauiBank.ViewModel;
 
 
 public partial class MainViewModel : BaseViewModel
 {
+	[ObservableProperty]
+	bool isScrollable = true;
 
 	[ObservableProperty]
 	ObservableCollection<Card> cards = new();
+	
 
 	private UserData userData { get; set; }
 
@@ -28,13 +32,18 @@ public partial class MainViewModel : BaseViewModel
 	public MainViewModel()
 	{
 		Load();
+		if (Cards.Count == 1) IsScrollable = false;
+		else IsScrollable = true;
 	}
+
 
 	private void SetEmptyCard()
 	{
 		Card emptyCard = new()
 		{
-			type_name = "Открыть карту"
+			number="",
+			type_name = "Открыть карту",
+			date_end = DateOnly.FromDateTime(DateTime.Now),
 		};
 		Cards.Clear();
 		Cards.Add(emptyCard);
@@ -63,6 +72,7 @@ public partial class MainViewModel : BaseViewModel
 		}
 	}
 
+	[RelayCommand]
 	private async Task FillCardsAsync()
 	{
 		if (Busy) return;
@@ -70,17 +80,16 @@ public partial class MainViewModel : BaseViewModel
 		{
 			Busy = true;
 			
-			var tempCards = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId + Preferences.Default.Get("UserId",-1));
+			var tempCards = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId + CacheService.GetValue("UserId"));
 
 			for (int i = 0, j = 0; j < tempCards.Count; i++, j++)
 			{
 				if (i == Colors.Length) i = 0;
 				tempCards[j].color = Colors[i];
 			}
+			Cards = new ObservableCollection<Card>(tempCards);
 
-			Cards = new ObservableCollection<Card> (tempCards);
-
-			Trace.WriteLine("SUCCESS CARDS");
+            Trace.WriteLine("SUCCESS CARDS");
 		}
 		catch (Exception ex)
 		{
@@ -107,7 +116,8 @@ public partial class MainViewModel : BaseViewModel
 
 		if (!flagFirstEntry) return;
 
-		Id? clientId = await ApiClient<Id?>.GetAsync(Routes.getClientOnUserIdUri.Replace(@"{0}", CacheService.GetValue("UserId").ToString()));
+		string idd = CacheService.GetValue("UserId").ToString();
+		Id? clientId = await ApiClient<Id?>.GetAsync(Routes.getClientOnUserIdUri.Replace(@"{0}", idd));
 
 		if (clientId == null)
 		{
@@ -120,7 +130,7 @@ public partial class MainViewModel : BaseViewModel
 		
 
 		flagFirstEntry = false;
-		Preferences.Default.Set("bank_account_id", SelectedCard.bank_account_id);
+		CacheService.SetValue("bank_account_id", SelectedCard.bank_account_id);
 	}
 
 	[RelayCommand]
@@ -152,18 +162,25 @@ public partial class MainViewModel : BaseViewModel
 		});
 
 	[RelayCommand]
-	public async Task GoToCardDetail() => await Shell.Current.GoToAsync("carddetail", true,
+	public async Task GoToCardDetail()
+	{
+		if(SelectedCard.number == "")
+		{
+			await Shell.Current.GoToAsync(nameof(OpenCardPage));
+		}
+
+		await Shell.Current.GoToAsync("carddetail", true,
 		new Dictionary<string, object>
 			{
 				{ "Card", SelectedCard }
 			});
+	}
 
 	[RelayCommand]
-	public async Task GoToQR() => await Shell.Current.GoToAsync("QR", true, new Dictionary<string, object>
-	{
-		{"UserName", userData.first_name + " " + userData.last_name },
-		{"CardNumber", SelectedCard.number }
-	});
+	public async Task GoToQR() {
+		CacheService.SetValue("CardNumber", SelectedCard.number);
+		await Shell.Current.GoToAsync("QR", true);
+	}
 	
 
 	readonly static string[] Colors = new string[]
@@ -174,6 +191,5 @@ public partial class MainViewModel : BaseViewModel
 	};
 
 
-	
 
 }

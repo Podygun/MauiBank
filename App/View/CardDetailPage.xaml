@@ -8,8 +8,7 @@
     xmlns:view="clr-namespace:MauiBank.View"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     Title="Подробно"
-    x:DataType="vm:CardDetailViewModel"
-    Loaded="CardDetailPage_Loaded">
+    x:DataType="vm:CardDetailViewModel">
     <ContentPage.Resources>
         <converters:StringToColor x:Key="StringToColor" />
     </ContentPage.Resources>
@@ -21,7 +20,7 @@
             FontSize="20"
             HorizontalOptions="Start"
             HorizontalTextAlignment="Start"
-            Style="{StaticResource BaseWhiteLbl}"
+            Style="{StaticResource BaseDarkLbl}"
             Text="Чтобы скопировать" />
         <Label
             Margin="20,0,0,30"
@@ -29,7 +28,7 @@
             FontSize="20"
             HorizontalOptions="Start"
             HorizontalTextAlignment="Start"
-            Style="{StaticResource BaseWhiteLbl}"
+            Style="{StaticResource BaseDarkLbl}"
             Text="нажмите на нужное поле" />
         <Frame
             x:Name="cardFrame"
@@ -39,31 +38,31 @@
             CornerRadius="15"
             HeightRequest="200">
             <Grid RowDefinitions="*,*,*">
-                <HorizontalStackLayout Spacing="30">
-                    <Image
-                        HeightRequest="40"
-                        HorizontalOptions="Start"
-                        Source="sim.png"
-                        WidthRequest="40" />
+                <Image
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    Source="sim.png"
+                    WidthRequest="40" />
+                <HorizontalStackLayout HorizontalOptions="End" Spacing="30">
+
 
                     <Border
                         Margin="10,0,0,0"
                         Padding="10"
                         BackgroundColor="Transparent"
                         Stroke="{StaticResource Primary}"
-                        StrokeShape="RoundRectangle 0,20,20,0"
+                        StrokeShape="RoundRectangle 10"
                         StrokeThickness="2">
                         <Label
                             x:Name="LblNumber"
                             FontFamily="SemiBold"
                             FontSize="22"
-                            HorizontalTextAlignment="Center"
                             Style="{StaticResource BaseEntry}"
                             Text="{Binding CurrentCard.number}"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CopyNumber" />
+                                <TapGestureRecognizer Command="{Binding CopyNumberCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Border>
@@ -93,7 +92,7 @@
                         BackgroundColor="Transparent"
                         HeightRequest="40"
                         Stroke="{StaticResource Primary}"
-                        StrokeShape="RoundRectangle 0,15,15,0"
+                        StrokeShape="RoundRectangle 10"
                         StrokeThickness="2">
                         <Label
                             x:Name="LblCvv"
@@ -104,7 +103,7 @@
                             Style="{StaticResource BaseWhiteLbl}"
                             Text="{Binding CurrentCard.cvv}">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CopyCvv" />
+                                <TapGestureRecognizer Command="{Binding CopyCvvCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Border>
@@ -116,9 +115,11 @@
 
                 <HorizontalStackLayout Grid.Row="2">
                     <Label
-                        Margin="5,0,0,0"
-                        FontFamily="Light"
-                        FontSize="16"
+                        Margin="5,0,10,0"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="До" />
+                    <Label
+                        FontSize="20"
                         HorizontalTextAlignment="Start"
                         Style="{StaticResource BaseWhiteLbl}"
                         Text="{Binding CurrentCard.date_end}" />
@@ -130,39 +131,35 @@
         <Border
             Margin="20"
             BackgroundColor="{StaticResource Violet100Accent}"
-            StrokeShape="RoundRectangle 0,40,40,0"
+            StrokeShape="RoundRectangle 20"
             StrokeThickness="0">
             <VerticalStackLayout>
                 <Label
                     Margin="20,20,0,0"
                     FontFamily="Regular"
-                    FontSize="16"
+                    FontSize="18"
                     HorizontalOptions="Start"
                     HorizontalTextAlignment="Start"
                     Style="{StaticResource BaseWhiteLbl}"
                     Text="Владелец:" />
-                <Border
-                    Margin="20"
-                    BackgroundColor="Transparent"
-                    StrokeShape="RoundRectangle 0,35,35,0"
-                    StrokeThickness="2">
-                    <VerticalStackLayout>
-                        <Label
-                            x:Name="LblName"
-                            Margin="20"
-                            FontFamily="Bold"
-                            FontSize="24"
-                            HorizontalOptions="Start"
-                            HorizontalTextAlignment="Start"
-                            Style="{StaticResource BaseWhiteLbl}"
-                            Text="ВЛАДИСЛАВ ПОДЫГАНОВ">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CopyName" />
-                            </Label.GestureRecognizers>
-                        </Label>
 
-                    </VerticalStackLayout>
-                </Border>
+                <VerticalStackLayout>
+                    <Label
+                        x:Name="LblName"
+                        Margin="20,0,20,20"
+                        FontFamily="Bold"
+                        FontSize="22"
+                        HorizontalOptions="Start"
+                        HorizontalTextAlignment="Start"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="{Binding Name}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CopyNameCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </VerticalStackLayout>
+
 
             </VerticalStackLayout>
 
