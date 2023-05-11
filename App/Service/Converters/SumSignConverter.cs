@@ -12,7 +12,7 @@ namespace MauiBank.Service.Converters;
 			return "+" + str;
 		}
 
-		return "-" + str;
+		return str;
 	}
 
 	public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

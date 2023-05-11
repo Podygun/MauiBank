@@ -1,6 +1,6 @@
 ﻿namespace MauiBank.ViewModel;
 
-public partial class MyQRViewModel : BaseViewModel, IQueryAttributable
+public partial class MyQRViewModel : BaseViewModel
 {
 
     [ObservableProperty]
@@ -15,15 +15,12 @@ public partial class MyQRViewModel : BaseViewModel, IQueryAttributable
 
 	public MyQRViewModel()
     {
-		
-    }
+		UserData data = CacheService.GetValue("UserData") as UserData;
+		OwnerName = data.first_name + " " + data.last_name;
+		string cardNumber = CacheService.GetValue("CardNumber") as string;
 
-	public void ApplyQueryAttributes(IDictionary<string, object> query)
-	{
-		OwnerName = query["UserName"] as string;
-		string cardNumber = query["CardNumber"] as string;
-		//BarcodeValue = cardNumber;
-		BarcodeValue = "5712067348295671";
+		BarcodeValue = cardNumber;
 		QrcodeValue = "card:" + cardNumber;
 	}
+
 }

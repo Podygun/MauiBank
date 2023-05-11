@@ -1,4 +1,7 @@
-﻿namespace MauiBank.ViewModel;
+﻿using Plugin.Fingerprint.Abstractions;
+using Plugin.Fingerprint;
+
+namespace MauiBank.ViewModel;
 
 
 public partial class AuthViewModel : BaseViewModel
@@ -16,7 +19,9 @@ public partial class AuthViewModel : BaseViewModel
 	{
 		TextError = String.Empty;
 		TryEntry();
-		
+		//ScanFinger();
+
+
 	}
 
 	[RelayCommand]
@@ -24,11 +29,16 @@ public partial class AuthViewModel : BaseViewModel
 	{
 		if (Busy) return;
 
+		if(CacheService.GetValue("UserId") != null)
+		{
+			await ScanFinger();
+			return;
+		}
 		
 		//TODO убрать эти две строки
-		CacheService.SetValue("UserId", 1, TimeSpan.FromHours(24));
+		CacheService.SetValue("UserId", 1, TimeSpan.FromHours(1));
 		await Shell.Current.GoToAsync("main");
-
+		
 		try
 		{
 			Busy = true;
@@ -77,5 +87,33 @@ public partial class AuthViewModel : BaseViewModel
 	{
 		TextError = String.Empty;
 		await Shell.Current.GoToAsync("reg");
+	}
+
+	[RelayCommand]
+	public async Task ScanFinger()
+	{
+
+		var availability = await CrossFingerprint.Current.IsAvailableAsync();
+
+		if (!availability)
+		{
+			await Shell.Current.DisplayAlert("", "false IsAvailableAsync", "OK");
+			return;
+		}
+
+		var request = new AuthenticationRequestConfiguration("Prove you have fingers!", "Because without it you can't have access");
+		var result = await CrossFingerprint.Current.AuthenticateAsync(request);
+
+		if (CrossFingerprint.Current.GetAvailabilityAsync() == null) await Shell.Current.DisplayAlert("", "null GetAvailabilityAsync", "OK");
+
+		if (result.Authenticated)
+		{
+			await Shell.Current.GoToAsync("main");
+		}
+		else
+		{
+			await Shell.Current.DisplayAlert("Ошибка", "Неверный отпечаток", "OK");
+		}
+
 	}
 }

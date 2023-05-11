@@ -12,6 +12,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseBarcodeReader()
+			
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("Inter-Thin.ttf", "Thin");

@@ -38,11 +38,16 @@ class PayCheckController extends Controller
         return DB::table('pay_checks as pc')
             ->select(
                 DB::raw("DATE_FORMAT(pc.updated_at, '%d.%m.%Y') as Time")
-                , 'pc.id as Id'
-                , 'pc.sum as Sum'
-                , 'pc.requisite_value as Requisite_value'
-                , 'v.code as Valute'
-                , 'f.name as Favour'
+                , 'pc.id as id'
+                , 'pc.sum as sum'
+                , 'pc.fee as fee'
+                , 'pc.requisite_value as requisite_value'
+                , 'f.name as favour'
+//                , 'f.favour_id as favour_id'
+                , 'pc.bank_account_id as bank_account_id'
+                , 'pc.to_bank_account_id as to_bank_account_id'
+                , 'pc.created_at as created_at'
+                , 'v.code as valute'
             )
             ->join('bank_accounts as bacc', 'pc.bank_account_id', '=', 'bacc.id' )
             ->join('valutes as v', 'bacc.valute_id', '=', 'v.id' )

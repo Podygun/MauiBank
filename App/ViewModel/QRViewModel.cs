@@ -12,6 +12,6 @@ public partial class QRViewModel : BaseViewModel
 	public async Task GoToMyQrCode() => await Shell.Current.GoToAsync("myQR", true);
 
 	[RelayCommand]
-	public async Task GoToScanQrCode() => await Shell.Current.GoToAsync("scanQR");
+	public async Task GoToScanQrCode() => await Shell.Current.GoToAsync("scanQR", true);
 
 }

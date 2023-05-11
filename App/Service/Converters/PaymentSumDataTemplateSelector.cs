@@ -1,4 +1,6 @@
-﻿namespace MauiBank.Service.Converters;
+﻿using MauiBank.Model;
+
+namespace MauiBank.Service.Converters;
 
 class PaymentSumDataTemplateSelector : DataTemplateSelector
 {
@@ -7,6 +9,6 @@ class PaymentSumDataTemplateSelector : DataTemplateSelector
 
 	protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
 	{
-		return ((ShortPayCheck)item).Sum <= 0 ? NegativeTemplate : PositiveTemplate;
+		return ((PayCheck)item).sum <= 0 ? NegativeTemplate : PositiveTemplate;
 	}
 }

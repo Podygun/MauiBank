@@ -63,7 +63,8 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 				sum = Sum,
 				fee = Fee,
 				requisite_value = RequisiteValue,
-				favour_id = Preferences.Default.Get("favour_id", 0)
+				favour_id = Preferences.Default.Get("favour_id", 0),
+				to_bank_account_id = null
 			};
 			Preferences.Clear("favour_id");
 
@@ -72,7 +73,7 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 			if (result.IsSuccessStatusCode)
 			{
 				await Shell.Current.DisplayAlert("Успешно", $"Оплата {OrganisationName} выполнена", "OK");
-				Preferences.Default.Set("IsUpdateCards", 1);
+				CacheService.SetValue("IsUpdateCards", "1");
 				await Shell.Current.GoToAsync("main", true);
 
 			}

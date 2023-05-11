@@ -5,7 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\ListRequisites;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class ListRequisitesController extends Controller
 {
@@ -28,6 +28,7 @@ class ListRequisitesController extends Controller
     }
 
     public function getOnFavour(request $request)
+
     {
 
         return DB::table('list_requisites')

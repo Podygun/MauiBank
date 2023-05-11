@@ -104,12 +104,12 @@ public partial class MainViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task Load()
 	{
-		if (Preferences.Default.Get("IsUpdateCards", 0) != 0)
+		if (CacheService.GetValue("IsUpdateCards") as string == "1")
 		{
 			if (Cards?.Count > 0)
 				Cards?.Clear();
 			await FillCardsAsync();
-			Preferences.Default.Remove("IsUpdateCards");
+			CacheService.SetValue("IsUpdateCards", "0");
 			return;
 		}
 

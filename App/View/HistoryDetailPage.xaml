@@ -27,7 +27,7 @@
                         FontFamily="Bold"
                         FontSize="30"
                         Style="{StaticResource BaseDarkLbl}"
-                        Text="{Binding PayCheck.Favour}" />
+                        Text="{Binding ThisPayCheck.Favour}" />
                 </VerticalStackLayout>
 
             </Border>
@@ -69,22 +69,22 @@
                         Style="{StaticResource LightLeftLabel}"
                         Text="Время операции" />
 
-                    <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding PayCheck.Time}" />
+                    <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding ThisPayCheck.Time}" />
 
                     <Label
                         Margin="0,20,0,0"
                         Style="{StaticResource LightLeftLabel}"
                         Text="Реквизит" />
-                    <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding PayCheck.Requisite_value}" />
+                    <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding ThisPayCheck.Requisite_value}" />
 
                     <Label
                         Margin="0,20,0,0"
                         Style="{StaticResource LightLeftLabel}"
                         Text="Сумма" />
                     <HorizontalStackLayout>
-                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding PayCheck.Sum}" />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding ThisPayCheck.Sum}" />
                         <Label Style="{StaticResource DarkBoldLabel}" Text=" " />
-                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding PayCheck.Valute}" />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding ThisPayCheck.Valute}" />
                     </HorizontalStackLayout>
 
 
@@ -93,9 +93,9 @@
                         Style="{StaticResource LightLeftLabel}"
                         Text="Комиссия" />
                     <HorizontalStackLayout>
-                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding PayCheck.Fee}" />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding ThisPayCheck.Fee}" />
                         <Label Style="{StaticResource DarkBoldLabel}" Text=" " />
-                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding PayCheck.Valute}" />
+                        <Label Style="{StaticResource DarkBoldLabel}" Text="{Binding ThisPayCheck.Valute}" />
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>

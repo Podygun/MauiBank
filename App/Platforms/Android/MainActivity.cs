@@ -3,6 +3,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Widget;
+using Plugin.Fingerprint;
 
 namespace MauiBank;
 
@@ -26,6 +27,8 @@ public class MainActivity : MauiAppCompatActivity
 	{
 		base.OnCreate(savedInstanceState);
 
+		CrossFingerprint.SetCurrentActivityResolver(() =>
+		Platform.CurrentActivity);
 		Intent intent = this.Intent;
 		var action = intent.Action;
 		var strLink = intent.DataString;

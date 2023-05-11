@@ -4,7 +4,7 @@
 public static class Routes
 {
 	private const short isNgrok = 0;
-	private const string ngrokUri = @"https://de9b-136-169-210-76.ngrok-free.app/api/";
+	private const string ngrokUri = @"https://fea8-136-169-210-76.ngrok-free.app";
 	
 	private const string port = "8000/api/";
 	private const string localhost = @"http://127.0.0.1:";

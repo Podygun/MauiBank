@@ -97,7 +97,7 @@
                         FontFamily="Medium"
                         FontSize="16"
                         HorizontalOptions="EndAndExpand"
-                        Text="Зарегистрироваться"
+                        Text="Сканировать"
                         TextColor="{StaticResource Tertiary}" />
                 </VerticalStackLayout>
             </Grid>

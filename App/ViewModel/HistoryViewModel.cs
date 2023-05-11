@@ -1,9 +1,11 @@
-﻿namespace MauiBank.ViewModel;
+﻿using MauiBank.Model;
+
+namespace MauiBank.ViewModel;
 
 public partial class HistoryViewModel : BaseViewModel
 {
 	[ObservableProperty]
-	ObservableCollection<Grouping<DateOnly, ShortPayCheck>> histories = new();
+	ObservableCollection<Grouping<DateOnly, PayCheck>> histories = new();
 
 
 	public HistoryViewModel()
@@ -26,11 +28,19 @@ public partial class HistoryViewModel : BaseViewModel
 
 			Histories = await CacheService.GetOrCreateHistories(bank_account_id + "-histories", TimeSpan.FromSeconds(1),async () =>
 			{
-				var temp = await ApiClient<List<ShortPayCheck>>.GetAsync(Routes.getShortPayChecks + bank_account_id);
-				return temp;
+				var temp = await ApiClient<List<PayCheck>>.GetAsync(Routes.getShortPayChecks + bank_account_id);
+                foreach (var item in temp)
+                {
+					if (item.bank_account_id == bank_account_id) item.sum *= -1;
+                }
+                return temp;
 			});
-		
-		}
+            foreach (var hist in Histories)
+            {
+                
+            }
+
+        }
 		catch (Exception ex)
 		{
 			Trace.WriteLine(ex.Message);
@@ -44,8 +54,9 @@ public partial class HistoryViewModel : BaseViewModel
 
 
 	[RelayCommand]
-	public async Task GoToHistoryDetail(ShortPayCheck selectedPayCheck)
+	public async Task GoToHistoryDetail(PayCheck selectedPayCheck)
 	{
+		if (Busy) return;
 		if (Busy) return;
 		if (selectedPayCheck is null) return;	
 		try
@@ -53,7 +64,7 @@ public partial class HistoryViewModel : BaseViewModel
 			Busy = true;
 			await Shell.Current.GoToAsync("historydetail", true, new Dictionary<string, object>
 			{
-				{"selectedHistoryId", selectedPayCheck.Id }
+				{"selectedHistoryId", selectedPayCheck.id }
 			});
 		}
 		catch (Exception ex)

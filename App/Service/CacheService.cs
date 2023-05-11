@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using MauiBank.Model;
+using Microsoft.Extensions.Caching.Memory;
 
 
 namespace MauiBank.Service;
@@ -52,17 +53,17 @@ public class CacheService
 
 
 
-	public static async Task<ObservableCollection<Grouping<DateOnly, ShortPayCheck>>> GetOrCreateHistories(string key, TimeSpan lifeTime, Func<Task<List<ShortPayCheck>>> getQuerryDB)
+	public static async Task<ObservableCollection<Grouping<DateOnly, PayCheck>>> GetOrCreateHistories(string key, TimeSpan lifeTime, Func<Task<List<PayCheck>>> getQuerryDB)
 	{
-		if (!_cache.TryGetValue(key, out ObservableCollection<Grouping<DateOnly, ShortPayCheck>> finalList))
+		if (!_cache.TryGetValue(key, out ObservableCollection<Grouping<DateOnly, PayCheck>> finalList))
 		{
 			var DBData = await getQuerryDB();
 
 			var groups = DBData
 				.GroupBy(p => p.Time)
-				.Select(g => new Grouping<DateOnly, ShortPayCheck>(DateOnly.ParseExact(g.Key, "dd.MM.yyyy"), g))
+				.Select(g => new Grouping<DateOnly, PayCheck>(DateOnly.ParseExact(g.Key, "dd.MM.yyyy"), g))
 				.OrderByDescending(o => o.Time);
-			finalList = new ObservableCollection<Grouping<DateOnly, ShortPayCheck>>(groups);
+			finalList = new ObservableCollection<Grouping<DateOnly, PayCheck>>(groups);
 			_cache.Set(key, finalList, new MemoryCacheEntryOptions().SetAbsoluteExpiration(lifeTime));
 		}
 		return finalList;
