@@ -29,14 +29,26 @@
         </Grid.RowDefinitions>
 
 
-        <Label
-            x:Name="lbl"
-            Margin="40,0,0,0"
-            FontFamily="Bold"
-            FontSize="20"
-            HorizontalOptions="Start"
-            Style="{StaticResource BaseDarkLbl}"
-            Text="Главная" />
+        <FlexLayout
+            Margin="30,10,30,0"
+            HorizontalOptions="Fill"
+            JustifyContent="SpaceBetween">
+            <Label
+                x:Name="lbl"
+                FontFamily="Bold"
+                FontSize="20"
+                HorizontalOptions="Start"
+                Style="{StaticResource BaseDarkLbl}"
+                Text="Главная" />
+            <Button
+                BackgroundColor="Transparent"
+                Command="{Binding ShowAllCardsCommand}"
+                FontSize="20"
+                Text="Карты"
+                WidthRequest="100" />
+
+        </FlexLayout>
+
 
         <!--  Card block  -->
         <Grid

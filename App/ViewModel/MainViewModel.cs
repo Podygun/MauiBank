@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Storage;
 using System.Collections.Specialized;
+using System.Runtime.InteropServices;
 
 namespace MauiBank.ViewModel;
 
@@ -181,7 +182,17 @@ public partial class MainViewModel : BaseViewModel
 		CacheService.SetValue("CardNumber", SelectedCard.number);
 		await Shell.Current.GoToAsync("QR", true);
 	}
-	
+
+	[RelayCommand]
+	public async Task ShowAllCards()
+	{
+		//CacheService.SetValue("CardNumber", SelectedCard.number);
+		await Shell.Current.GoToAsync("allcards", true, new Dictionary<string, object>
+		{
+			{"Cards", Cards }
+		});
+	}
+
 
 	readonly static string[] Colors = new string[]
 	{

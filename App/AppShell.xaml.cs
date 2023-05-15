@@ -18,6 +18,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("scanQR", typeof(ScanQRPage));
 		Routing.RegisterRoute("orgtransfer", typeof(OrganisationTransferPage));
 		Routing.RegisterRoute("historydetail", typeof(HistoryDetailPage));
+		Routing.RegisterRoute("allcards", typeof(AllCardsPage));
 		Routing.RegisterRoute(nameof(OpenCardPage), typeof(OpenCardPage));
 
 

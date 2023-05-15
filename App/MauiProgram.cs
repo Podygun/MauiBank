@@ -30,6 +30,7 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<AllCardsPage>();
 		builder.Services.AddSingleton<RegPage>();
 		builder.Services.AddSingleton<AuthPage>();
 		//builder.Services.AddSingleton<UserDataPage>();
@@ -51,6 +52,7 @@ public static class MauiProgram
 
 
 		builder.Services.AddTransient<MainViewModel>();
+		builder.Services.AddTransient<AllCardsViewModel>();
 		builder.Services.AddSingleton<RegViewModel>();
 		builder.Services.AddSingleton<AuthViewModel>();
 		//builder.Services.AddSingleton<UserDataViewModel>();

@@ -48,7 +48,6 @@ public class ApiClient<T>
 
 	public static async Task<T?> GetAsync(string uri)
 	{
-
 		var task = _client.GetAsync(uri);
 		HttpResponseMessage? result = await task.WaitAsync(timeOut);
 		if (result.IsSuccessStatusCode)
@@ -63,7 +62,6 @@ public class ApiClient<T>
 		{
 			throw new Exception("Ошибка подключения к серверу");
 		}
-
 	}
 
 }
