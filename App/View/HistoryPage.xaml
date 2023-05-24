@@ -176,7 +176,7 @@
                 SelectionMode="None"
                 VerticalScrollBarVisibility="Always">
                 <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate x:DataType="model:ShortPayCheck">
+                    <DataTemplate x:DataType="model:PayCheck">
                         <Label
                             Margin="40,20,0,0"
                             BackgroundColor="Transparent"

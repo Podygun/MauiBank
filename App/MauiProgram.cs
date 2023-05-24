@@ -31,9 +31,8 @@ public static class MauiProgram
 #endif
 		builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<AllCardsPage>();
-		builder.Services.AddSingleton<RegPage>();
-		builder.Services.AddSingleton<AuthPage>();
-		//builder.Services.AddSingleton<UserDataPage>();
+		builder.Services.AddTransient<RegPage>();
+		builder.Services.AddTransient<AuthPage>();
 		builder.Services.AddTransient<HistoryPage>();
 		builder.Services.AddTransient<CardDetailPage>();
 		builder.Services.AddTransient<ClientInfoPage>();
@@ -53,9 +52,8 @@ public static class MauiProgram
 
 		builder.Services.AddTransient<MainViewModel>();
 		builder.Services.AddTransient<AllCardsViewModel>();
-		builder.Services.AddSingleton<RegViewModel>();
-		builder.Services.AddSingleton<AuthViewModel>();
-		//builder.Services.AddSingleton<UserDataViewModel>();
+		builder.Services.AddTransient<RegViewModel>();
+		builder.Services.AddTransient<AuthViewModel>();
 		builder.Services.AddTransient<HistoryViewModel>();	
 		builder.Services.AddTransient<CardDetailViewModel>();
 		builder.Services.AddTransient<ClientInfoViewModel>();

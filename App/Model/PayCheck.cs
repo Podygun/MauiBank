@@ -4,7 +4,6 @@ public class PayCheck
 {
 	public string? Time { get; set; }
 	public int id { get; set; }
-	public string? created_at { get; set; }
 	public double sum { get; set; }
 	public double fee { get; set; }
 	public int bank_account_id { get; set; }
@@ -34,13 +33,14 @@ public class PayCheckFromDB
 	public string Favour { get; set; }
 }
 
-public class ShortPayCheck
+public class PostPayCheck
 {
-	public string Time { get; set; }
-	public string Requisite_value { get; set; }
-	public int Id { get; set; }
-	public double Sum { get; set; }
-	public string Valute { get; set; }
-	public string Favour { get; set; }
-
+	public int id { get; set; }
+	public double sum { get; set; }
+	public double fee { get; set; }
+	public string requisite_value { get; set; }
+	public int bank_account_id { get; set; }
+	public int? to_bank_account_id { get; set; }
+	public int favour_id { get; set; }
 }
+

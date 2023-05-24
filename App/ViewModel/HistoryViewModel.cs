@@ -24,7 +24,7 @@ public partial class HistoryViewModel : BaseViewModel
 		try
 		{
 			Busy = true;
-			int bank_account_id = Preferences.Default.Get("bank_account_id", -1);
+			int bank_account_id = (int)CacheService.GetValue("bank_account_id");
 
 			Histories = await CacheService.GetOrCreateHistories(bank_account_id + "-histories", TimeSpan.FromSeconds(1),async () =>
 			{
@@ -32,13 +32,12 @@ public partial class HistoryViewModel : BaseViewModel
                 foreach (var item in temp)
                 {
 					if (item.bank_account_id == bank_account_id) item.sum *= -1;
-                }
+					
+				}
                 return temp;
 			});
-            foreach (var hist in Histories)
-            {
-                
-            }
+
+			
 
         }
 		catch (Exception ex)

@@ -7,8 +7,6 @@ namespace MauiBank.ViewModel;
 
 public partial class MainViewModel : BaseViewModel
 {
-	[ObservableProperty]
-	bool isScrollable = true;
 
 	[ObservableProperty]
 	ObservableCollection<Card> cards = new();
@@ -16,27 +14,36 @@ public partial class MainViewModel : BaseViewModel
 
 	private UserData userData { get; set; }
 
-	
-	private Card selectedCard;
-	public Card SelectedCard
-	{
-		get => selectedCard;
-		set
-		{
-			SetProperty(ref selectedCard, value);
-			Preferences.Default.Set("bank_account_id", SelectedCard.bank_account_id);
-		}
-	}
+	[ObservableProperty]
+	bool cardsBtnEnable = true;
 
-	private bool flagFirstEntry = true;
+	[ObservableProperty]
+	Card selectedCard;
 
 	public MainViewModel()
 	{
-		Load();
-		if (Cards.Count == 1) IsScrollable = false;
-		else IsScrollable = true;
+		try
+		{
+			string? prevPage = CacheService.GetValue("PrevPage") as string;
+			if (prevPage == "allcards")
+			{
+				Card? chosenCard = CacheService.GetValue("SelectedCard") as Card;
+				SelectedCard ??= chosenCard;
+				CacheService.SetValue("bank_account_id", SelectedCard.bank_account_id);
+				Cards = CacheService.GetValue("Cards") as ObservableCollection<Card>;
+				userData = CacheService.GetValue("UserData") as UserData;
+			}
+			else
+			{
+				Load();				
+			}
+		}
+		catch
+		{
+			
+		}
+		
 	}
-
 
 	private void SetEmptyCard()
 	{
@@ -46,8 +53,8 @@ public partial class MainViewModel : BaseViewModel
 			type_name = "Открыть карту",
 			date_end = DateOnly.FromDateTime(DateTime.Now),
 		};
-		Cards.Clear();
-		Cards.Add(emptyCard);
+		SelectedCard = emptyCard;
+		CardsBtnEnable = false;
 	}
 
 	private async Task GetUserData()
@@ -56,8 +63,7 @@ public partial class MainViewModel : BaseViewModel
 		try
 		{
 			Busy = true;
-			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", Preferences.Default.Get("UserId", -1).ToString()));
-			
+			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", CacheService.GetValue("UserId").ToString()));			
 			userData = tempUserData[0];
 			CacheService.GetOrCreateCacheValue("UserData", TimeSpan.FromMinutes(60), userData);
 			CacheService.SetValue("ClientId", userData.id);
@@ -79,17 +85,10 @@ public partial class MainViewModel : BaseViewModel
 		if (Busy) return;
 		try
 		{
-			Busy = true;
-			
+			Busy = true;			
 			var tempCards = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId + CacheService.GetValue("UserId"));
-
-			for (int i = 0, j = 0; j < tempCards.Count; i++, j++)
-			{
-				if (i == Colors.Length) i = 0;
-				tempCards[j].color = Colors[i];
-			}
 			Cards = new ObservableCollection<Card>(tempCards);
-
+			CacheService.SetValue("Cards", Cards);
             Trace.WriteLine("SUCCESS CARDS");
 		}
 		catch (Exception ex)
@@ -105,32 +104,27 @@ public partial class MainViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task Load()
 	{
+		//After transaction
 		if (CacheService.GetValue("IsUpdateCards") as string == "1")
 		{
-			if (Cards?.Count > 0)
-				Cards?.Clear();
+			if (Cards?.Count > 0) Cards?.Clear();
 			await FillCardsAsync();
 			CacheService.SetValue("IsUpdateCards", "0");
 			return;
 		}
 
-
-		if (!flagFirstEntry) return;
-
 		string idd = CacheService.GetValue("UserId").ToString();
 		Id? clientId = await ApiClient<Id?>.GetAsync(Routes.getClientOnUserIdUri.Replace(@"{0}", idd));
 
+		//If client doesnt have cards
 		if (clientId == null)
 		{
 			SetEmptyCard();
-			Trace.WriteLine("setted empty card");
 			return;
-		}
+		}		
 		await FillCardsAsync();
 		await GetUserData();
-		
-
-		flagFirstEntry = false;
+		SelectedCard = Cards[0];
 		CacheService.SetValue("bank_account_id", SelectedCard.bank_account_id);
 	}
 
@@ -143,7 +137,7 @@ public partial class MainViewModel : BaseViewModel
 		});
 
 	[RelayCommand]
-	public async Task GoToAuth() => await Shell.Current.GoToAsync("auth");
+	public async Task GoToAuth() => await Shell.Current.GoToAsync("auth", true);
 
 	[RelayCommand]
 	public async Task GoToHistory() => await Shell.Current.GoToAsync("history");
@@ -186,21 +180,10 @@ public partial class MainViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task ShowAllCards()
 	{
-		//CacheService.SetValue("CardNumber", SelectedCard.number);
 		await Shell.Current.GoToAsync("allcards", true, new Dictionary<string, object>
 		{
 			{"Cards", Cards }
 		});
 	}
-
-
-	readonly static string[] Colors = new string[]
-	{
-		"#8916FF",
-		"#ECC200",
-		"#424874"
-	};
-
-
 
 }

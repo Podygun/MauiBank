@@ -19,26 +19,24 @@ public partial class AuthViewModel : BaseViewModel
 	{
 		TextError = String.Empty;
 		TryEntry();
-		//ScanFinger();
-
-
 	}
 
 	[RelayCommand]
 	public async Task TryEntry()
 	{
 		if (Busy) return;
-
-		if(CacheService.GetValue("UserId") != null)
-		{
-			await ScanFinger();
-			return;
-		}
+		//await Task.Delay(1000);
+		//if(CacheService.GetValue("UserId") != null)
+		//{
+		//	//await ScanFinger();
+		//	return;
+		//}
 		
-		//TODO убрать эти две строки
+		//TODO убрать эти три строки
 		CacheService.SetValue("UserId", 1, TimeSpan.FromHours(1));
-		await Shell.Current.GoToAsync("main");
-		
+		await Shell.Current.GoToAsync("main", true);
+		return;
+
 		try
 		{
 			Busy = true;
@@ -86,7 +84,7 @@ public partial class AuthViewModel : BaseViewModel
 	public async Task OpenRegPage()
 	{
 		TextError = String.Empty;
-		await Shell.Current.GoToAsync("reg");
+		await Shell.Current.GoToAsync("reg", true);
 	}
 
 	[RelayCommand]
@@ -108,6 +106,7 @@ public partial class AuthViewModel : BaseViewModel
 
 		if (result.Authenticated)
 		{
+			//CacheService.SetValue("UserId", 1, TimeSpan.FromHours(1));
 			await Shell.Current.GoToAsync("main");
 		}
 		else

@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:MauiBank.ViewModel"
     x:DataType="vm:RegViewModel">
-    <Grid BackgroundColor="{StaticResource Secondary}">
+    <Grid BackgroundColor="{StaticResource Primary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <VerticalStackLayout
-            Margin="60,20,0,0"
+            Margin="40,20,0,0"
             MinimumHeightRequest="300"
             Spacing="10">
             <Label
@@ -19,62 +19,132 @@
                 FontSize="36"
                 HorizontalOptions="Start"
                 HorizontalTextAlignment="Start"
-                Style="{StaticResource BaseWhiteLbl}"
+                Style="{StaticResource BaseDarkLbl}"
                 Text="Регистрация" />
             <Label
-                FontFamily="Light"
+                FontFamily="Regular"
                 FontSize="18"
                 HorizontalOptions="Start"
                 HorizontalTextAlignment="Start"
-                Style="{StaticResource BaseWhiteLbl}"
+                Style="{StaticResource BaseDarkLbl}"
                 Text="Введите данные" />
         </VerticalStackLayout>
 
+        <Border
+            Grid.Row="1"
+            Margin="20,10,20,30"
+            Padding="20"
+            BackgroundColor="{StaticResource Secondary}"
+            StrokeShape="RoundRectangle 30"
+            StrokeThickness="0"
+            VerticalOptions="FillAndExpand">
+            <Border.Shadow>
+                <Shadow
+                    Brush="{StaticResource Tertiary}"
+                    Opacity="50"
+                    Radius="20"
+                    Offset="0,0" />
 
-        <VerticalStackLayout Grid.Row="1" VerticalOptions="Fill">
+            </Border.Shadow>
+            <Grid RowDefinitions="*,*">
+                <VerticalStackLayout
+                    Margin="0,10,0,0"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    Spacing="10"
+                    VerticalOptions="Start">
 
-            <VerticalStackLayout
-                HorizontalOptions="Center"
-                Spacing="20"
-                VerticalOptions="Center">
+                    <Label
+                        Margin="20,0,0,-10"
+                        FontFamily="Medium"
+                        FontSize="24"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="Логин" />
+                    <Frame
+                        BackgroundColor="White"
+                        BorderColor="{StaticResource Tertiary}"
+                        CornerRadius="15"
+                        HasShadow="False"
+                        HeightRequest="60">
+                        <Entry
+                            HeightRequest="80"
+                            Style="{StaticResource NewEntry}"
+                            Text="{Binding Login, Mode=TwoWay}" />
+                    </Frame>
 
-                <Entry
-                    x:Name="btnsPanel"
-                    Placeholder="Логин"
-                    Style="{StaticResource AuthEntry}"
-                    Text="{Binding Login, Mode=TwoWay}" />
-                <Entry
-                    IsPassword="True"
-                    Placeholder="Пароль"
-                    Style="{StaticResource AuthEntry}"
-                    Text="{Binding Password}" />
-                <Entry
-                    IsPassword="True"
-                    Placeholder="Подтвердите пароль"
-                    ReturnCommand="{Binding RegEntryCommand}"
-                    Style="{StaticResource AuthEntry}"
-                    Text="{Binding ConfirmPassword}" />
-                <Label
-                    FontSize="20"
-                    HorizontalOptions="Start"
-                    Style="{StaticResource BaseWhiteLbl}"
-                    Text="{Binding TextError}"
-                    TextColor="{StaticResource Violet300Accent}" />
+                    <Label
+                        Margin="20,0,0,-10"
+                        FontFamily="Medium"
+                        FontSize="24"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="Пароль" />
+                    <Frame
+                        BackgroundColor="White"
+                        BorderColor="{StaticResource Tertiary}"
+                        CornerRadius="15"
+                        HasShadow="False"
+                        HeightRequest="60">
+                        <Entry
+                            HeightRequest="80"
+                            IsPassword="True"
+                            Style="{StaticResource NewEntry}"
+                            Text="{Binding Password, Mode=TwoWay}" />
+                    </Frame>
+
+                    <Label
+                        Margin="20,0,0,-10"
+                        FontFamily="Medium"
+                        FontSize="24"
+                        HorizontalOptions="Start"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="Подтвердите пароль" />
+                    <Frame
+                        BackgroundColor="White"
+                        BorderColor="{StaticResource Tertiary}"
+                        CornerRadius="15"
+                        HasShadow="False"
+                        HeightRequest="60">
+                        <Entry
+                            HeightRequest="80"
+                            IsPassword="True"
+                            ReturnCommand="{Binding RegEntryCommand}"
+                            Style="{StaticResource NewEntry}"
+                            Text="{Binding ConfirmPassword, Mode=TwoWay}" />
+                    </Frame>
+
+                    <Label
+                        Margin="0,10"
+                        FontSize="20"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource BaseWhiteLbl}"
+                        Text="{Binding TextError}"
+                        TextColor="{StaticResource Tertiary}" />
+
+                </VerticalStackLayout>
+
                 <Button
-                    Margin="0,20,0,0"
-                    BackgroundColor="{StaticResource Orange100Accent}"
+                    Grid.Row="1"
+                    Margin="0,0,0,60"
+                    BackgroundColor="{StaticResource Tertiary}"
                     Command="{Binding RegEntryCommand}"
                     CornerRadius="25"
                     FontFamily="Medium"
                     FontSize="20"
                     HeightRequest="50"
-                    Text="Зарегистрироваться"
-                    WidthRequest="{Binding Source={x:Reference btnsPanel}, Path=WidthRequest}" />
+                    Text="Подтвердить"
+                    VerticalOptions="End"
+                    WidthRequest="{Binding Source={x:Reference btnsPanel}, Path=WidthRequest}"
+                    ZIndex="1" />
+            </Grid>
 
-            </VerticalStackLayout>
 
 
-        </VerticalStackLayout>
+
+        </Border>
+
+
 
 
 

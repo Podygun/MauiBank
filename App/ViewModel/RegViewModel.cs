@@ -24,9 +24,9 @@ public partial class RegViewModel : BaseViewModel
 	public async Task RegEntry()
 	{
 		TextError = string.Empty;
-		Password = Password.Trim();
-		Login = Login.Trim();
-		ConfirmPassword = ConfirmPassword.Trim();
+		Password = Password?.Trim();
+		Login = Login?.Trim();
+		ConfirmPassword = ConfirmPassword?.Trim();
 
 
 		if (String.IsNullOrWhiteSpace(Login) || String.IsNullOrWhiteSpace(Password) || String.IsNullOrWhiteSpace(ConfirmPassword))
@@ -56,7 +56,7 @@ public partial class RegViewModel : BaseViewModel
 		if (response == null) { TextError = "Что-то пошло не так"; return; }
 		if (response.IsSuccessStatusCode)
 		{
-			await Shell.Current.GoToAsync("auth");
+			await Shell.Current.GoToAsync("auth", true);
 		}
 
 

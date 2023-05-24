@@ -47,7 +47,7 @@ public partial class QRPage : ContentPage
 	//			};
 
 	//			Trace.WriteLine(result.Value);
-	//			//TODO
+	//			
 	//			await Shell.Current.GoToAsync("main", navParam);
 	//		});
 	//	}

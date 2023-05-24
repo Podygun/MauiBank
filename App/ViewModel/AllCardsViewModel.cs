@@ -18,7 +18,8 @@ public partial class AllCardsViewModel : BaseViewModel, IQueryAttributable
 	[RelayCommand]
 	public async Task GoBack(Card selectedCard)
 	{
+		CacheService.SetValue("PrevPage", "allcards");
 		CacheService.SetValue("SelectedCard", selectedCard);
-		await Shell.Current.GoToAsync("main");
+		await Shell.Current.GoToAsync("main", true);
 	}
 }

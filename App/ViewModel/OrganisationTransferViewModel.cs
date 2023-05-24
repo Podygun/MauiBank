@@ -57,9 +57,9 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 		try
 		{
 			Busy = true;
-			PayCheck payCheck = new PayCheck
+			PostPayCheck payCheck = new PostPayCheck
 			{
-				bank_account_id = Preferences.Default.Get("bank_account_id", -1),
+				bank_account_id = (int)CacheService.GetValue("bank_account_id"),
 				sum = Sum,
 				fee = Fee,
 				requisite_value = RequisiteValue,
@@ -68,7 +68,7 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 			};
 			Preferences.Clear("favour_id");
 
-			var result = await ApiClient<PayCheck>.PostAsync(Routes.setNewPaymentUri, payCheck);
+			var result = await ApiClient<PostPayCheck>.PostAsync(Routes.setNewPaymentUri, payCheck);
 
 			if (result.IsSuccessStatusCode)
 			{
