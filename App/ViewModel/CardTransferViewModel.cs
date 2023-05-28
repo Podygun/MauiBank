@@ -40,19 +40,19 @@ public partial class CardTransferViewModel : BaseViewModel
 			Busy = true;
 			PayCheck payCheck = new PayCheck
 			{
-				bank_account_id = Preferences.Default.Get("bank_account_id", -1),
+				bank_account_id = (int)CacheService.GetValue("bank_account_id"),
 				sum = Sum,
 				fee = Fee,
 				requisite_value = CardNumber,
 				favour_id = FavourId
 			};
-
+			//TODO не работает перевод по номеру карты
 			var result = await ApiClient<PayCheck>.PostAsync(Routes.setNewPaymentUri, payCheck);
 			
 			if (result.IsSuccessStatusCode)
 			{
 				await Shell.Current.DisplayAlert("Успешно", "Перевод выполнен", "OK");
-				Preferences.Default.Set("IsUpdateCards", 1);
+				CacheService.SetValue("IsUpdateCards", 1);
 				await GoBack();
 
 				

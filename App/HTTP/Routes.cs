@@ -111,6 +111,7 @@ public static class Routes
 
 #endif
 	#endregion
+
 	#region SetNewPayment
 #if WINDOWS
 	public static string setNewPaymentUri =
@@ -229,12 +230,24 @@ public static class Routes
 	#region PostBankAccount
 #if WINDOWS
 	public static string postBankAccount =
-		localhost + port + @"bank_accounts/";
+		localhost + port + @"bankAccounts/";
 #elif ANDROID
 	public static string postBankAccount =
 	(isNgrok == 0) ?
-		emulatorhost + port + @"bank_accounts/" :
-		ngrokUri + @"bank_accounts/";
+		emulatorhost + port + @"bankAccounts/" :
+		ngrokUri + @"bankAccounts/";
+#endif
+	#endregion
+
+	#region PostCard
+#if WINDOWS
+	public static string postCard =
+		localhost + port + @"cards/";
+#elif ANDROID
+	public static string postCard =
+	(isNgrok == 0) ?
+		emulatorhost + port + @"cards/" :
+		ngrokUri + @"cards/";
 #endif
 	#endregion
 }

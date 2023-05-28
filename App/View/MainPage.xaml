@@ -36,17 +36,29 @@
             <Label
                 x:Name="lbl"
                 FontFamily="Bold"
-                FontSize="20"
+                FontSize="18"
                 HorizontalOptions="Start"
                 Style="{StaticResource BaseDarkLbl}"
                 Text="Главная" />
-            <Button
-                BackgroundColor="Transparent"
-                Command="{Binding ShowAllCardsCommand}"
-                FontSize="20"
-                IsEnabled="{Binding CardsBtnEnable}"
-                Text="Карты"
-                WidthRequest="100" />
+            <Border
+                Margin="0,0,-5,0"
+                Padding="10,0"
+                BackgroundColor="{StaticResource White}"
+                StrokeShape="RoundRectangle 10"
+                Style="{StaticResource MainPageBtn}">
+                <Border.Shadow>
+                    <Shadow Opacity="0.5" Radius="20" />
+                </Border.Shadow>
+                <Label
+                    FontFamily="Medium"
+                    IsEnabled="{Binding CardsBtnEnable}"
+                    Style="{StaticResource BaseDarkLbl}"
+                    Text="Мои карты" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowAllCardsCommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+
 
         </FlexLayout>
 
@@ -60,7 +72,7 @@
             <Frame
                 Background="{StaticResource Secondary}"
                 BorderColor="Transparent"
-                CornerRadius="30">
+                CornerRadius="20">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer x:DataType="vm:MainViewModel" Tapped="TapGestureRecognizer_Tapped" />
                 </Frame.GestureRecognizers>

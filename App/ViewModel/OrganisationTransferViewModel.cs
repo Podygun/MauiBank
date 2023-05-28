@@ -35,7 +35,7 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 		}
 	}
 
-	private void ComputeFee() => Fee = sum * 0.01;
+	private void ComputeFee() => Fee = sum * 0.0;
 
 	public OrganisationTransferViewModel()
     {

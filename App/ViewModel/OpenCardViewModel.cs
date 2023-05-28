@@ -12,6 +12,10 @@ public partial class OpenCardViewModel : BaseViewModel
 	Valute selectedValute;
 
 	[ObservableProperty]
+	string dateEnd;
+    DateOnly DateEndDate;
+
+	[ObservableProperty]
 	ObservableCollection<CardType> cardTypes;
 
     [ObservableProperty]
@@ -27,38 +31,66 @@ public partial class OpenCardViewModel : BaseViewModel
     {
         _cardsService = cardsService;
         _bankAccountService = bankAccountService;
+		DateEndDate = DateOnly.FromDateTime(DateTime.Now).AddYears(4);
+        DateEnd = DateEndDate.ToString().Replace('/','.');
         FillCardTypes();
-        FillValuteList();
+        //FillValuteList();
     }
 
     [RelayCommand]
     async Task CreateCardAsync()
     {
-        string cvv = _cardsService.GetCvv();
-        CardDB newCard = new()
-        {
-            bank_account_id = 1
-        };
-
-    }
-
-	[RelayCommand]
-	async Task CreateBankAccAsync()
-	{
         if (Busy) return;
         try
         {
             Busy = true;
+			string cvv = _cardsService.GetCvv();
+			//var newBankAccId = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId)
+			CardDB newCard = new()
+			{
+				number = await _cardsService.GetNewCardNumber(SelectedCardType.prefix),
+				bank_account_id = -1,
+				cvv = cvv,
+				date_end = DateEndDate,
+				card_type_id = SelectedCardType.id
+
+			};
+			var result = await ApiClient<CardDB>.PostAsync(Routes.postCard, newCard);
+			if (result == null) Trace.WriteLine("result from post card is null");
+            await CreateBankAccAsync();
+		}
+        catch (Exception ex)
+        {
+            Trace.WriteLine(ex.Message);
+        }
+        finally
+        {
+            Busy = false;
+        }
+        
+
+	}
+
+	[RelayCommand]
+	async Task CreateBankAccAsync()
+	{
+		if (Busy) return;
+        try
+        {
+			
+			Busy = true;
+
+			
 			BankAccount newBankAccount = new()
 			{
 				balance = 0,
-				valute_id = SelectedValute.id,
+				valute_id = 1,
 				client_id = (int)CacheService.GetValue("ClientId")
 			};
             var result = await _bankAccountService.Post(newBankAccount);
-            if (result == null) return;
-            //newBankAccount = await ApiClient<BankAccount>.GetAsync(Routes.getBankAccount)
-			//result = await CreateCardAsync();
+            if (result == null) Trace.WriteLine("result from post bank_acc is null");
+            
+			
 		}
         catch (Exception ex)
         {
