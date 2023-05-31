@@ -10,6 +10,9 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 	ObservableCollection<Organisation> organisations = new();
 
 	[ObservableProperty]
+	ObservableCollection<Card> cards = new();
+
+	[ObservableProperty]
     string requisiteValue;
 
 	[ObservableProperty]
@@ -17,7 +20,8 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 
 	int OrganisationId;
 
-	Organisation SelectedOrganisation = new();
+	[ObservableProperty]
+	Card selectedCard = new();
 
 
 	[ObservableProperty]                                                                                                                                                                                         
@@ -48,6 +52,7 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
         OrganisationName = tempFavour.Name;
         OrganisationId = tempFavour.Id;
         FillRequisites();
+		FillCards();
 	}
 
 	[RelayCommand]
@@ -59,7 +64,7 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
 			Busy = true;
 			PostPayCheck payCheck = new PostPayCheck
 			{
-				bank_account_id = (int)CacheService.GetValue("bank_account_id"),
+				bank_account_id = SelectedCard.bank_account_id,
 				sum = Sum,
 				fee = Fee,
 				requisite_value = RequisiteValue,
@@ -111,4 +116,9 @@ public partial class OrganisationTransferViewModel : BaseViewModel, IQueryAttrib
             Busy = false;
         }
     }
+
+	private void FillCards()
+	{
+		Cards = new ObservableCollection<Card>(CacheService.GetValue("Cards") as ObservableCollection<Card>);
+	}
 }

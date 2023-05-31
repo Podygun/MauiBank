@@ -1,8 +1,4 @@
-﻿using Microsoft.Maui.Storage;
-using System.Collections.Specialized;
-using System.Runtime.InteropServices;
-
-namespace MauiBank.ViewModel;
+﻿namespace MauiBank.ViewModel;
 
 
 public partial class MainViewModel : BaseViewModel
@@ -65,7 +61,7 @@ public partial class MainViewModel : BaseViewModel
 			Busy = true;
 			var tempUserData = await ApiClient<List<UserData>>.GetAsync(Routes.getUserDataUri.Replace("{0}", CacheService.GetValue("UserId").ToString()));			
 			userData = tempUserData[0];
-			CacheService.GetOrCreateCacheValue("UserData", TimeSpan.FromMinutes(60), userData);
+			CacheService.SetValue("UserData", userData, TimeSpan.FromMinutes(60));
 			CacheService.SetValue("ClientId", userData.id);
 			Trace.WriteLine("SUCCESS USERDATA");
 		}

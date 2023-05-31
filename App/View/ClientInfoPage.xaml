@@ -40,7 +40,7 @@
                     <Border BackgroundColor="{StaticResource Secondary}" StrokeShape="RoundRectangle 30">
                         <VerticalStackLayout
                             Margin="0"
-                            Padding="20,20,20,50"
+                            Padding="20,20,20,30"
                             Spacing="10">
                             <Label
                                 Margin="20,0,0,-10"
@@ -142,6 +142,29 @@
                                     Style="{StaticResource NewEntry}"
                                     Text="{Binding UserData.email}" />
                             </Frame>
+
+                            <Label
+                                IsVisible="{Binding IsVisibleFingerPrint}"
+                                Margin="20,0,0,-10"
+                                FontFamily="Medium"
+                                FontSize="20"
+                                HorizontalOptions="Start"
+                                Style="{StaticResource BaseWhiteLbl}"
+                                Text="Вход по отпечатку" />
+                            <Border
+                                IsVisible="{Binding IsVisibleFingerPrint}"
+                                Margin="0,5,0,0"
+                                BackgroundColor="{Binding BgColorFingerPrint}"
+                                HeightRequest="40"
+                                HorizontalOptions="Start"
+                                Stroke="{StaticResource Tertiary}"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1"
+                                WidthRequest="40">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapFingerPrintCommand}" />
+                                </Border.GestureRecognizers>
+                            </Border>
                         </VerticalStackLayout>
 
 

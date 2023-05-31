@@ -19,7 +19,7 @@
                             <Shadow
                                 Brush="{StaticResource Tertiary}"
                                 Opacity="0.5"
-                                Radius="10" />
+                                Radius="30" />
                         </Frame.Shadow>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AllCardsViewModel}}, Path=GoBackCommand}" CommandParameter="{Binding .}" />

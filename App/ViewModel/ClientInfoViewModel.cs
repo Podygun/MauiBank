@@ -1,4 +1,7 @@
-﻿namespace MauiBank.ViewModel;
+﻿
+using Android.Locations;
+
+namespace MauiBank.ViewModel;
 
 public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 {
@@ -10,10 +13,32 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 	[ObservableProperty]
 	public bool isVisibleButton = false;
 
+	[ObservableProperty]
+	public bool isVisibleFingerPrint;
+
+	private bool IsFingerPrint;
+
+	[ObservableProperty]
+	Color bgColorFingerPrint;
 
 	public ClientInfoViewModel()
-    {
-		//UserData = 
+    {		
+		if (!(bool)CacheService.GetValue("AvailabilityFP"))
+			IsVisibleFingerPrint = false;		
+		else
+			IsVisibleFingerPrint = true;
+		IsFingerPrint = (bool?)CacheService.GetValue("IsFingerPrint") ?? false;
+		if (!IsFingerPrint)
+		{
+			App.Current.Resources.TryGetValue("Primary", out object lightColor);
+			bgColorFingerPrint = (Color)lightColor;
+		}
+		else
+		{
+			App.Current.Resources.TryGetValue("Tertiary", out object darkColor);
+			bgColorFingerPrint = (Color)darkColor;
+		}
+
 	}
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -46,6 +71,7 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 			var result = ApiClient<Client>.PostAsync(Routes.updateClientUri + UserData.id, client, false);
 			if(result.IsCompletedSuccessfully) 
 			{
+				CacheService.SetValue("IsFingerPrint", IsFingerPrint, TimeSpan.FromDays(30));
 				await Shell.Current.DisplayAlert("Успешно", "Данные были обновлены", "OK");
 				await Shell.Current.GoToAsync("main");
 			}
@@ -61,5 +87,26 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 		}
 	}
 
-	
+	[RelayCommand]
+	public void TapFingerPrint()
+	{
+		App.Current.Resources.TryGetValue("Primary", out object lightColor);
+		App.Current.Resources.TryGetValue("Tertiary", out object darkColor);
+
+		if (BgColorFingerPrint == darkColor)
+		{
+			BgColorFingerPrint = (Color)lightColor;
+			CacheService.SetValue("IsFingerPrint", false, TimeSpan.FromDays(30));
+			IsFingerPrint = false;
+		}
+		else if (BgColorFingerPrint == lightColor)
+		{
+			BgColorFingerPrint = (Color)darkColor;
+			CacheService.SetValue("IsFingerPrint", true, TimeSpan.FromDays(30));
+			IsFingerPrint = true;
+		}
+
+	}
+
+
 }

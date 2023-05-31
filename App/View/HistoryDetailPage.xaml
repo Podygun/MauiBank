@@ -62,7 +62,20 @@
                         HorizontalOptions="Start"
                         HorizontalTextAlignment="Start"
                         Style="{StaticResource BaseDarkLbl}"
-                        Text="{Binding FullName}" />
+                        Text="{Binding SenderFullName}" />
+
+                    <Label
+                        Margin="0,20,0,0"
+                        Style="{StaticResource LightLeftLabel}"
+                        Text="Получатель" />
+
+                    <Label
+                        FontFamily="Bold"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        HorizontalTextAlignment="Start"
+                        Style="{StaticResource BaseDarkLbl}"
+                        Text="{Binding RecieverFullName}" />
 
                     <Label
                         Margin="0,20,0,0"

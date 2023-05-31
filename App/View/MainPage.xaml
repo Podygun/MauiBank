@@ -11,6 +11,7 @@
     <ContentPage.Resources>
         <converters:StringToColor x:Key="StringToColor" />
         <converters:ToShortNumber x:Key="ToShortNumber" />
+        <converters:Balance2signsConverter x:Key="BalanceConverter" />
         <StyleSheet Source="/Resources/Styles/mycss.css" />
 
 
@@ -67,7 +68,7 @@
         <Grid
             x:Name="cardBlock"
             Grid.Row="1"
-            Padding="20"
+            Padding="20,20,20,10"
             VerticalOptions="Fill">
             <Frame
                 Background="{StaticResource Secondary}"
@@ -183,7 +184,7 @@
             BackgroundColor="{StaticResource Tertiary}"
             BorderColor="Transparent"
             CornerRadius="20"
-            HeightRequest="120">
+            VerticalOptions="Fill">
             <Grid ColumnDefinitions="3*,*">
                 <VerticalStackLayout Grid.ColumnSpan="3" VerticalOptions="Center">
                     <Label
@@ -197,7 +198,7 @@
                         FontSize="28"
                         HorizontalOptions="Start"
                         Style="{StaticResource BaseWhiteLbl}"
-                        Text="{Binding SelectedCard.balance}" />
+                        Text="{Binding SelectedCard.balance, Converter={StaticResource BalanceConverter}}" />
                 </VerticalStackLayout>
 
                 <Image

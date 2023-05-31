@@ -38,7 +38,7 @@ public partial class CardTransferViewModel : BaseViewModel
 		try
 		{
 			Busy = true;
-			PayCheck payCheck = new PayCheck
+			PostPayCheck payCheck = new PostPayCheck
 			{
 				bank_account_id = (int)CacheService.GetValue("bank_account_id"),
 				sum = Sum,
@@ -47,7 +47,7 @@ public partial class CardTransferViewModel : BaseViewModel
 				favour_id = FavourId
 			};
 			//TODO не работает перевод по номеру карты
-			var result = await ApiClient<PayCheck>.PostAsync(Routes.setNewPaymentUri, payCheck);
+			var result = await ApiClient<PostPayCheck>.PostAsync(Routes.setNewPaymentUri, payCheck);
 			
 			if (result.IsSuccessStatusCode)
 			{

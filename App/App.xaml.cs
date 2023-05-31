@@ -33,6 +33,6 @@ public partial class App : Application
 		//#endif
 		//		});
 		MainPage = new AppShell();
-		
+		Resources.MergedDictionaries.Add(new Resources.Styles.ColorsNew());
 	}
 }

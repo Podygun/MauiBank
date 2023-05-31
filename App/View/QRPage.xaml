@@ -19,14 +19,16 @@
         <Border
             Grid.Row="1"
             Margin="20,0"
-            Padding="0,40"
             BackgroundColor="{StaticResource Secondary}"
+            HeightRequest="300"
             Stroke="Transparent"
             StrokeShape="RoundRectangle 30"
             VerticalOptions="Center">
             <Grid
                 Padding="20"
+                BackgroundColor="Transparent"
                 ColumnDefinitions="*,*"
+                HeightRequest="200"
                 VerticalOptions="Fill">
 
                 <!--  MY CODE  -->
@@ -35,8 +37,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     HeightRequest="{Binding Source={x:Reference MyQrCode}, Path=WidthRequest}"
-                    Style="{StaticResource MainPageBtn}"
-                    WidthRequest="150">
+                    Style="{StaticResource MainPageBtn}">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToMyQrCodeCommand}" Tapped="MyQrCodeTapped" />
@@ -67,9 +68,7 @@
                     x:Name="ScanQrCode"
                     Grid.Row="0"
                     Grid.Column="1"
-                    HeightRequest="{Binding Source={x:Reference ScanQrCode}, Path=WidthRequest}"
-                    Style="{StaticResource MainPageBtn}"
-                    WidthRequest="150">
+                    Style="{StaticResource MainPageBtn}">
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding GoToScanQrCodeCommand}" Tapped="ScanQrCodeTapped" />

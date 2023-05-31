@@ -53,7 +53,7 @@
                         Text="{Binding OwnerName}"
                         TextColor="{StaticResource Tertiary}" />
                 </Grid>
-                
+
                 <zxing:BarcodeGeneratorView
                     BackgroundColor="Transparent"
                     Format="Codabar"
@@ -95,8 +95,9 @@
                 <VerticalStackLayout
                     Grid.Column="1"
                     Margin="3,0,0,0"
+                    Spacing="-4"
                     VerticalOptions="CenterAndExpand">
-                    <Label Style="{StaticResource BaseWhiteLbl}" Text="Просто покажите QR Код вашим" />
+                    <Label Style="{StaticResource BaseWhiteLbl}" Text="Покажите QR Код вашим" />
                     <Label Style="{StaticResource BaseWhiteLbl}" Text="друзьям для перевода!" />
 
                 </VerticalStackLayout>

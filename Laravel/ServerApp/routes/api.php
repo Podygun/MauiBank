@@ -48,8 +48,9 @@ Route::get('/listRequisites/getOnFavour', [Controllers\api\ListRequisitesControl
 Route::get('/payChecks/short', [Controllers\api\PayCheckController::class, 'short']);
 Route::get('/payChecks/getAllFields', [Controllers\api\PayCheckController::class, 'getAllFields']);
 
-
 Route::get('/cards/getByNumber', [Controllers\api\CardController::class, 'getByNumber']);
+
+
 
 Route::apiResources([
     'userdata' => api\UserDataController::class
@@ -62,6 +63,7 @@ Route::apiResources([
     , 'payCheck'=>api\PayCheckController::class
     , 'organisations'=>api\OrganisationController::class
     , 'card_types'=>api\CardTypesController::class
+    , 'bankAccounts'=>api\BankAccountController::class
 ]);
 
 

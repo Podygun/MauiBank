@@ -9,7 +9,10 @@ public partial class HistoryDetailViewModel : BaseViewModel, IQueryAttributable
 	public PayCheckFromDB thisPayCheck;
 
 	[ObservableProperty]
-	public string fullName;
+	public string senderFullName;
+
+	[ObservableProperty]
+	public string recieverFullName;
 
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
@@ -30,7 +33,14 @@ public partial class HistoryDetailViewModel : BaseViewModel, IQueryAttributable
 		{
 			var ListPayChecks = await ApiClient<List<PayCheckFromDB>>.GetAsync(Routes.getFullPayChecks + id);
 			ThisPayCheck = ListPayChecks.FirstOrDefault();
-			FullName = ThisPayCheck.Sender_Second_name + " " + ThisPayCheck.Sender_First_name + " " + ThisPayCheck.Sender_Last_name;
+
+			SenderFullName = ThisPayCheck.Sender_Second_name + " " 
+				+ ThisPayCheck.Sender_First_name + " " 
+				+ ThisPayCheck.Sender_Last_name;
+
+			RecieverFullName = ThisPayCheck.Reciever_Second_name + " " 
+				+ ThisPayCheck.Reciever_First_name + " " 
+				+ ThisPayCheck.Reciever_Last_name;
 
 		}
 		catch (Exception ex)
