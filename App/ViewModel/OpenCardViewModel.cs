@@ -1,4 +1,7 @@
-﻿namespace MauiBank.ViewModel;
+﻿using Newtonsoft.Json;
+using Org.Json;
+
+namespace MauiBank.ViewModel;
 
 public partial class OpenCardViewModel : BaseViewModel
 {
@@ -43,13 +46,14 @@ public partial class OpenCardViewModel : BaseViewModel
         if (Busy) return;
         try
         {
+            var newBankAccId = await CreateBankAccAsync();
             Busy = true;
 			string cvv = _cardsService.GetCvv();
-			//var newBankAccId = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId)
+            //var newBankAccId = await ApiClient<List<Card>>.GetAsync(Routes.getCardsUriOnUserId);
 			CardDB newCard = new()
 			{
 				number = await _cardsService.GetNewCardNumber(SelectedCardType.prefix),
-				bank_account_id = -1,
+				bank_account_id = newBankAccId,
 				cvv = cvv,
 				date_end = DateEndDate,
 				card_type_id = SelectedCardType.id
@@ -57,7 +61,8 @@ public partial class OpenCardViewModel : BaseViewModel
 			};
 			var result = await ApiClient<CardDB>.PostAsync(Routes.postCard, newCard);
 			if (result == null) Trace.WriteLine("result from post card is null");
-            await CreateBankAccAsync();
+            if (result.IsSuccessStatusCode) await Shell.Current.GoToAsync("main");
+            
 		}
         catch (Exception ex)
         {
@@ -72,9 +77,9 @@ public partial class OpenCardViewModel : BaseViewModel
 	}
 
 	[RelayCommand]
-	async Task CreateBankAccAsync()
+	async Task<int> CreateBankAccAsync()
 	{
-		if (Busy) return;
+		if (Busy) return -1;
         try
         {
 			
@@ -89,13 +94,14 @@ public partial class OpenCardViewModel : BaseViewModel
 			};
             var result = await _bankAccountService.Post(newBankAccount);
             if (result == null) Trace.WriteLine("result from post bank_acc is null");
-            
-			
+            var bacc = JsonConvert.DeserializeObject<BankAccount>(result.Content.ReadAsStringAsync().Result);
+            return bacc.id;
 		}
         catch (Exception ex)
         {
             Trace.WriteLine(ex.Message);
             await Shell.Current.DisplayAlert("Ошибка", ex.Message, ex.StackTrace);
+            return -2;
         }
         finally
         {

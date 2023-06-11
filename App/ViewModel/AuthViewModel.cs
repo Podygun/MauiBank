@@ -21,6 +21,11 @@ public partial class AuthViewModel : BaseViewModel
 
 		CheckAvailabilityFingerPrint();
 
+		//TODO
+		//Login = "logg";
+		//Password = "logg";
+		//TryEntry();
+
 		if ((bool)CacheService.GetValue("AvailabilityFP"))
 		{
 			bool scanFinger = (bool?)CacheService.GetValue("IsFingerPrint") ?? false;

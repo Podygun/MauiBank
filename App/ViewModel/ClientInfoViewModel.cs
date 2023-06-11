@@ -17,6 +17,7 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 	public bool isVisibleFingerPrint;
 
 	private bool IsFingerPrint;
+	private bool IsNewClient = false;
 
 	[ObservableProperty]
 	Color bgColorFingerPrint;
@@ -44,6 +45,13 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 	public void ApplyQueryAttributes(IDictionary<string, object> query)
 	{
 		UserData = query["UserData"] as UserData;
+		if(UserData == null)
+		{
+			UserData = new();
+			IsNewClient = true;
+
+        }
+		
 	}
 
 
@@ -54,22 +62,41 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 		if (Busy) return;
 		try
 		{
-			Busy = true;
+            Busy = true;
+			Client client;
 
-			Client client = new Client
+            if (IsNewClient)
 			{
-				id = UserData.id,
-				first_name = UserData.first_name,
-				second_name = UserData.second_name,
-				last_name = UserData.last_name,
-				email = UserData.email,
-				phone = UserData.phone,
-				gender = "empty"
+				client = new Client
+				{
+					first_name = UserData.first_name,
+					second_name = UserData.second_name,
+					last_name = UserData.last_name,
+					email = UserData.email,
+					phone = UserData.phone,
+					user_account_id = (int)CacheService.GetValue("UserId"),
+					gender = "empty"
+				};
+			}
+			else
+			{
 
-			};
+				client = new Client
+				{
+					id = UserData.id,
+					first_name = UserData.first_name,
+					second_name = UserData.second_name,
+					last_name = UserData.last_name,
+					email = UserData.email,
+					phone = UserData.phone,
+                    user_account_id = (int)CacheService.GetValue("UserId"),
+                    gender = "empty"
 
-			var result = ApiClient<Client>.PostAsync(Routes.updateClientUri + UserData.id, client, false);
-			if(result.IsCompletedSuccessfully) 
+				};
+			}
+
+			var result = await ApiClient<Client>.PostAsync(Routes.updateClientUri + UserData.id, client);
+			if(result.IsSuccessStatusCode) 
 			{
 				CacheService.SetValue("IsFingerPrint", IsFingerPrint, TimeSpan.FromDays(30));
 				await Shell.Current.DisplayAlert("Успешно", "Данные были обновлены", "OK");

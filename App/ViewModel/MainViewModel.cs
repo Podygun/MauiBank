@@ -7,6 +7,8 @@ public partial class MainViewModel : BaseViewModel
 	[ObservableProperty]
 	ObservableCollection<Card> cards = new();
 	
+	//TODO
+	//не меняется qrкод при выборе другой кары
 
 	private UserData userData { get; set; }
 

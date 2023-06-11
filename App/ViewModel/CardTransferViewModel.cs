@@ -18,15 +18,13 @@ public partial class CardTransferViewModel : BaseViewModel
 
     public CardTransferViewModel()
     {
-		if (Preferences.Default.ContainsKey("cardToTransfer"))
+		if (CacheService.GetValue("cardToTransfer") != null)
 		{
-			CardNumber = Preferences.Default.Get("cardToTransfer", "Неверные данные");
-			Preferences.Default.Clear("cardToTransfer");
-			fromQr = true;
+			CardNumber = (string)CacheService.GetValue("cardToTransfer");
+            fromQr = true;
 		}
 		else fromQr = false;
-		//TODO
-        //if doesnt MAUIBANK set FEE = 0.1% from sum
+
     }
 
 
@@ -72,7 +70,8 @@ public partial class CardTransferViewModel : BaseViewModel
 
 	private async Task GoBack()
 	{
-		if (fromQr) await Shell.Current.GoToAsync("../../..", true);
+		//if (fromQr) await Shell.Current.GoToAsync("../../..", true);
+		if (fromQr) await Shell.Current.GoToAsync("main", true);
 		else		await Shell.Current.GoToAsync("main", true);
 	}
 }

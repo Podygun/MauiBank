@@ -48,12 +48,12 @@ public partial class ScanQRPage : ContentPage
 	{
 		if (QRData.Contains("card"))
 		{
-			Preferences.Default.Set("cardToTransfer", QRData.Replace("card:", ""));
+			CacheService.SetValue("cardToTransfer", QRData.Replace("card:", ""), TimeSpan.FromSeconds(5));
 			await Shell.Current.GoToAsync("cardtransfer");
 		}
 		else if (QRData.Contains("org"))
 		{
-			Preferences.Default.Set("orgToTransfer", QRData.Replace("org:", ""));
+            CacheService.SetValue("orgToTransfer", QRData.Replace("org:", ""), TimeSpan.FromSeconds(5));
 			await Shell.Current.GoToAsync("orgtransfer");
 		}
 	}
