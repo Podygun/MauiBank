@@ -27,10 +27,13 @@ public partial class MainViewModel : BaseViewModel
 			{
 				Card? chosenCard = CacheService.GetValue("SelectedCard") as Card;
 				SelectedCard ??= chosenCard;
-				CacheService.SetValue("bank_account_id", SelectedCard.bank_account_id);
+
+                CacheService.SetValue("bank_account_id", SelectedCard.bank_account_id);
 				Cards = CacheService.GetValue("Cards") as ObservableCollection<Card>;
 				userData = CacheService.GetValue("UserData") as UserData;
-			}
+				CacheService.SetValue("PrevPage", "null");
+
+            }
 			else
 			{
 				Load();				

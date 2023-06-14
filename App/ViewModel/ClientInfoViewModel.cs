@@ -64,6 +64,7 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 		{
             Busy = true;
 			Client client;
+			HttpResponseMessage result = new();
 
             if (IsNewClient)
 			{
@@ -77,7 +78,8 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
 					user_account_id = (int)CacheService.GetValue("UserId"),
 					gender = "empty"
 				};
-			}
+                result = await ApiClient<Client>.PostAsync(Routes.updateClientUri + UserData.id, client, true);
+            }
 			else
 			{
 
@@ -93,9 +95,10 @@ public partial class ClientInfoViewModel : BaseViewModel, IQueryAttributable
                     gender = "empty"
 
 				};
-			}
+                result = await ApiClient<Client>.PostAsync(Routes.updateClientUri + UserData.id, client, false);
+            }
 
-			var result = await ApiClient<Client>.PostAsync(Routes.updateClientUri + UserData.id, client);
+			
 			if(result.IsSuccessStatusCode) 
 			{
 				CacheService.SetValue("IsFingerPrint", IsFingerPrint, TimeSpan.FromDays(30));

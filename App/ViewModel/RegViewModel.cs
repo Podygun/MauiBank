@@ -1,4 +1,6 @@
-﻿namespace MauiBank.ViewModel;
+﻿using Newtonsoft.Json;
+
+namespace MauiBank.ViewModel;
 
 public partial class RegViewModel : BaseViewModel
 {
@@ -49,12 +51,31 @@ public partial class RegViewModel : BaseViewModel
 			salt = Salt
 		};
 
-		string uriNewClient = Routes.postUserAccountUri;
 
-		HttpResponseMessage? response = await ApiClient<object>.PostAsync(uriNewClient, acc);
+		string uriNewAcc = Routes.postUserAccountUri;
 
-		if (response == null) { TextError = "Что-то пошло не так"; return; }
-		if (response.IsSuccessStatusCode)
+		HttpResponseMessage? response = await ApiClient<object>.PostAsync(uriNewAcc, acc);
+        if (response == null) { TextError = "Что-то пошло не так"; return; }
+
+        acc = JsonConvert.DeserializeObject<UserAccount>(response.Content.ReadAsStringAsync().Result);
+
+		Client client = new()
+		{
+			first_name = "Имя",
+			second_name = "Фамилия",
+			last_name ="Отчество",
+			gender="empty",
+			email = "mail@mail",
+			phone = "+7900",
+			user_account_id = acc.id
+		};
+
+        string uriNewClient = Routes.updateClientUri;
+        HttpResponseMessage? response2 = await ApiClient<Client>.PostAsync(uriNewClient, client);
+        if (response2 == null) { TextError = "Что-то пошло не так"; return; }
+
+
+        if (response2.IsSuccessStatusCode)
 		{
 			await Shell.Current.GoToAsync("auth", true);
 		}

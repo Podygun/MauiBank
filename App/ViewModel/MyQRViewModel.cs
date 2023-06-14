@@ -17,6 +17,7 @@ public partial class MyQRViewModel : BaseViewModel
     {
 		UserData data = CacheService.GetValue("UserData") as UserData;
 		OwnerName = data.first_name + " " + data.last_name;
+		
 		string cardNumber = CacheService.GetValue("CardNumber") as string;
 
 		BarcodeValue = cardNumber;
